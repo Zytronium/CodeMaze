@@ -342,28 +342,28 @@ class MainActivity : AppCompatActivity() {
         val ranRand = randomRando.random()
         when ((1..8).random()) {
             2 -> {
-                randTile.setBackgroundColor("#CDEE00FF".toColorInt())
+                 randTile.setBackgroundColor(getColor(R.color.glitch_block))
             }
             1 -> {
-                randTile2.setBackgroundColor("#CDEE00FF".toColorInt())
+                randTile2.setBackgroundColor(getColor(R.color.glitch_block))
             }
             3 -> {
-                randTile3.setBackgroundColor("#CDEE00FF".toColorInt())
+                randTile3.setBackgroundColor(getColor(R.color.glitch_block))
             }
             4 -> {
-                randTile4.setBackgroundColor("#CDEE00FF".toColorInt())
+                randTile4.setBackgroundColor(getColor(R.color.glitch_block))
             }
             5 -> {
-                randTile7.setBackgroundColor("#CDEE00FF".toColorInt())
+                randTile7.setBackgroundColor(getColor(R.color.glitch_block))
             }
             6 -> {
-                randTile6.setBackgroundColor("#CDEE00FF".toColorInt())
+                randTile6.setBackgroundColor(getColor(R.color.glitch_block))
             }
             7 -> {
-                randTile5.setBackgroundColor("#CDEE00FF".toColorInt())
+                randTile5.setBackgroundColor(getColor(R.color.glitch_block))
             }
             8 -> {
-                ranRand.setBackgroundColor("#CDEE00FF".toColorInt())
+                  ranRand.setBackgroundColor(getColor(R.color.glitch_block))
             }
         }
     }
@@ -497,6 +497,7 @@ class MainActivity : AppCompatActivity() {
             player.setColorFilter(getColor(R.color.white))
         }, (750).toLong())
         issues = 0
+        TODO("to be impelemted laterGater, so will crashmfor nowhqiut hugiqwhAAAAAAAAAAAAAAAA")
         //reset game board | randomization: x warning tiles; x error tiles; 5 crash tiles. hardcode safe path tiles and fix tiles if needed or randomize if time is available.
         //reset character placement
         // shake screen and vibrate device
@@ -4337,6 +4338,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun glitchBlockHit() {
+        val handler1 = Handler(Looper.getMainLooper())
+
+        player.setColorFilter(getColor(R.color.glitch_block))
+        handler1.postDelayed({
+            player.setColorFilter(getColor(R.color.white))
+        }, (150).toLong())
         when((1..8).random()) {
             in (1..3) -> issues += (1..4).random()
             in (4..7) -> {
@@ -4356,7 +4363,7 @@ class MainActivity : AppCompatActivity() {
 // Teal: Fix Blocks; fixes 1 issue and 25% chance of adding another fix block over a green safe block.
 // Magenta: Glitch Blocks; Let the glitch apocalypse begin. ;)
 
-/* ~FEATURES~
+/* ~FEATURE IDEAS~
 *  Hitting an Error BLock makes the phone vibrate and screen shake via 3D rotation
 *  Idea: White BLocks: Ad Blocks; gives the user a frikin' ad
 *
