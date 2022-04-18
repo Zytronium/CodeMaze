@@ -8,24 +8,6 @@
     android:background="@drawable/black_gradient"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="404dp"
-        android:layout_height="48dp"
-        android:fontFamily="@font/press_start_2p"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:text="Hello World!"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -729,7 +711,7 @@
             android:scaleX="1.03125"
             android:scaleY="1.03125"
             app:layout_column="4"
-            app:layout_row="12"/>
+            app:layout_row="12" />
 
         <FrameLayout
             android:id="@+id/tile53"
@@ -1227,117 +1209,6 @@
 
     </androidx.gridlayout.widget.GridLayout>
 
-    <ToggleButton
-        android:id="@+id/devToolsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha=".65"
-        android:background="#009688"
-        android:checked="false"
-        android:text="Testing Tools"
-        android:textColor="#FFF9D9"
-        android:textOff="Testing Tools ✘ "
-        android:textOn="Testing Tools ✔ "
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.018" />
-
-    <ScrollView
-        android:id="@+id/devToolsMenu"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="#4D683FB5"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/devToolsButton"
-        tools:visibility="visible">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/devTool0"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="1"
-                android:backgroundTint="#002AFF"
-                android:onClick="warningBlockHit"
-                android:text="Warning"
-                android:textColor="#FFC107"
-                android:textStyle="bold|italic"
-                app:cornerRadius="15dp" />
-
-            <Button
-                android:id="@+id/devTool1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="1"
-                android:backgroundTint="#002AFF"
-                android:onClick="errorBlockHit"
-                android:text="Error"
-                android:textColor="#FFC107"
-                android:textStyle="bold|italic"
-                app:cornerRadius="15dp" />
-
-            <Button
-                android:id="@+id/devTool2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="1"
-                android:backgroundTint="#002AFF"
-                android:onClick="crashBlockHit"
-                android:text="Crash"
-                android:textColor="#FFC107"
-                android:textStyle="bold|italic"
-                app:cornerRadius="15dp" />
-
-            <Button
-                android:id="@+id/devTool3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="1"
-                android:backgroundTint="#002AFF"
-                android:onClick="fixBlockHit"
-                android:text="Fix"
-                android:textColor="#FFC107"
-                android:textStyle="bold|italic"
-                app:cornerRadius="15dp" />
-
-            <Button
-                android:id="@+id/devTool4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="1"
-                android:backgroundTint="#002AFF"
-                android:onClick="gameOver"
-                android:text="Game Over"
-                android:textColor="#FFC107"
-                android:textStyle="bold|italic"
-                app:cornerRadius="15dp" />
-
-            <Button
-                android:id="@+id/devTool5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="1"
-                android:backgroundTint="#002AFF"
-                android:onClick="delDevTools"
-                android:text="Remove Dev Tools"
-                android:textColor="#FFC107"
-                android:textStyle="bold|italic"
-                app:cornerRadius="15dp" />
-        </LinearLayout>
-    </ScrollView>
-
     <RelativeLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -1362,8 +1233,39 @@
             android:scaleType="fitCenter"
             android:scaleX="3"
             android:scaleY="3"
-            android:tint="#EBFFE3"
             app:srcCompat="@drawable/ic_launcher_foreground" />
+
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="404dp"
+        android:layout_height="48dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="Hello World!"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/issues"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
