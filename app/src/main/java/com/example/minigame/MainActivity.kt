@@ -1,6 +1,10 @@
 package com.example.minigame
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -9,16 +13,23 @@ import android.os.Looper
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.toColorInt
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.gridlayout.widget.GridLayout
 
 class MainActivity : AppCompatActivity() {
     // ~Stats:~
     private var issues = 0
+    private var level: Int = 1
+    private var plugins: Int = 0
+    lateinit var shared : SharedPreferences
     // ~Stats ~
 
     var activated0 = false
@@ -112,6 +123,9 @@ class MainActivity : AppCompatActivity() {
     var activated88 = false
     var activated89 = false
     var activated90 = false
+
+    lateinit var grid: GridLayout
+    lateinit var screen: ConstraintLayout
     lateinit var issuesText: TextView
     lateinit var player: ImageView
     lateinit var tile1: FrameLayout
@@ -209,14 +223,22 @@ class MainActivity : AppCompatActivity() {
     lateinit var allTiles: Array<FrameLayout>
 
     private var mainLayout: ViewGroup? = null
-    private var image: ImageView? = null
     private var xDelta = 0
     private var yDelta = 0
+
+    private var rot1start =  0f
+    private var rot1end =  (-5..5).random().toFloat()
+    private var rot2start =  0f
+    private var rot2end =  (-5..5).random().toFloat()
+    private var rot3start =  0f
+    private var rot3end =  (-5..5).random().toFloat()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        grid = findViewById(R.id.grid)
+        screen = findViewById(R.id.screen)
         issuesText = findViewById(R.id.textView2)
         player = findViewById(R.id.player)
         tile0 = findViewById(R.id.tile0)
@@ -311,18 +333,35 @@ class MainActivity : AppCompatActivity() {
         tile89 = findViewById(R.id.tile89)
         tile90 = findViewById(R.id.tile90)
 
-        allTiles = arrayOf(tile1, tile0, tile2, tile3, tile4, tile5, tile6, tile7, tile71, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile16, tile17, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27, tile28, tile29, tile30, tile31, tile32, tile33, tile34, tile35, tile36, tile37, tile38, tile39, tile40, tile41, tile42, tile43, tile44, tile45, tile46, tile47, tile48, tile49, tile50, tile51, tile52, tile53, tile54, tile55, tile56, tile57, tile58, tile59, tile60, tile61, tile62, tile63, tile64, tile65, tile66, tile67, tile68, tile69, tile70, tile8, tile72, tile73, tile74, tile75, tile76, tile77, tile78, tile79, tile80, tile81, tile82, tile83, tile84, tile85, tile86, tile87, tile88, tile89, tile90)
+        when((0..3).random()) {
+            0 -> allTiles = arrayOf(tile1, tile2, tile3, tile0, tile4, tile5, tile16, tile7, tile71, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile17, tile6, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27, tile28, tile29, tile30, tile31, tile32, tile33, tile34, tile35, tile36, tile37, tile38, tile39, tile40, tile41, tile42, tile43, tile44, tile45, tile46, tile47, tile48, tile49, tile50, tile51, tile52, tile53, tile54, tile55, tile56, tile57, tile58, tile59, tile60, tile61, tile62, tile63, tile64, tile65, tile66, tile67, tile68, tile69, tile70, tile8, tile72, tile73, tile74, tile75, tile76, tile77, tile78, tile79, tile80, tile81, tile82, tile83, tile84, tile85, tile86, tile87, tile88, tile89, tile90)
+
+            1 -> allTiles = arrayOf(tile23, tile1, tile45, tile10, tile19, tile29, tile5, tile32, tile48, tile89, tile0, tile14, tile71, tile69, tile36, tile12, tile3, tile73, tile16, tile86, tile28, tile27, tile54, tile17, tile25, tile52, tile84, tile75, tile55, tile67, tile11, tile50, tile51, tile21, tile77, tile33, tile79, tile4, tile90, tile61, tile46, tile47, tile9, tile76, tile59, tile60, tile87, tile37, tile24, tile8, tile2, tile83, tile64, tile78, tile74, tile66, tile38, tile49, tile85, tile30, tile15, tile26, tile72, tile88, tile39, tile68, tile35, tile80, tile34, tile6, tile43, tile62, tile18, tile63, tile7, tile22, tile40, tile41, tile20, tile82, tile42, tile53, tile56, tile70, tile44, tile57, tile31, tile65, tile58, tile13, tile81)
+
+            2 -> allTiles = arrayOf(tile35, tile39, tile84, tile12, tile88, tile87, tile3, tile32, tile59, tile70, tile38, tile79, tile85, tile60, tile33, tile76, tile69, tile73, tile90, tile25, tile56, tile37, tile5, tile43, tile77, tile22, tile61, tile26, tile58, tile16, tile83, tile49, tile34, tile36, tile48, tile2, tile10, tile47, tile75, tile46, tile72, tile55, tile18, tile19, tile4, tile40, tile27, tile15, tile24, tile68, tile64, tile29, tile9, tile1, tile63, tile23, tile71, tile0, tile53, tile52, tile82, tile6, tile51, tile78, tile65, tile89, tile8, tile81, tile14, tile11, tile67, tile30, tile7, tile57, tile66, tile45, tile41, tile62, tile21, tile86, tile42, tile74, tile31, tile28, tile44, tile54, tile13, tile20, tile17, tile50, tile80)
+
+            3 -> allTiles = arrayOf(tile58, tile87, tile26, tile22, tile48, tile46, tile25, tile71, tile18, tile59, tile69, tile13, tile56, tile2, tile11, tile32, tile66, tile28, tile38, tile0, tile86, tile30, tile77, tile47, tile1, tile83, tile39, tile21, tile54, tile50, tile78, tile3, tile33, tile41, tile37, tile73, tile72, tile45, tile64, tile6, tile49, tile74, tile10, tile29, tile57, tile44, tile52, tile19, tile88, tile20, tile53, tile90, tile65, tile79, tile68, tile27, tile82, tile60, tile7, tile63, tile55, tile75, tile61, tile62, tile23, tile67, tile89, tile8, tile17, tile70, tile24, tile43, tile14, tile15, tile51, tile85, tile76, tile31, tile16, tile84, tile80, tile81, tile9, tile35, tile12, tile4, tile40, tile42, tile36, tile5, tile34)
+        }
 
         mainLayout = findViewById<View>(R.id.main) as RelativeLayout
-        image = findViewById<View>(R.id.player) as ImageView
-        image!!.setOnTouchListener(onTouchListener())
+        player!!.setOnTouchListener(onTouchListener())
         val windowInsetsController =
-
             ViewCompat.getWindowInsetsController(window.decorView) ?: return
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         checkIssues()
+        readData()
+//        getStats()
+//        loadLevel()
+    }
+
+    private fun getStats() {
+        TODO("Not yet implemented")
+    }
+
+    private fun loadLevel() {
+        TODO("Not yet implemented")
     }
 
     private fun selectRandomTile(): FrameLayout {
@@ -330,7 +369,7 @@ class MainActivity : AppCompatActivity() {
         return randTile
     }
 
-    private fun highlightRandomTile() {
+    private fun highlightRandomTile(highlightColor: Int) {
         val randTile = allTiles.random()
         val randTile2 = allTiles.random()
         val randTile3 = allTiles.random()
@@ -338,34 +377,10 @@ class MainActivity : AppCompatActivity() {
         val randTile5 = allTiles.random()
         val randTile6 = allTiles.random()
         val randTile7 = allTiles.random()
-        val randomRando = arrayOf(randTile, randTile2, randTile3, randTile4, randTile5, randTile6, randTile7)
+        val randomRando = arrayOf(randTile2, randTile, randTile3, randTile4, randTile5, randTile6, randTile7)
         val ranRand = randomRando.random()
-        when ((1..8).random()) {
-            2 -> {
-                 randTile.setBackgroundColor(getColor(R.color.glitch_block))
-            }
-            1 -> {
-                randTile2.setBackgroundColor(getColor(R.color.glitch_block))
-            }
-            3 -> {
-                randTile3.setBackgroundColor(getColor(R.color.glitch_block))
-            }
-            4 -> {
-                randTile4.setBackgroundColor(getColor(R.color.glitch_block))
-            }
-            5 -> {
-                randTile7.setBackgroundColor(getColor(R.color.glitch_block))
-            }
-            6 -> {
-                randTile6.setBackgroundColor(getColor(R.color.glitch_block))
-            }
-            7 -> {
-                randTile5.setBackgroundColor(getColor(R.color.glitch_block))
-            }
-            8 -> {
-                  ranRand.setBackgroundColor(getColor(R.color.glitch_block))
-            }
-        }
+
+        ranRand.setBackgroundColor(highlightColor)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -401,35 +416,42 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkIssues() {
         if (issues >= 10) {
+            issues = 0
             gameOver()
         }
         val handler1 = Handler(Looper.getMainLooper())
         handler1.postDelayed({
             checkIssues()
             issuesText.text = getString(R.string.issues, issues.toString())
-        }, (150).toLong())
+        }, (250).toLong())
     }
 
-    fun fixBlockHit() {
+    private fun fixBlockHit(tile: FrameLayout) {
         if (issues != 0) {
             issues -= 1
+        }
+
+        tile.setBackgroundColor(getColor(R.color.safe_block))
+        val newTile = selectRandomTile()
+        if(getBackgroundColor(newTile) == getColor(R.color.safe_block)) {
+            newTile.setBackgroundColor(getColor(R.color.fix_block))
         }
         //make this fix block a safe block
         //25% chance that another fix block appears
     }
 
-    fun warningBlockHit() {
+    private fun warningBlockHit() {
         issues += 1
 
         val handler1 = Handler(Looper.getMainLooper())
 
         player.setColorFilter(getColor(R.color.warning_block))
         handler1.postDelayed({
-            player.setColorFilter(getColor(R.color.white))
+            player.colorFilter = null
         }, (150).toLong())
     }
 
-    fun errorBlockHit() {
+    private fun errorBlockHit() {
         val selectedTile1 = selectRandomTile()
         val selectedTile2 = selectRandomTile()
         val selectedTile3 = selectRandomTile()
@@ -439,69 +461,143 @@ class MainActivity : AppCompatActivity() {
         issues += (2..3).random()
         player.setColorFilter(getColor(R.color.error_block))
         handler1.postDelayed({
-            player.setColorFilter(getColor(R.color.white))
+            player.colorFilter = null
         }, (200).toLong())
 
-        var color: Int = Color.TRANSPARENT
-
-        val background = selectedTile1.background
-        if (background is ColorDrawable) color = background.color
-        if (color == getColor(R.color.warning_block)) {
-            selectedTile1.setBackgroundColor(getColor(R.color.error_block))
-        } else if(color == getColor(R.color.error_block)) {
-            selectedTile1.setBackgroundColor(getColor(R.color.black))
-        } else println("WIP code")//*******
-        if(getBackgroundColor(selectedTile1) == getColor(R.color.warning_block)) selectedTile1.setBackgroundColor(getColor(R.color.error_block))
-        else if(getBackgroundColor(selectedTile1) == getColor(R.color.error_block)) selectedTile1.setBackgroundColor(getColor(R.color.black))
-        else if(getBackgroundColor(selectedTile1) == getColor(R.color.black)) {
-            when((1..3).random()) {
-                in (2..3) -> selectedTile1.setBackgroundColor(getColor(R.color.glitch_block))
+        when {
+            getBackgroundColor(selectedTile1) == getColor(R.color.warning_block) -> selectedTile1.setBackgroundColor(getColor(R.color.error_block))
+            getBackgroundColor(selectedTile1) == getColor(R.color.error_block) -> selectedTile1.setBackgroundColor(getColor(R.color.black))
+            getBackgroundColor(selectedTile1) == getColor(R.color.black) -> {
+                when ((1..3).random()) {
+                    in (2..3) -> selectedTile1.setBackgroundColor(getColor(R.color.glitch_block))
+                }
             }
-        } else println("WIP code")//*******
-        val background2 = selectedTile2.background
-        if (background2 is ColorDrawable) color = background2.color
-        if (color == getColor(R.color.warning_block)) {
-            selectedTile2.setBackgroundColor(getColor(R.color.error_block))
-        } else if(color == getColor(R.color.error_block)) {
-            selectedTile2.setBackgroundColor(getColor(R.color.black))
-        } else println("WIP code")//******** *
-
-        val background3 = selectedTile3.background
-        if (background3 is ColorDrawable) color = background3.color
-        if (color == getColor(R.color.warning_block)) {
-            selectedTile3.setBackgroundColor(getColor(R.color.error_block))
-        } else if(color == getColor(R.color.error_block)) {
-            selectedTile3.setBackgroundColor(getColor(R.color.black))
-        } else println("WIP code")//******** *
-
-        val background4 = selectedTile4.background
-        if (background4 is ColorDrawable) color = background4.color
-        if (color == getColor(R.color.warning_block)) {
-            selectedTile4.setBackgroundColor(getColor(R.color.error_block))
-        } else if(color == getColor(R.color.error_block)) {
-            selectedTile4.setBackgroundColor(getColor(R.color.black))
-        } else println("WIP code")//*******
-
-        //increase amount of red and black blocks. some random blocks will be chosen randomly, chosen orange blocks become red and chosen red blocks become black
+            else -> println("WIP code")
+        }
+        when {
+            getBackgroundColor(selectedTile2) == getColor(R.color.warning_block) -> selectedTile2.setBackgroundColor(getColor(R.color.error_block))
+            getBackgroundColor(selectedTile2) == getColor(R.color.error_block) -> selectedTile2.setBackgroundColor(getColor(R.color.black))
+            getBackgroundColor(selectedTile2) == getColor(R.color.black) -> {
+                when ((1..3).random()) {
+                    in (2..3) -> selectedTile2.setBackgroundColor(getColor(R.color.glitch_block))
+                }
+            }
+        else -> println("WIP code")
     }
 
-    fun crashBlockHit() {
+            when {
+        getBackgroundColor(selectedTile3) == getColor(R.color.warning_block) -> selectedTile3.setBackgroundColor(getColor(R.color.error_block))
+        getBackgroundColor(selectedTile3) == getColor(R.color.error_block) -> selectedTile3.setBackgroundColor(getColor(R.color.black))
+        getBackgroundColor(selectedTile3) == getColor(R.color.black) -> {
+            when ((1..3).random()) {
+                in (2..3) -> selectedTile3.setBackgroundColor(getColor(R.color.glitch_block))
+            }
+        }
+        else -> println("WIP code")
+    }
+
+    when {
+        getBackgroundColor(selectedTile4) == getColor(R.color.warning_block) -> selectedTile4.setBackgroundColor(getColor(R.color.error_block))
+        getBackgroundColor(selectedTile4) == getColor(R.color.error_block) -> selectedTile4.setBackgroundColor(getColor(R.color.black))
+        getBackgroundColor(selectedTile4) == getColor(R.color.black) -> {
+        when ((1..3).random()) {
+            in (2..3) -> selectedTile4.setBackgroundColor(getColor(R.color.glitch_block))
+        }
+    }
+        else -> println("WIP code")
+         }
+    }
+
+    private fun crashBlockHit() {
         gameOver()
     }
 
-    fun gameOver() {
+    @SuppressLint("RestrictedApi")
+    private fun gameOver() {
         player.setColorFilter(getColor(R.color.error_block))
-
         val handler1 = Handler(Looper.getMainLooper())
+
+        shakeScreen()
         handler1.postDelayed({
-            player.setColorFilter(getColor(R.color.white))
-        }, (750).toLong())
-        issues = 0
-        TODO("to be impelemted laterGater, so will crashmfor nowhqiut hugiqwhAAAAAAAAAAAAAAAA")
+            shakeScreen()
+            handler1.postDelayed({
+                shakeScreen()
+                handler1.postDelayed({
+                    shakeScreen()
+                    handler1.postDelayed({
+                        val animator = ObjectAnimator.ofFloat(grid, View.ROTATION, rot1end, 0f)
+                        animator.duration = ((74..76).random()).toLong()
+                        animator.start()
+
+                        val animator2 = ObjectAnimator.ofFloat(grid, View.ROTATION_X, rot2end, 0f)
+                        animator2.duration = ((74..76).random()).toLong()
+                        animator2.start()
+
+                        val animator3 = ObjectAnimator.ofFloat(grid, View.ROTATION_Y, rot3end, 0f)
+                        animator3.duration = ((74..76).random()).toLong()
+                        animator3.start()
+                    }, 75)
+                }, 75)
+            }, 75)
+        }, 75)
+
+        repeat(475) {
+            handler1.postDelayed({
+                highlightRandomTile(Color.RED)
+
+            }, ((50..1505).random()).toLong())
+                    handler1.postDelayed({
+                        player.colorFilter = null
+                        handler1.postDelayed({
+                            player.setColorFilter(getColor(R.color.error_block))
+                            handler1.postDelayed({
+                                player.colorFilter = null
+                                handler1.postDelayed({
+                                    player.setColorFilter(getColor(R.color.error_block))
+                                    handler1.postDelayed({
+                                        player.colorFilter = null
+                                        handler1.postDelayed({
+                                            player.setColorFilter(getColor(R.color.error_block))
+                                            handler1.postDelayed({
+                                                player.colorFilter = null
+                                                handler1.postDelayed({
+                                                    //game over stuff here
+                                                    issues = 0
+                                                    recreate()
+                                                }, (50).toLong())
+                                            }, (750).toLong())
+                                        }, (250).toLong())
+                                    }, (250).toLong())
+                                }, (250).toLong())
+                            }, (250).toLong())
+                        }, (250).toLong())
+                    }, (300).toLong())
+        }
         //reset game board | randomization: x warning tiles; x error tiles; 5 crash tiles. hardcode safe path tiles and fix tiles if needed or randomize if time is available.
         //reset character placement
         // shake screen and vibrate device
         }
+
+    private fun shakeScreen() {
+        rot1end = (-1..1).random().toFloat()
+        rot2end = (-1..1).random().toFloat()
+        rot3end = (-1..1).random().toFloat()
+
+        rot1start = (-1..1).random().toFloat()
+        rot2start = (-1..1).random().toFloat()
+        rot3start = (-1..1).random().toFloat()
+        val animator = ObjectAnimator.ofFloat(grid, View.ROTATION, (rot1end / 3), (rot1start / 3))
+        animator.duration = ((74..76).random()).toLong()
+        animator.start()
+
+        val animator2 = ObjectAnimator.ofFloat(grid, View.ROTATION_X, (rot2end / 3), (rot2start / 3))
+        animator2.duration = ((74..76).random()).toLong()
+        animator2.start()
+
+        val animator3 = ObjectAnimator.ofFloat(grid, View.ROTATION_Y, (rot3end / 3), (rot3start / 3))
+        animator3.duration = ((74..76).random()).toLong()
+        animator3.start()
+    }
 
     private fun checkHitboxes() {
         collideDetect0()
@@ -633,7 +729,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -674,7 +770,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -715,7 +811,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -756,7 +852,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -797,7 +893,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -838,7 +934,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -879,7 +975,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -920,7 +1016,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -961,7 +1057,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1002,7 +1098,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1043,7 +1139,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1084,7 +1180,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1125,7 +1221,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1166,7 +1262,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1207,7 +1303,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1248,7 +1344,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1289,7 +1385,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1330,7 +1426,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1371,7 +1467,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1412,7 +1508,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1453,7 +1549,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1494,7 +1590,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1535,7 +1631,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1576,7 +1672,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1617,7 +1713,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1658,7 +1754,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1699,7 +1795,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1740,7 +1836,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1781,7 +1877,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1822,7 +1918,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1863,7 +1959,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1904,7 +2000,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1945,7 +2041,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -1986,7 +2082,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2027,7 +2123,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2068,7 +2164,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2109,7 +2205,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2150,7 +2246,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2191,7 +2287,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2232,7 +2328,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2273,7 +2369,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2314,7 +2410,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2355,7 +2451,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2396,7 +2492,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2437,7 +2533,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2478,7 +2574,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2519,7 +2615,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2560,7 +2656,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2601,7 +2697,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2642,7 +2738,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2683,7 +2779,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2724,7 +2820,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2765,7 +2861,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2806,7 +2902,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2847,7 +2943,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2888,7 +2984,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2929,7 +3025,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -2970,7 +3066,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3011,7 +3107,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3052,7 +3148,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3093,7 +3189,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3134,7 +3230,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3175,7 +3271,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3216,7 +3312,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3257,7 +3353,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3298,7 +3394,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3339,7 +3435,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3380,7 +3476,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3421,7 +3517,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3462,7 +3558,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3503,7 +3599,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3544,7 +3640,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3585,7 +3681,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3626,7 +3722,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3667,7 +3763,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3708,7 +3804,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3749,7 +3845,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3790,7 +3886,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3831,7 +3927,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3872,7 +3968,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3913,7 +4009,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3954,7 +4050,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -3995,7 +4091,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -4036,7 +4132,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -4077,7 +4173,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -4118,7 +4214,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -4159,7 +4255,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -4200,7 +4296,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -4241,7 +4337,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -4282,7 +4378,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -4323,7 +4419,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == warningColor -> warningBlockHit()
                                 getBackgroundColor(thisTile) == errorColor -> errorBlockHit()
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
-                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit()
+                                getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
                             }
                         }
@@ -4342,19 +4438,49 @@ class MainActivity : AppCompatActivity() {
 
         player.setColorFilter(getColor(R.color.glitch_block))
         handler1.postDelayed({
-            player.setColorFilter(getColor(R.color.white))
+            player.colorFilter = null
         }, (150).toLong())
-        when((1..8).random()) {
-            in (1..3) -> issues += (1..4).random()
-            in (4..7) -> {
-                issues += (0..4).random()
+        when((1..16).random()) {
+            in (1..2) -> issues += (1..3).random()
+            in (3..15) -> {
+                issues += (0..3).random()
                 repeat((2..6).random()) {
-                    highlightRandomTile()
+                    highlightRandomTile(getColor(R.color.glitch_block))
                 }
             }
-            8 -> gameOver()
+            16 -> {
+                repeat((2..6).random()) {
+                highlightRandomTile(getColor(R.color.glitch_block))
+            }
+                gameOver()
+            }
         }
     }
+
+
+    private fun readData() {
+        issues = shared.getInt("issues", issues)
+        level = shared.getInt("level", level)
+        plugins = shared.getInt("plugins", plugins)
+//        raidEnabled1 = shared.getBoolean("raidEnabled", raidEnabled1)
+//        raidPTS1 = shared.getInt("raidPTS", raidPTS1)
+//        pingVol = shared.getFloat("pingVol", pingVol)
+//        musicVol = shared.getFloat("musicVol", musicVol)
+//        pingPoints.text = getString(R.string.balance, pings1.toString())
+    }
+
+    private fun saveStats() {
+        val edit = shared.edit()
+        edit.putInt("issues" , issues )
+        edit.putInt("level" , level )
+        edit.putInt("plugins" , plugins )
+//        edit.putBoolean("raidEnabled" , raidEnabled1 )
+//        edit.putInt("raidPTS", raidPTS1 )
+//        edit.putFloat("pingVol", pingVol )
+//        edit.putFloat("musicVol", musicVol )
+        edit.apply()
+    }
+
 }
 // Green: Safe block; 10% chance of adding an Info Block.
 // Orange: Warning Block; adds 1 issue to the user's "code"
@@ -4364,7 +4490,7 @@ class MainActivity : AppCompatActivity() {
 // Magenta: Glitch Blocks; Let the glitch apocalypse begin. ;)
 
 /* ~FEATURE IDEAS~
-*  Hitting an Error BLock makes the phone vibrate and screen shake via 3D rotation
+*  Hitting an Error Block makes the phone vibrate and screen shake via 3D rotation
 *  Idea: White BLocks: Ad Blocks; gives the user a frikin' ad
 *
 *
