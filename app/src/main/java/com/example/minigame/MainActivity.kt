@@ -4491,7 +4491,7 @@ class MainActivity : AppCompatActivity() {
 
 /* ~FEATURE IDEAS~
 *  Hitting an Error Block makes the phone vibrate and screen shake via 3D rotation
-*  Idea: White BLocks: Ad Blocks; gives the user a frikin' ad
+*  Idea: White Blocks: Ad Blocks; gives the user a frikin' ad
 *
 *
 *
