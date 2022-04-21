@@ -351,18 +351,14 @@ class MainActivity : AppCompatActivity() {
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         checkIssues()
-        readData()
-//        getStats()
-//        loadLevel()
+//        readData()
+//        loadStats()
     }
 
-    private fun getStats() {
+    private fun loadStats() {
         TODO("Not yet implemented")
     }
 
-    private fun loadLevel() {
-        TODO("Not yet implemented")
-    }
 
     private fun selectRandomTile(): FrameLayout {
         val randTile = allTiles.random()
@@ -4482,12 +4478,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-// Green: Safe block; 10% chance of adding an Info Block.
+// Green: Safe block
 // Orange: Warning Block; adds 1 issue to the user's "code"
-// Red: Error Block; adds 2 to 3 issues to the user's "code" and creates more unsafe blocks. Chosen orange blocks become red and chosen red blocks become black
+// Red: Error Block; adds 2 to 3 issues to the user's "code" and creates more unsafe blocks. Chosen orange blocks become red and chosen red blocks become black, and some chosen black blocks can become magenta
 // Black: Crash Blocks; hitting one of these is an instant game over.
-// Teal: Fix Blocks; fixes 1 issue and 25% chance of adding another fix block over a green safe block.
-// Magenta: Glitch Blocks; Let the glitch apocalypse begin. ;)
+// Teal: Fix Blocks; fixes 1 issue and small chance of adding another fix block over a green safe block.
+// Magenta: Glitch Blocks; Let the spread of the glitch apocalypse begin. ;) (can spread, add issues, or kill)
+// goal: get to the other side without dying, and collect items on the way (items not implemented yet)
 
 /* ~FEATURE IDEAS~
 *  Hitting an Error Block makes the phone vibrate and screen shake via 3D rotation
