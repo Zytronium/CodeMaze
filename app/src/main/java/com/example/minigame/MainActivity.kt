@@ -1,7 +1,5 @@
 package com.example.minigame
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
@@ -19,6 +17,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -343,6 +342,8 @@ class MainActivity : AppCompatActivity() {
             3 -> allTiles = arrayOf(tile58, tile87, tile26, tile22, tile48, tile46, tile25, tile71, tile18, tile59, tile69, tile13, tile56, tile2, tile11, tile32, tile66, tile28, tile38, tile0, tile86, tile30, tile77, tile47, tile1, tile83, tile39, tile21, tile54, tile50, tile78, tile3, tile33, tile41, tile37, tile73, tile72, tile45, tile64, tile6, tile49, tile74, tile10, tile29, tile57, tile44, tile52, tile19, tile88, tile20, tile53, tile90, tile65, tile79, tile68, tile27, tile82, tile60, tile7, tile63, tile55, tile75, tile61, tile62, tile23, tile67, tile89, tile8, tile17, tile70, tile24, tile43, tile14, tile15, tile51, tile85, tile76, tile31, tile16, tile84, tile80, tile81, tile9, tile35, tile12, tile4, tile40, tile42, tile36, tile5, tile34)
         }
 
+        updateIssues()
+
         mainLayout = findViewById<View>(R.id.main) as RelativeLayout
         player!!.setOnTouchListener(onTouchListener())
         val windowInsetsController =
@@ -351,32 +352,21 @@ class MainActivity : AppCompatActivity() {
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         checkIssues()
-        readData()
+//        readData()
 //        loadStats()
+        generateOptimizers(8)
     }
 
     private fun loadStats() {
         TODO("Not yet implemented")
     }
 
-
     private fun selectRandomTile(): FrameLayout {
-        val randTile = allTiles.random()
-        return randTile
+        return allTiles.random()
     }
 
     private fun highlightRandomTile(highlightColor: Int) {
-        val randTile = allTiles.random()
-        val randTile2 = allTiles.random()
-        val randTile3 = allTiles.random()
-        val randTile4 = allTiles.random()
-        val randTile5 = allTiles.random()
-        val randTile6 = allTiles.random()
-        val randTile7 = allTiles.random()
-        val randomRando = arrayOf(randTile2, randTile, randTile3, randTile4, randTile5, randTile6, randTile7)
-        val ranRand = randomRando.random()
-
-        ranRand.setBackgroundColor(highlightColor)
+        selectRandomTile().setBackgroundColor(highlightColor)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -418,8 +408,29 @@ class MainActivity : AppCompatActivity() {
         val handler1 = Handler(Looper.getMainLooper())
         handler1.postDelayed({
             checkIssues()
-            issuesText.text = getString(R.string.issues, issues.toString())
+            updateIssues()
         }, (250).toLong())
+    }
+
+    private fun updateIssues() {
+        issuesText.text = getString(R.string.issues, issues.toString())
+//        issuesText.text = issues.toString()
+    }
+
+    private fun generateOptimizers(repeatNum: Int) {
+        repeat(repeatNum) {
+            generateOptimizer()
+        }
+    }
+
+    private fun generateOptimizer() {
+        val tile = selectRandomTile()
+        if(getBackgroundColor(tile) == getColor(R.color.safe_block)) {
+            tile.foreground = (R.drawable.ic_baseline_extension_24).toDrawable()
+//            tile.setBackgroundColor(getColor(R.color.safe_block))
+        } else {
+            generateOptimizer()
+        }
     }
 
     private fun fixBlockHit(tile: FrameLayout) {
