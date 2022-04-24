@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     // ~Stats:~
     private var issues = 0
     private var level: Int = 1
-    private var plugins: Int = 0
+    private var optimizers: Int = 0
     lateinit var shared : SharedPreferences
     // ~Stats ~
 
@@ -126,6 +126,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var grid: GridLayout
     lateinit var screen: ConstraintLayout
     lateinit var issuesText: TextView
+    lateinit var optiText: TextView
     lateinit var player: ImageView
     lateinit var tile1: FrameLayout
     lateinit var tile0: FrameLayout
@@ -239,6 +240,7 @@ class MainActivity : AppCompatActivity() {
         grid = findViewById(R.id.grid)
         screen = findViewById(R.id.screen)
         issuesText = findViewById(R.id.textView2)
+        optiText = findViewById(R.id.textView3)
         player = findViewById(R.id.player)
         tile0 = findViewById(R.id.tile0)
         tile1 = findViewById(R.id.tile1)
@@ -343,6 +345,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         updateIssues()
+        updateOptimizers()
 
         mainLayout = findViewById<View>(R.id.main) as RelativeLayout
         player!!.setOnTouchListener(onTouchListener())
@@ -353,12 +356,12 @@ class MainActivity : AppCompatActivity() {
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         checkIssues()
 //        readData()
-//        loadStats()
-        generateOptimizers(8)
+        generateOptimizers(5)
     }
 
-    private fun loadStats() {
-        TODO("Not yet implemented")
+    private fun updateStats() {
+        updateIssues()
+        updateOptimizers()
     }
 
     private fun selectRandomTile(): FrameLayout {
@@ -417,6 +420,10 @@ class MainActivity : AppCompatActivity() {
 //        issuesText.text = issues.toString()
     }
 
+    private fun updateOptimizers() {
+        optiText.text = getString(R.string.optimizers, optimizers.toString())
+    }
+
     private fun generateOptimizers(repeatNum: Int) {
         repeat(repeatNum) {
             generateOptimizer()
@@ -426,10 +433,35 @@ class MainActivity : AppCompatActivity() {
     private fun generateOptimizer() {
         val tile = selectRandomTile()
         if(getBackgroundColor(tile) == getColor(R.color.safe_block)) {
-            tile.foreground = (R.drawable.ic_baseline_extension_24).toDrawable()
+//            tile.foreground = (R.drawable.ic_baseline_extension_24).toDrawable()
 //            tile.setBackgroundColor(getColor(R.color.safe_block))
+            tile.setBackgroundColor(getColor(R.color.optimizer_piece))
         } else {
             generateOptimizer()
+        }
+    }
+
+    private fun optimizerCollect(tile: FrameLayout) {
+        tile.setBackgroundColor(getColor(R.color.safe_block))
+        optimizers++
+        when((1..5).random()) {
+            1 -> {
+                if(issues != 0) issues -= 1
+                generateFixBlock()
+            }
+        }
+        updateStats()
+//        saveStats()
+        //if(optimizers <= x) {below code}
+        generateOptimizer()
+    }
+
+    private fun generateFixBlock() {
+        val newTile = selectRandomTile()
+        if(getBackgroundColor(newTile) == getColor(R.color.safe_block)) {
+            newTile.setBackgroundColor(getColor(R.color.fix_block))
+        } else {
+            generateFixBlock()
         }
     }
 
@@ -439,12 +471,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         tile.setBackgroundColor(getColor(R.color.safe_block))
-        val newTile = selectRandomTile()
-        if(getBackgroundColor(newTile) == getColor(R.color.safe_block)) {
-            newTile.setBackgroundColor(getColor(R.color.fix_block))
+
+        when((1..4).random()) {
+            1 -> generateFixBlock()
         }
-        //make this fix block a safe block
-        //25% chance that another fix block appears
     }
 
     private fun warningBlockHit() {
@@ -548,11 +578,11 @@ class MainActivity : AppCompatActivity() {
             }, 75)
         }, 75)
 
-        repeat(475) {
+        repeat(500) {
             handler1.postDelayed({
                 highlightRandomTile(Color.RED)
 
-            }, ((50..1505).random()).toLong())
+            }, ((25..1505).random()).toLong()) }
                     handler1.postDelayed({
                         player.colorFilter = null
                         handler1.postDelayed({
@@ -570,6 +600,7 @@ class MainActivity : AppCompatActivity() {
                                                 handler1.postDelayed({
                                                     //game over stuff here
                                                     issues = 0
+                                                    optimizers = 0
                                                     recreate()
                                                 }, (50).toLong())
                                             }, (750).toLong())
@@ -579,11 +610,22 @@ class MainActivity : AppCompatActivity() {
                             }, (250).toLong())
                         }, (250).toLong())
                     }, (300).toLong())
+
+        //reset game board | randomization: x warning tiles; x error tiles; 5 crash tiles. hardcode safe path tiles and fix tiles presets if needed or randomize if time is available.
         }
-        //reset game board | randomization: x warning tiles; x error tiles; 5 crash tiles. hardcode safe path tiles and fix tiles if needed or randomize if time is available.
-        //reset character placement
-        // shake screen and vibrate device
-        }
+
+    private fun levelWin() {
+        level++
+        saveStats()
+//        loadNextLevel()
+    }
+
+    private fun loadNextLevel() {
+        //xx = level
+        //load this level
+
+        //or... randomize game board
+    }
 
     private fun shakeScreen() {
         rot1end = (-1..1).random().toFloat()
@@ -715,6 +757,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile0
 
@@ -738,6 +781,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -756,6 +800,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile1
 
@@ -779,6 +824,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -797,6 +843,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile2
 
@@ -820,6 +867,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -838,6 +886,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile3
 
@@ -861,6 +910,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -879,6 +929,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile4
 
@@ -902,6 +953,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -920,6 +972,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile5
 
@@ -943,6 +996,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -961,6 +1015,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile6
 
@@ -984,6 +1039,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1002,6 +1058,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile7
 
@@ -1025,6 +1082,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1043,6 +1101,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile8
 
@@ -1066,6 +1125,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1084,6 +1144,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile9
 
@@ -1107,6 +1168,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1125,6 +1187,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile10
 
@@ -1148,6 +1211,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1166,6 +1230,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile11
 
@@ -1189,6 +1254,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1207,6 +1273,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile12
 
@@ -1230,6 +1297,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1248,6 +1316,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile13
 
@@ -1271,6 +1340,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1289,6 +1359,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile14
 
@@ -1312,6 +1383,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1330,6 +1402,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile15
 
@@ -1353,6 +1426,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1371,6 +1445,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile16
 
@@ -1394,6 +1469,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1412,6 +1488,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile17
 
@@ -1435,6 +1512,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1453,6 +1531,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile18
 
@@ -1476,6 +1555,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1494,6 +1574,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile19
 
@@ -1517,6 +1598,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1535,6 +1617,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile20
 
@@ -1558,6 +1641,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1576,6 +1660,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile21
 
@@ -1599,6 +1684,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1617,6 +1703,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile22
 
@@ -1640,6 +1727,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1658,6 +1746,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+                        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile23
 
@@ -1681,6 +1770,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1699,6 +1789,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile24
 
@@ -1722,6 +1813,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1740,6 +1832,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile25
 
@@ -1763,6 +1856,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1781,6 +1875,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile26
 
@@ -1804,6 +1899,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1822,6 +1918,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile27
 
@@ -1845,6 +1942,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1863,6 +1961,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile28
 
@@ -1886,6 +1985,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1904,6 +2004,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile29
 
@@ -1927,6 +2028,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1945,6 +2047,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile30
 
@@ -1968,6 +2071,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -1986,6 +2090,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile31
 
@@ -2009,6 +2114,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2027,6 +2133,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile32
 
@@ -2050,6 +2157,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2068,6 +2176,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile33
 
@@ -2091,6 +2200,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2109,6 +2219,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile34
 
@@ -2132,6 +2243,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2150,6 +2262,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile35
 
@@ -2173,6 +2286,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2191,6 +2305,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile36
 
@@ -2214,6 +2329,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2232,6 +2348,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile37
 
@@ -2255,6 +2372,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2273,6 +2391,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile38
 
@@ -2296,6 +2415,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2314,6 +2434,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile39
 
@@ -2337,6 +2458,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2355,6 +2477,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile40
 
@@ -2378,6 +2501,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2396,6 +2520,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile41
 
@@ -2419,6 +2544,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2437,6 +2563,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile42
 
@@ -2460,6 +2587,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2478,6 +2606,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile43
 
@@ -2501,6 +2630,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2519,6 +2649,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile44
 
@@ -2542,6 +2673,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2560,6 +2692,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile45
 
@@ -2583,6 +2716,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2601,6 +2735,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile46
 
@@ -2624,6 +2759,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2642,6 +2778,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile47
 
@@ -2665,6 +2802,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2683,6 +2821,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile48
 
@@ -2706,6 +2845,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2724,6 +2864,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile49
 
@@ -2747,6 +2888,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2765,6 +2907,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile50
 
@@ -2788,6 +2931,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2806,6 +2950,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile51
 
@@ -2829,6 +2974,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2847,6 +2993,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile52
 
@@ -2870,6 +3017,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2888,6 +3036,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile53
 
@@ -2911,6 +3060,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2929,6 +3079,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile54
 
@@ -2952,6 +3103,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -2970,6 +3122,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile55
 
@@ -2993,6 +3146,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3011,6 +3165,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile56
 
@@ -3034,6 +3189,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3052,6 +3208,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile57
 
@@ -3075,6 +3232,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3093,6 +3251,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile58
 
@@ -3116,6 +3275,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3134,6 +3294,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile59
 
@@ -3157,6 +3318,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3175,6 +3337,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile60
 
@@ -3198,6 +3361,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3216,6 +3380,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile61
 
@@ -3239,6 +3404,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3257,6 +3423,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile62
 
@@ -3280,6 +3447,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3298,6 +3466,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile63
 
@@ -3321,6 +3490,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3339,6 +3509,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile64
 
@@ -3362,6 +3533,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3380,6 +3552,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile65
 
@@ -3403,6 +3576,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3421,6 +3595,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile66
 
@@ -3444,6 +3619,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3462,6 +3638,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile67
 
@@ -3485,6 +3662,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3503,6 +3681,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile68
 
@@ -3526,6 +3705,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3544,6 +3724,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile69
 
@@ -3567,6 +3748,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3585,6 +3767,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile70
 
@@ -3608,6 +3791,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3626,6 +3810,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile71
 
@@ -3649,6 +3834,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3667,6 +3853,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile72
 
@@ -3690,6 +3877,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3708,6 +3896,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile73
 
@@ -3731,6 +3920,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3749,6 +3939,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile74
 
@@ -3772,6 +3963,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3790,6 +3982,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile75
 
@@ -3813,6 +4006,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3831,6 +4025,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile76
 
@@ -3854,6 +4049,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3872,6 +4068,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile77
 
@@ -3895,6 +4092,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3913,6 +4111,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile78
 
@@ -3936,6 +4135,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3954,6 +4154,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile79
 
@@ -3977,6 +4178,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -3995,6 +4197,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile80
 
@@ -4018,6 +4221,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4036,6 +4240,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile81
 
@@ -4059,6 +4264,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4077,6 +4283,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile82
 
@@ -4100,6 +4307,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4118,6 +4326,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile83
 
@@ -4141,6 +4350,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4159,6 +4369,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile84
 
@@ -4182,6 +4393,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4200,6 +4412,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile85
 
@@ -4223,6 +4436,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4241,6 +4455,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile86
 
@@ -4264,6 +4479,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4282,6 +4498,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile87
 
@@ -4305,6 +4522,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4323,6 +4541,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile88
 
@@ -4346,6 +4565,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4364,6 +4584,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile89
 
@@ -4387,6 +4608,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4405,6 +4627,7 @@ class MainActivity : AppCompatActivity() {
         val warningColor = getColor(R.color.warning_block)
         val fixColor = getColor(R.color.fix_block)
         val crashColor = getColor(R.color.black)
+        val optiColor = getColor(R.color.optimizer_piece)
 
         val thisTile = tile90
 
@@ -4428,6 +4651,7 @@ class MainActivity : AppCompatActivity() {
                                 getBackgroundColor(thisTile) == crashColor -> crashBlockHit()
                                 getBackgroundColor(thisTile) == fixColor -> fixBlockHit(thisTile)
                                 getBackgroundColor(thisTile) == glitchColor -> glitchBlockHit()
+                                getBackgroundColor(thisTile) == optiColor -> optimizerCollect(thisTile)
                             }
                         }
                     }
@@ -4468,7 +4692,7 @@ class MainActivity : AppCompatActivity() {
     private fun readData() {
         issues = shared.getInt("issues", issues)
         level = shared.getInt("level", level)
-        plugins = shared.getInt("plugins", plugins)
+        optimizers = shared.getInt("optimizers", optimizers)
 //        raidEnabled1 = shared.getBoolean("raidEnabled", raidEnabled1)
 //        raidPTS1 = shared.getInt("raidPTS", raidPTS1)
 //        pingVol = shared.getFloat("pingVol", pingVol)
@@ -4480,7 +4704,7 @@ class MainActivity : AppCompatActivity() {
         val edit = shared.edit()
         edit.putInt("issues" , issues )
         edit.putInt("level" , level )
-        edit.putInt("plugins" , plugins )
+        edit.putInt("optimizers" , optimizers )
 //        edit.putBoolean("raidEnabled" , raidEnabled1 )
 //        edit.putInt("raidPTS", raidPTS1 )
 //        edit.putFloat("pingVol", pingVol )
