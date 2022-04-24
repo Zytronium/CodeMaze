@@ -5,23 +5,22 @@ import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.gridlayout.widget.GridLayout
+
 
 class MainActivity : AppCompatActivity() {
     // ~Stats:~
@@ -334,6 +333,12 @@ class MainActivity : AppCompatActivity() {
         tile89 = findViewById(R.id.tile89)
         tile90 = findViewById(R.id.tile90)
 
+        val w: Window = window
+        w.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+
         when((0..3).random()) {
             0 -> allTiles = arrayOf(tile1, tile2, tile3, tile0, tile4, tile5, tile16, tile7, tile71, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile17, tile6, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27, tile28, tile29, tile30, tile31, tile32, tile33, tile34, tile35, tile36, tile37, tile38, tile39, tile40, tile41, tile42, tile43, tile44, tile45, tile46, tile47, tile48, tile49, tile50, tile51, tile52, tile53, tile54, tile55, tile56, tile57, tile58, tile59, tile60, tile61, tile62, tile63, tile64, tile65, tile66, tile67, tile68, tile69, tile70, tile8, tile72, tile73, tile74, tile75, tile76, tile77, tile78, tile79, tile80, tile81, tile82, tile83, tile84, tile85, tile86, tile87, tile88, tile89, tile90)
 
@@ -356,7 +361,7 @@ class MainActivity : AppCompatActivity() {
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         checkIssues()
 //        readData()
-        generateOptimizers(5)
+        generateOptimizers(6)
     }
 
     private fun updateStats() {
@@ -444,6 +449,7 @@ class MainActivity : AppCompatActivity() {
     private fun optimizerCollect(tile: FrameLayout) {
         tile.setBackgroundColor(getColor(R.color.safe_block))
         optimizers++
+        allTiles.shuffle()
         when((1..5).random()) {
             1 -> {
                 if(issues != 0) issues -= 1
