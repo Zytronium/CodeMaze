@@ -212,7 +212,7 @@
             android:layout_width="58dp"
             android:layout_height="58dp"
             android:alpha=".5"
-            android:background="@color/fix_block"
+            android:background="@color/safe_block"
             android:foregroundTint="#9C27B0"
             android:foregroundTintMode="src_in"
             android:scaleX="1.03125"
@@ -332,7 +332,7 @@
             android:layout_width="58dp"
             android:layout_height="58dp"
             android:alpha=".5"
-            android:background="@color/fix_block"
+            android:background="@color/safe_block"
             android:foregroundTint="#9C27B0"
             android:foregroundTintMode="src_in"
             android:scaleX="1.03125"
@@ -482,7 +482,7 @@
             android:layout_width="58dp"
             android:layout_height="58dp"
             android:alpha=".5"
-            android:background="@color/safe_block"
+            android:background="@color/fix_block"
             android:foregroundTint="#9C27B0"
             android:foregroundTintMode="src_in"
             android:scaleX="1.03125"
@@ -1416,7 +1416,7 @@
             android:scaleType="fitCenter"
             android:scaleX="3"
             android:scaleY="3"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:srcCompat="@drawable/ic_baseline_android_24" />
 
     </RelativeLayout>
 
@@ -1430,7 +1430,7 @@
         android:paddingBottom="6dp"
         android:text="Hello World!"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
