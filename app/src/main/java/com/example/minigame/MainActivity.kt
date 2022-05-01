@@ -333,12 +333,6 @@ class MainActivity : AppCompatActivity() {
         tile89 = findViewById(R.id.tile89)
         tile90 = findViewById(R.id.tile90)
 
-        val w: Window = window
-        w.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
-
         when((0..3).random()) {
             0 -> allTiles = arrayOf(tile1, tile2, tile3, tile0, tile4, tile5, tile16, tile7, tile71, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile17, tile6, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27, tile28, tile29, tile30, tile31, tile32, tile33, tile34, tile35, tile36, tile37, tile38, tile39, tile40, tile41, tile42, tile43, tile44, tile45, tile46, tile47, tile48, tile49, tile50, tile51, tile52, tile53, tile54, tile55, tile56, tile57, tile58, tile59, tile60, tile61, tile62, tile63, tile64, tile65, tile66, tile67, tile68, tile69, tile70, tile8, tile72, tile73, tile74, tile75, tile76, tile77, tile78, tile79, tile80, tile81, tile82, tile83, tile84, tile85, tile86, tile87, tile88, tile89, tile90)
 
@@ -348,17 +342,25 @@ class MainActivity : AppCompatActivity() {
 
             3 -> allTiles = arrayOf(tile58, tile87, tile26, tile22, tile48, tile46, tile25, tile71, tile18, tile59, tile69, tile13, tile56, tile2, tile11, tile32, tile66, tile28, tile38, tile0, tile86, tile30, tile77, tile47, tile1, tile83, tile39, tile21, tile54, tile50, tile78, tile3, tile33, tile41, tile37, tile73, tile72, tile45, tile64, tile6, tile49, tile74, tile10, tile29, tile57, tile44, tile52, tile19, tile88, tile20, tile53, tile90, tile65, tile79, tile68, tile27, tile82, tile60, tile7, tile63, tile55, tile75, tile61, tile62, tile23, tile67, tile89, tile8, tile17, tile70, tile24, tile43, tile14, tile15, tile51, tile85, tile76, tile31, tile16, tile84, tile80, tile81, tile9, tile35, tile12, tile4, tile40, tile42, tile36, tile5, tile34)
         }
-
-        updateIssues()
-        updateOptimizers()
-
+        allTiles.shuffle()
         mainLayout = findViewById<View>(R.id.main) as RelativeLayout
         player!!.setOnTouchListener(onTouchListener())
-        val windowInsetsController =
+
+        val w: Window = window
+        w.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+
+    val windowInsetsController =
             ViewCompat.getWindowInsetsController(window.decorView) ?: return
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+        updateIssues()
+        updateOptimizers()
+
+
         checkIssues()
 //        readData()
         generateOptimizers(6)
