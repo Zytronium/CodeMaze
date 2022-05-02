@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.gridlayout.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/screen"
+    android:layout_gravity="center"
+    app:layout_anchorGravity="center"
+    android:id="@+id/grid"
+    android:background="@drawable/black_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/black_gradient"
-    tools:context=".MainActivity">
-
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fadeScrollbars="false"
-        android:foregroundGravity="center"
-        android:overScrollMode="ifContentScrolls"
-        android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:scrollbarAlwaysDrawVerticalTrack="false"
-        android:scrollbarThumbHorizontal="@null"
-        android:scrollbarThumbVertical="@null"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.028">
+    android:fadeScrollbars="false"
+    android:foregroundGravity="center"
+    android:overScrollMode="ifContentScrolls"
+    android:scrollbarAlwaysDrawHorizontalTrack="false"
+    android:scrollbarAlwaysDrawVerticalTrack="false"
+    android:scrollbarThumbHorizontal="@null"
+    android:scrollbarThumbVertical="@null"
+    android:scrollbars="none"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textView"
+    app:layout_constraintVertical_bias="0.028">
 
     <FrameLayout
         android:id="@+id/tile0"
@@ -507,20 +504,20 @@
 
     </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/tile32"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:alpha=".5"
-            android:background="@color/safe_block"
-            android:foregroundTint="#9C27B0"
-            android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
-            app:layout_column="4"
-            app:layout_row="4">
+    <FrameLayout
+        android:id="@+id/tile32"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:alpha=".5"
+        android:background="@color/safe_block"
+        android:foregroundTint="#9C27B0"
+        android:foregroundTintMode="src_in"
+        android:scaleX="1.03125"
+        android:scaleY="1.03125"
+        app:layout_column="4"
+        app:layout_row="4">
 
-        </FrameLayout>
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/tile33"
@@ -1391,81 +1388,3 @@
     </FrameLayout>
 
 </androidx.gridlayout.widget.GridLayout>
-
-    <RelativeLayout
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="1dp">
-
-        <ImageView
-            android:id="@+id/player"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="187dp"
-            android:layout_marginTop="826dp"
-            android:layout_marginEnd="189dp"
-            android:layout_marginBottom="30dp"
-            android:adjustViewBounds="true"
-            android:cropToPadding="false"
-            android:scaleType="fitCenter"
-            android:scaleX="3"
-            android:scaleY="3"
-            app:srcCompat="@drawable/ic_baseline_android_24" />
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="404dp"
-        android:layout_height="48dp"
-        android:fontFamily="@font/press_start_2p"
-        android:gravity="bottom|center"
-        android:includeFontPadding="false"
-        android:paddingBottom="6dp"
-        android:text="Hello World!"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/issues"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.965"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/optimizers"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.035"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
- 

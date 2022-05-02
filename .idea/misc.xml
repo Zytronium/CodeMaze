@@ -4,15 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Owner/AndroidStudioProjects/CoderMinigame/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3285" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/CoderMinigame/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1365" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/CoderMinigame/app/src/main/res/layout/activity_main.xml" value="0.19662921348314608" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/CoderMinigame/app/src/main/res/layout/path1_layout.xml" value="0.22" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/CoderMinigame/app/src/main/res/layout/test_layout.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/drawable/black_gradient.xml" value="0.181" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/drawable/ic_baseline_android_24.xml" value="0.1365" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/drawable/ic_baseline_extension_24.xml" value="0.1365" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1365" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1365" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_main.xml" value="0.19" />
       </map>
     </option>
   </component>
