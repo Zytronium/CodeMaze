@@ -7,10 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="error_block">#DB0000</color>
+    <color name="error_block">#EA0400</color>
     <color name="warning_block">#FFA200</color>
     <color name="safe_block">#5AFF00</color>
-    <color name="fix_block">#00ED8E</color>
+    <color name="fix_block">#00EDA2</color>
     <color name="glitch_block">#EE00FF</color>
-    <color name="optimizer_piece">#4C00FF</color>
+    <color name="optimizer_piece">#6200FF</color>
 </resources>
