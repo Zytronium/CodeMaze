@@ -17,7 +17,7 @@ class MainMenuActivity : AppCompatActivity() {
         finish()
     }
 
-    fun speedMaze(view: View) {
+    fun painMode(view: View) {
         val intent = Intent(this@MainMenuActivity, StartActivity(5)::class.java)
         startActivity(intent)
         finish()

@@ -58,6 +58,17 @@
                 app:cornerRadius="28dp"
                 android:textSize="20sp"/>
 
+            <Button
+                android:backgroundTint="#170000"
+                android:id="@+id/btn_painmode"
+                android:layout_width="155dp"
+                android:layout_height="90dp"
+                android:onClick="painMode"
+                android:text="PAIN MODE"
+                android:textStyle="bold"
+                app:cornerRadius="28dp"
+                android:textSize="20sp"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -73,7 +84,6 @@
                 android:layout_height="90dp"
                 android:text="SPEED MAZE"
                 android:textStyle="bold"
-                android:onClick="speedMaze"
                 app:cornerRadius="28dp"
                 android:textSize="20sp"/>
 
