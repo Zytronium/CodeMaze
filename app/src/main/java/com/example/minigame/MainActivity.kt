@@ -112,7 +112,10 @@ import com.example.minigame.Path1Activity.Path1Tiles.TILE89
 import com.example.minigame.Path1Activity.Path1Tiles.TILE9
 import com.example.minigame.Path1Activity.Path1Tiles.TILE90
 
-class MainActivity : AppCompatActivity() {
+class MainActivity(gamemode: Int) : AppCompatActivity() {
+    private var mode: Int = gamemode//5 // 1 = classic; 2 = spee maze; 3 = speedrun; 4 = glitch; 5 = pain mode; 6 = god mode
+    private var alphaUp: Boolean = true
+    private var alphaDown: Boolean = false
     private var optiFails: Int = 0
     private var fixFails: Int = 0
     private var errorFails: Int = 0
@@ -378,6 +381,37 @@ class MainActivity : AppCompatActivity() {
         checkIssues()
         generateTiles()
 
+        if(mode == 5) {
+            loopShake()
+            alphaFluctuate()
+        }
+
+    }
+
+    private fun alphaFluctuate() {
+        when((1..13001).random()) {
+            1355 -> grid.alpha = 0.9f
+            117 -> grid.alpha = 0.001f
+        }
+        if(grid.alpha in 0.05f..0.35f) {
+            if(grid.alpha <= 0.05f) {
+                alphaUp = true
+                alphaDown = false
+            }
+            if(grid.alpha >= 0.35f) {
+                alphaUp = false
+                alphaDown = true
+            }
+            if(alphaUp) grid.alpha += 0.05f
+            if(alphaDown) grid.alpha -= 0.05f
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
+                alphaFluctuate()
+            }, (50).toLong())
+        } else {
+            grid.alpha = 0.05f
+            alphaFluctuate()
+        }
     }
 
     private fun generateLayout1() {
@@ -947,7 +981,7 @@ class MainActivity : AppCompatActivity() {
         player.setColorFilter(getColor(R.color.error_block))
         val handler1 = Handler(Looper.getMainLooper())
 
-        vibrate(150)
+        vibrate(250)
 
         shakeScreen()
         handler1.postDelayed({
@@ -1235,6 +1269,14 @@ class MainActivity : AppCompatActivity() {
         animator3.start()
     }
 
+    private fun loopShake() {
+        shakeScreen()
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            loopShake()
+        }, 80)
+    }
+
     private fun getBackgroundColor(selectedTile: FrameLayout): Int {
         val background = selectedTile.background
         return if (background is ColorDrawable) background.color
@@ -1268,6 +1310,13 @@ class MainActivity : AppCompatActivity() {
 
                             if(frameLayout.alpha == 0.55f) {
                                 frameLayout.alpha = 0.6f
+                                if(mode == 5) {
+                                    vibrate((150..1000).random().toLong())
+                                    when((1..573).random()) {
+                                        in 1..52 -> frameLayout.setBackgroundColor(Color.TRANSPARENT)
+                                        in 256..258 -> frameLayout.setBackgroundColor(getColor(R.color.error_block))
+                                    }
+                                }
 
                                 when {
                                     getBackgroundColor(frameLayout) == warningColor -> warningBlockHit()

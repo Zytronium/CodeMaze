@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/black_gradient"
+    tools:context=".MainMenuActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro_semibold"
+        android:text="CHOOSE YOUR GAMEMODE"
+        android:textColor="@color/glow_teal"
+        android:textSize="32sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/row1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:backgroundTint="@color/optimizer_piece"
+                android:id="@+id/btn_classic"
+                android:layout_width="155dp"
+                android:layout_height="90dp"
+                android:text="CLASSIC"
+                android:textStyle="bold"
+                app:cornerRadius="28dp"
+                android:onClick="classic"
+                android:textSize="20sp"/>
+
+            <Button
+                android:backgroundTint="@color/orange"
+                android:id="@+id/btn_speed"
+                android:layout_width="155dp"
+                android:layout_height="90dp"
+                android:text="SPEEDRUN"
+                android:textStyle="bold"
+                app:cornerRadius="28dp"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:backgroundTint="@color/green"
+                android:id="@+id/btn_maze"
+                android:layout_width="155dp"
+                android:layout_height="90dp"
+                android:text="SPEED MAZE"
+                android:textStyle="bold"
+                android:onClick="speedMaze"
+                app:cornerRadius="28dp"
+                android:textSize="20sp"/>
+
+            <Button
+                android:backgroundTint="@color/glitch_block"
+                android:id="@+id/btn_glitch"
+                android:layout_width="155dp"
+                android:layout_height="90dp"
+                android:text="GLITCH"
+                android:textStyle="bold"
+                app:cornerRadius="28dp"
+                android:textSize="20sp"/>
+
+            <Button
+                android:backgroundTint="@color/warning_block"
+                android:id="@+id/btn_godmode"
+                android:layout_width="155dp"
+                android:layout_height="90dp"
+                android:text="GOD MODE"
+                android:textStyle="bold"
+                app:cornerRadius="28dp"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!-- Classic - original normal game rules -->
+    <!-- Speedrun - every second, error block code (minus add issues part; AND green tiles have a chance of turning to orange when chosen) plays.  so the player has to beat the round before the board becomes full of dangers -->
+    <!-- Speed Maze - No fixes or optimizers, but every unsafe tile is an instant game over. After 15 seconds or so, glitch tiles start appearing. -->
+    <!-- Glitch - Instead of collecting optimizers, the player spreads the glitch. Their score is the number of glitch tiles on the board when they loose. -->
+    <!-- God Mode - original game rules but the player can never die. -->

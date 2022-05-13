@@ -98,7 +98,9 @@ import com.example.minigame.Path1Activity.Path1Tiles.TILE88
 import com.example.minigame.Path1Activity.Path1Tiles.TILE89
 import com.example.minigame.Path1Activity.Path1Tiles.TILE90
 
-class Path10Activity : AppCompatActivity() {
+class Path10Activity(gamemode: Int) : AppCompatActivity() {
+
+    private val mode: Int = gamemode
 
     private var numb = 0
      lateinit var tile0: FrameLayout
@@ -303,7 +305,7 @@ class Path10Activity : AppCompatActivity() {
             }
         }
 
-        val intent = Intent(this@Path10Activity, MainActivity::class.java)
+        val intent = Intent(this@Path10Activity, MainActivity(mode)::class.java)
         startActivity(intent)
         finish()
 
