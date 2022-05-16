@@ -2,5 +2,30 @@
     <string name="app_name">Minigame</string>>
     <string name="issues">Issues: %s</string>
     <string name="optimizers">Optimizers: %s</string>
+    <string name="optimizers_and_goal">Optimizers: %s/%s</string>
+    <string name="glitch_score">Score: %s</string>
     <string name="path">%s</string>
+
+    <string name="title_activity_settings">SettingzActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="main_header">Game</string>
+    <string name="misc_header">Misc.</string>
+
+    <!-- Game Preferences -->
+    <string name="signature_title">Your signature</string> <!-- sample, not using -->
+    <string name="reply_title">Default reply action</string> <!-- sample, not using -->
+    <string name="vibrations_title">Allow Vibrations</string>
+    <string name="vibrations_summary_on">Allow this game to vibrate the phone.\n*WIP Setting; toggling currently does nothing.*</string>
+    <string name="vibrations_summary_off">This game will never vibrate your phone.</string>
+
+    <!-- Misc Preferences -->
+    <string name="sync_title">Sync email periodically</string> <!-- sample, not using -->
+    <string name="attachment_title">Download incoming attachments</string> <!-- sample, not using -->
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string> <!-- sample, not using -->
+    <string name="attachment_summary_off">Only download attachments when manually requested</string> <!-- sample, not using -->
+
+    <string name="rainbow_title">Rainbow Character</string>
+    <string name="rainbow_summary_on">Character constantly changes colors, cycling though the entire rainbow. *may interfere with character color blinking during things like collisions with tiles and game over animations.</string>
+    <string name="rainbow_summary_off">Character stays normal white color.\n*WIP setting, currently not available*</string>
 </resources>

@@ -12,15 +12,48 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     fun classic(view: View) {
-        val intent = Intent(this@MainMenuActivity, StartActivity(1)::class.java)
+        GameMode.gamemode = 1
+        val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
     fun painMode(view: View) {
-        val intent = Intent(this@MainMenuActivity, StartActivity(5)::class.java)
+        GameMode.gamemode = 5
+        val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
-        finish()
+    }
+
+    object GameMode {
+        var gamemode: Int = 1
+    }
+
+    fun apocalypse(view: View) {
+        GameMode.gamemode = 3
+        val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun glitchSpread(view: View) {
+        GameMode.gamemode = 4
+        val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun infmode(view: View) {
+        GameMode.gamemode = 6
+        val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun suddenDeath(view: View) {
+    GameMode.gamemode = 7
+    val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
+    startActivity(intent)
+    }
+
+    fun settings(view: View) {
+        val intent = Intent(this@MainMenuActivity, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
 }

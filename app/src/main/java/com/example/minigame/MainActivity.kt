@@ -9,10 +9,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.*
 import android.view.*
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.toColorInt
@@ -112,8 +109,8 @@ import com.example.minigame.Path1Activity.Path1Tiles.TILE89
 import com.example.minigame.Path1Activity.Path1Tiles.TILE9
 import com.example.minigame.Path1Activity.Path1Tiles.TILE90
 
-class MainActivity(gamemode: Int) : AppCompatActivity() {
-    private var mode: Int = gamemode//5 // 1 = classic; 2 = spee maze; 3 = speedrun; 4 = glitch; 5 = pain mode; 6 = god mode
+class MainActivity : AppCompatActivity() {
+    private var mode: Int = MainMenuActivity.GameMode.gamemode // 1 = classic; 2 = speed maze; 3 = speedrun; 4 = glitch; 5 = pain mode; 6 = infinite; 7 = sudden death;
     private var alphaUp: Boolean = true
     private var alphaDown: Boolean = false
     private var optiFails: Int = 0
@@ -127,11 +124,12 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
     private var optimizers: Int = 0
     private var totalOptimizers: Int = 0
     private var optiGoal: Int = 25
-    private var difficulty: Int = 1 //(1..4).random()
+    private var difficulty: Int = DifficultyActivity.Difficulty.difficulty //0 //(1..4).random() // 0 - baby | 1 - beginner | 2 - easy | 3 - medium | 4 - hard | 5 - harder | 6 - expert | 7 - impossible | 8 - impossible++
     private var finBlockGenerated: Boolean = false
     private lateinit var shared : SharedPreferences
     // ~ Stats ~
 
+    private lateinit var postGameText: TextView
     private lateinit var grid: GridLayout
     private lateinit var screen: ConstraintLayout
     private lateinit var issuesText: TextView
@@ -249,6 +247,7 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
 
         shared = getSharedPreferences("CodeMinigameDB", Context.MODE_PRIVATE)
 
+        postGameText = findViewById(R.id.pgtv)
         grid = findViewById(R.id.grid)
         screen = findViewById(R.id.screen)
         issuesText = findViewById(R.id.textView2)
@@ -355,14 +354,20 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
         allTiles.shuffle()
         path1 = arrayOf(tile84, tile56, tile54, tile42, tile38, tile50, tile78, tile23, tile29, tile15, tile46, tile75, tile17, tile55, tile1, tile58, tile25, tile72, tile70, tile39, tile30, tile20, tile34, tile10, tile19, tile32, tile68, tile12, tile87, tile89, tile62, tile47, tile44, tile37, tile85, tile82, tile24, tile7, tile8, tile28, tile21, tile60, tile33, tile3, tile52)
         when(difficulty) {
-            1 -> optiGoal = 5 //(25..50).random()
-            2 -> optiGoal = (50..100).random()
-            3 -> optiGoal = (100..175).random()
-            4 -> optiGoal = (175..250).random()
-            5 -> optiGoal = (300..500).random()
+            0 -> optiGoal = 5 //testing goal // baby
+            1 -> optiGoal = (15..30).random() // beginner
+            2 -> optiGoal = (30..50).random()  // easy
+            3 -> optiGoal = (50..100).random() // medium
+            4 -> optiGoal = (100..170).random() // hard
+            5 -> optiGoal = (175..275).random() // harder
+            6 -> optiGoal = (300..550).random() // expert
+            7 -> optiGoal = (700..1500).random() // impossible
+            8 -> optiGoal = (2500..4000).random() // impossible++
         }
         mainLayout = findViewById<View>(R.id.main) as RelativeLayout
         player.setOnTouchListener(onTouchListener())
+
+        if(mode == 7) screen.setBackgroundResource(R.drawable.death_gradient)
 
         val w: Window = window
         w.setFlags(
@@ -384,6 +389,181 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
         if(mode == 5) {
             loopShake()
             alphaFluctuate()
+        }
+
+        if(mode == 3) {
+            loopError()
+        }
+
+        if (mode == 4) {
+            optiText.text = getString(R.string.glitch_score, optimizers.toString())
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
+                glitchUnspread()
+            }, (3335).toLong())
+        }
+
+    }
+
+
+    private fun loopError() {
+        apocalypseProgress()
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            loopError()
+        }, (750).toLong())
+    }
+
+    private fun glitchUnspread() {
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            when ((1..24).random()) {
+                in 16..24 -> {
+                    val tile = selectRandomTile()
+                    if (getBackgroundColor(tile) == getColor(R.color.glitch_block)) {
+                        when((1..13).random()) {
+                            1 -> tile.setBackgroundColor(getColor(R.color.black))
+                            in 2..4 -> tile.setBackgroundColor(getColor(R.color.error_block))
+                            in 5..8 -> tile.setBackgroundColor(getColor(R.color.safe_block))
+                            in 9..13 -> tile.setBackgroundColor(getColor(R.color.warning_block))
+                        }
+                    }
+                }
+            }
+            glitchUnspread()
+        }, (5000).toLong())
+
+    }
+
+    private fun apocalypseProgress() {
+        val selectedTile1 = selectRandomTile()
+        val selectedTile2 = selectRandomTile()
+        val selectedTile3 = selectRandomTile()
+        val selectedTile4 = selectRandomTile()
+        val selectedTile5 = selectRandomTile()
+
+        when {
+            getBackgroundColor(selectedTile1) == getColor(R.color.warning_block) -> selectedTile1.setBackgroundColor(getColor(R.color.error_block))
+            getBackgroundColor(selectedTile1) == getColor(R.color.error_block) -> selectedTile1.setBackgroundColor(getColor(R.color.black))
+            getBackgroundColor(selectedTile1) == getColor(R.color.black) -> {
+                when ((0..5).random()) {
+                    in (2..5) -> selectedTile1.setBackgroundColor(getColor(R.color.glitch_block))
+                }
+            }
+            getBackgroundColor(selectedTile1) == getColor(R.color.safe_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile1.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile1) == getColor(R.color.fix_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile1.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile1) == getColor(R.color.glitch_block) -> {
+                when ((0..6).random()) {
+                    in (2..5) -> selectedTile1.setBackgroundColor(getColor(R.color.black))
+                }
+            }
+        }
+        when {
+            getBackgroundColor(selectedTile2) == getColor(R.color.warning_block) -> selectedTile2.setBackgroundColor(getColor(R.color.error_block))
+            getBackgroundColor(selectedTile2) == getColor(R.color.error_block) -> selectedTile2.setBackgroundColor(getColor(R.color.black))
+            getBackgroundColor(selectedTile2) == getColor(R.color.black) -> {
+                when ((0..5).random()) {
+                    in (2..5) -> selectedTile2.setBackgroundColor(getColor(R.color.glitch_block))
+                }
+            }
+            getBackgroundColor(selectedTile2) == getColor(R.color.safe_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile2.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile2) == getColor(R.color.fix_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile1.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile2) == getColor(R.color.glitch_block) -> {
+                when ((0..6).random()) {
+                    in (2..5) -> selectedTile2.setBackgroundColor(getColor(R.color.black))
+                }
+            }
+        }
+
+        when {
+            getBackgroundColor(selectedTile3) == getColor(R.color.warning_block) -> selectedTile3.setBackgroundColor(getColor(R.color.error_block))
+            getBackgroundColor(selectedTile3) == getColor(R.color.error_block) -> selectedTile3.setBackgroundColor(getColor(R.color.black))
+            getBackgroundColor(selectedTile3) == getColor(R.color.black) -> {
+                when ((0..5).random()) {
+                    in (2..5) -> selectedTile3.setBackgroundColor(getColor(R.color.glitch_block))
+                }
+            }
+            getBackgroundColor(selectedTile3) == getColor(R.color.safe_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile3.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile3) == getColor(R.color.fix_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile1.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile3) == getColor(R.color.glitch_block) -> {
+                when ((0..6).random()) {
+                    in (2..5) -> selectedTile3.setBackgroundColor(getColor(R.color.black))
+                }
+            }
+        }
+
+        when {
+            getBackgroundColor(selectedTile4) == getColor(R.color.warning_block) -> selectedTile4.setBackgroundColor(getColor(R.color.error_block))
+            getBackgroundColor(selectedTile4) == getColor(R.color.error_block) -> selectedTile4.setBackgroundColor(getColor(R.color.black))
+            getBackgroundColor(selectedTile4) == getColor(R.color.black) -> {
+                when ((0..5).random()) {
+                    in (2..5) -> selectedTile4.setBackgroundColor(getColor(R.color.glitch_block))
+                }
+            }
+            getBackgroundColor(selectedTile4) == getColor(R.color.safe_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile4.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile4) == getColor(R.color.fix_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile1.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile4) == getColor(R.color.glitch_block) -> {
+                when ((0..6).random()) {
+                    in (2..5) -> selectedTile4.setBackgroundColor(getColor(R.color.black))
+                }
+            }
+        }
+
+        when {
+            getBackgroundColor(selectedTile5) == getColor(R.color.warning_block) -> selectedTile5.setBackgroundColor(getColor(R.color.error_block))
+            getBackgroundColor(selectedTile5) == getColor(R.color.error_block) -> selectedTile5.setBackgroundColor(getColor(R.color.black))
+            getBackgroundColor(selectedTile5) == getColor(R.color.black) -> {
+                when ((0..5).random()) {
+                    in (2..5) -> selectedTile5.setBackgroundColor(getColor(R.color.glitch_block))
+                }
+            }
+            getBackgroundColor(selectedTile5) == getColor(R.color.safe_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile5.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile5) == getColor(R.color.fix_block) -> {
+                when ((1..16).random()) {
+                    2 -> selectedTile1.setBackgroundColor(getColor(R.color.warning_block))
+                }
+            }
+            getBackgroundColor(selectedTile5) == getColor(R.color.glitch_block) -> {
+                when ((0..6).random()) {
+                    in (2..5) -> selectedTile5.setBackgroundColor(getColor(R.color.black))
+                }
+            }
         }
 
     }
@@ -696,9 +876,12 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
     private fun generateTiles() {
         generateLayout1()
         generateFixes((6..10).random())
-        generateOptimizers(6)
+        if(mode != 4) {
+            generateOptimizers(6)
+        }
         generateErrors((20..25).random())
         generateCrashes((5..7).random())
+        if(mode == 4) highlightRandomTile(getColor(R.color.glitch_block))
     }
 
     private fun generateFixes(repeatNum: Int) {
@@ -757,17 +940,17 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
         }
     }
 
-    private fun identifyPath(): Array<FrameLayout> {
-
-        var safeTiles: Array<FrameLayout> = arrayOf()
-        allTiles.onEach { frameLayout: FrameLayout ->
-            if(getBackgroundColor(frameLayout) == getColor(R.color.safe_block)) {
-//                safeTiles = append(safeTiles, frameLayout)
-                safeTiles += frameLayout
-            }
-        }
-        return safeTiles
-    }
+//    private fun identifyPath(): Array<FrameLayout> {
+//
+//        var safeTiles: Array<FrameLayout> = arrayOf()
+//        allTiles.onEach { frameLayout: FrameLayout ->
+//            if(getBackgroundColor(frameLayout) == getColor(R.color.safe_block)) {
+// //                safeTiles = append(safeTiles, frameLayout)
+//                safeTiles += frameLayout
+//            }
+//        }
+//        return safeTiles
+//    }
 
     private fun updateStats() {
         updateIssues()
@@ -823,7 +1006,9 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
     }
 
     private fun updateOptimizers() {
-        optiText.text = getString(R.string.optimizers, optimizers.toString())
+        if(mode !=4 && mode != 6) optiText.text = getString(R.string.optimizers_and_goal, optimizers.toString(), optiGoal.toString())
+        else if (mode == 4) optiText.text = getString(R.string.glitch_score, optimizers.toString())
+        else if (mode == 6) optiText.text = getString(R.string.optimizers, optimizers.toString())
     }
 
     private fun generateOptimizers(repeatNum: Int) {
@@ -851,13 +1036,17 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
         optimizers++
         totalOptimizers++
         allTiles.shuffle()
-        when((1..5).random()) {
+        when((1..4).random()) {
             1 -> {
-                if(issues != 0) issues -= 1
                 generateFixBlock()
             }
         }
-        if(optimizers >= optiGoal && !finBlockGenerated) {
+        when((1..5).random()) {
+            1 -> {
+                if(issues != 0) issues -= 1
+            }
+        }
+        if(optimizers >= optiGoal && !finBlockGenerated && mode !=6) {
             generateFinishBlock()
             finBlockGenerated = true
         }
@@ -981,6 +1170,11 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
         player.setColorFilter(getColor(R.color.error_block))
         val handler1 = Handler(Looper.getMainLooper())
 
+        player.setOnTouchListener(null)
+        Toast.makeText(applicationContext, "You Lost.", Toast.LENGTH_LONG).show()
+        postGameText.visibility = View.VISIBLE
+        postGameText.text = "Game Over.\nTap your character to play again, or tap and hold to go to the main menu."
+
         vibrate(250)
 
         shakeScreen()
@@ -1011,133 +1205,239 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
             handler1.postDelayed({
                 highlightRandomTile(Color.RED)
 
-            }, ((25..1505).random()).toLong()) }
+            }, ((25..1505).random()).toLong())
+        }
+        handler1.postDelayed({
+            player.colorFilter = null
+
+            saveStats()
+            player.setOnClickListener {
+                issues = 0
+                optimizers = 0
+                TILE0 = false
+                TILE1 = false
+                TILE2 = false
+                TILE3 = false
+                TILE4 = false
+                TILE5 = false
+                TILE6 = false
+                TILE7 = false
+                TILE8 = false
+                TILE9 = false
+                TILE10 = false
+                TILE11 = false
+                TILE12 = false
+                TILE13 = false
+                TILE14 = false
+                TILE15 = false
+                TILE16 = false
+                TILE17 = false
+                TILE18 = false
+                TILE19 = false
+                TILE20 = false
+                TILE21 = false
+                TILE22 = false
+                TILE23 = false
+                TILE24 = false
+                TILE25 = false
+                TILE26 = false
+                TILE27 = false
+                TILE28 = false
+                TILE29 = false
+                TILE30 = false
+                TILE31 = false
+                TILE32 = false
+                TILE33 = false
+                TILE34 = false
+                TILE35 = false
+                TILE36 = false
+                TILE37 = false
+                TILE38 = false
+                TILE39 = false
+                TILE40 = false
+                TILE41 = false
+                TILE42 = false
+                TILE43 = false
+                TILE44 = false
+                TILE45 = false
+                TILE46 = false
+                TILE47 = false
+                TILE48 = false
+                TILE49 = false
+                TILE50 = false
+                TILE51 = false
+                TILE52 = false
+                TILE53 = false
+                TILE54 = false
+                TILE55 = false
+                TILE56 = false
+                TILE57 = false
+                TILE58 = false
+                TILE59 = false
+                TILE60 = false
+                TILE61 = false
+                TILE62 = false
+                TILE63 = false
+                TILE64 = false
+                TILE65 = false
+                TILE66 = false
+                TILE67 = false
+                TILE68 = false
+                TILE69 = false
+                TILE70 = false
+                TILE71 = false
+                TILE72 = false
+                TILE73 = false
+                TILE74 = false
+                TILE75 = false
+                TILE76 = false
+                TILE77 = false
+                TILE78 = false
+                TILE79 = false
+                TILE80 = false
+                TILE81 = false
+                TILE82 = false
+                TILE83 = false
+                TILE84 = false
+                TILE85 = false
+                TILE86 = false
+                TILE87 = false
+                TILE88 = false
+                TILE89 = false
+                TILE90 = false
+                val intent = Intent(this@MainActivity, StartActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            player.setOnLongClickListener {
+                TILE0 = false
+                TILE1 = false
+                TILE2 = false
+                TILE3 = false
+                TILE4 = false
+                TILE5 = false
+                TILE6 = false
+                TILE7 = false
+                TILE8 = false
+                TILE9 = false
+                TILE10 = false
+                TILE11 = false
+                TILE12 = false
+                TILE13 = false
+                TILE14 = false
+                TILE15 = false
+                TILE16 = false
+                TILE17 = false
+                TILE18 = false
+                TILE19 = false
+                TILE20 = false
+                TILE21 = false
+                TILE22 = false
+                TILE23 = false
+                TILE24 = false
+                TILE25 = false
+                TILE26 = false
+                TILE27 = false
+                TILE28 = false
+                TILE29 = false
+                TILE30 = false
+                TILE31 = false
+                TILE32 = false
+                TILE33 = false
+                TILE34 = false
+                TILE35 = false
+                TILE36 = false
+                TILE37 = false
+                TILE38 = false
+                TILE39 = false
+                TILE40 = false
+                TILE41 = false
+                TILE42 = false
+                TILE43 = false
+                TILE44 = false
+                TILE45 = false
+                TILE46 = false
+                TILE47 = false
+                TILE48 = false
+                TILE49 = false
+                TILE50 = false
+                TILE51 = false
+                TILE52 = false
+                TILE53 = false
+                TILE54 = false
+                TILE55 = false
+                TILE56 = false
+                TILE57 = false
+                TILE58 = false
+                TILE59 = false
+                TILE60 = false
+                TILE61 = false
+                TILE62 = false
+                TILE63 = false
+                TILE64 = false
+                TILE65 = false
+                TILE66 = false
+                TILE67 = false
+                TILE68 = false
+                TILE69 = false
+                TILE70 = false
+                TILE71 = false
+                TILE72 = false
+                TILE73 = false
+                TILE74 = false
+                TILE75 = false
+                TILE76 = false
+                TILE77 = false
+                TILE78 = false
+                TILE79 = false
+                TILE80 = false
+                TILE81 = false
+                TILE82 = false
+                TILE83 = false
+                TILE84 = false
+                TILE85 = false
+                TILE86 = false
+                TILE87 = false
+                TILE88 = false
+                TILE89 = false
+                TILE90 = false
+                vibrate(10)
+                val intent = Intent(this@MainActivity, MainMenuActivity::class.java)
+                startActivity(intent)
+                finish()
+                true
+            }
+            handler1.postDelayed({
+                player.setColorFilter(getColor(R.color.error_block))
+                handler1.postDelayed({
+                    player.colorFilter = null
                     handler1.postDelayed({
-                        player.colorFilter = null
+                        player.setColorFilter(getColor(R.color.error_block))
                         handler1.postDelayed({
-                            player.setColorFilter(getColor(R.color.error_block))
+                            player.colorFilter = null
                             handler1.postDelayed({
-                                player.colorFilter = null
+                                player.setColorFilter(getColor(R.color.error_block))
                                 handler1.postDelayed({
-                                    player.setColorFilter(getColor(R.color.error_block))
-                                    handler1.postDelayed({
-                                        player.colorFilter = null
-                                        handler1.postDelayed({
-                                            player.setColorFilter(getColor(R.color.error_block))
-                                            handler1.postDelayed({
-                                                player.colorFilter = null
-                                                handler1.postDelayed({
-                                                    //game over stuff here
-                                                    issues = 0
-                                                    optimizers = 0
-                                                    saveStats()
-                                                    TILE0 = false
-                                                    TILE1 = false
-                                                    TILE2 = false
-                                                    TILE3 = false
-                                                    TILE4 = false
-                                                    TILE5 = false
-                                                    TILE6 = false
-                                                    TILE7 = false
-                                                    TILE8 = false
-                                                    TILE9 = false
-                                                    TILE10 = false
-                                                    TILE11 = false
-                                                    TILE12 = false
-                                                    TILE13 = false
-                                                    TILE14 = false
-                                                    TILE15 = false
-                                                    TILE16 = false
-                                                    TILE17 = false
-                                                    TILE18 = false
-                                                    TILE19 = false
-                                                    TILE20 = false
-                                                    TILE21 = false
-                                                    TILE22 = false
-                                                    TILE23 = false
-                                                    TILE24 = false
-                                                    TILE25 = false
-                                                    TILE26 = false
-                                                    TILE27 = false
-                                                    TILE28 = false
-                                                    TILE29 = false
-                                                    TILE30 = false
-                                                    TILE31 = false
-                                                    TILE32 = false
-                                                    TILE33 = false
-                                                    TILE34 = false
-                                                    TILE35 = false
-                                                    TILE36 = false
-                                                    TILE37 = false
-                                                    TILE38 = false
-                                                    TILE39 = false
-                                                    TILE40 = false
-                                                    TILE41 = false
-                                                    TILE42 = false
-                                                    TILE43 = false
-                                                    TILE44 = false
-                                                    TILE45 = false
-                                                    TILE46 = false
-                                                    TILE47 = false
-                                                    TILE48 = false
-                                                    TILE49 = false
-                                                    TILE50 = false
-                                                    TILE51 = false
-                                                    TILE52 = false
-                                                    TILE53 = false
-                                                    TILE54 = false
-                                                    TILE55 = false
-                                                    TILE56 = false
-                                                    TILE57 = false
-                                                    TILE58 = false
-                                                    TILE59 = false
-                                                    TILE60 = false
-                                                    TILE61 = false
-                                                    TILE62 = false
-                                                    TILE63 = false
-                                                    TILE64 = false
-                                                    TILE65 = false
-                                                    TILE66 = false
-                                                    TILE67 = false
-                                                    TILE68 = false
-                                                    TILE69 = false
-                                                    TILE70 = false
-                                                    TILE71 = false
-                                                    TILE72 = false
-                                                    TILE73 = false
-                                                    TILE74 = false
-                                                    TILE75 = false
-                                                    TILE76 = false
-                                                    TILE77 = false
-                                                    TILE78 = false
-                                                    TILE79 = false
-                                                    TILE80 = false
-                                                    TILE81 = false
-                                                    TILE82 = false
-                                                    TILE83 = false
-                                                    TILE84 = false
-                                                    TILE85 = false
-                                                    TILE86 = false
-                                                    TILE87 = false
-                                                    TILE88 = false
-                                                    TILE89 = false
-                                                    TILE90 = false
-                                                    val intent = Intent(this@MainActivity, StartActivity::class.java)
-                                                    startActivity(intent)
-                                                    finish()
-                                                }, (50).toLong())
-                                            }, (750).toLong())
-                                        }, (250).toLong())
-                                    }, (250).toLong())
-                                }, (250).toLong())
+                                    player.colorFilter = null
+                                }, (750).toLong())
                             }, (250).toLong())
                         }, (250).toLong())
-                    }, (300).toLong())
-        //reset game board | randomization: x warning tiles; x error tiles; 5 crash tiles. hardcode safe path tiles and fix tiles presets if needed or randomize if time is available.
-        }
+                    }, (250).toLong())
+                }, (250).toLong())
+            }, (250).toLong())
+        }, (300).toLong())
+    }
 
     private fun levelWin() {
-        // wins++
+        vibrate(75)
+        player.setOnTouchListener(null)
+        val handler = Handler(Looper.getMainLooper())
+        repeat(90) {
+            handler.postDelayed({
+                rainbowAll()
+            }, ((95..3505).random()).toLong())
+        }
         level++
         issues = 0
 //        totalOptimizers += optimizers
@@ -1145,100 +1445,219 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
         saveStats()
 //        loadNextLevel()
 //        recreate()
-        TILE0 = false
-        TILE1 = false
-        TILE2 = false
-        TILE3 = false
-        TILE4 = false
-        TILE5 = false
-        TILE6 = false
-        TILE7 = false
-        TILE8 = false
-        TILE9 = false
-        TILE10 = false
-        TILE11 = false
-        TILE12 = false
-        TILE13 = false
-        TILE14 = false
-        TILE15 = false
-        TILE16 = false
-        TILE17 = false
-        TILE18 = false
-        TILE19 = false
-        TILE20 = false
-        TILE21 = false
-        TILE22 = false
-        TILE23 = false
-        TILE24 = false
-        TILE25 = false
-        TILE26 = false
-        TILE27 = false
-        TILE28 = false
-        TILE29 = false
-        TILE30 = false
-        TILE31 = false
-        TILE32 = false
-        TILE33 = false
-        TILE34 = false
-        TILE35 = false
-        TILE36 = false
-        TILE37 = false
-        TILE38 = false
-        TILE39 = false
-        TILE40 = false
-        TILE41 = false
-        TILE42 = false
-        TILE43 = false
-        TILE44 = false
-        TILE45 = false
-        TILE46 = false
-        TILE47 = false
-        TILE48 = false
-        TILE49 = false
-        TILE50 = false
-        TILE51 = false
-        TILE52 = false
-        TILE53 = false
-        TILE54 = false
-        TILE55 = false
-        TILE56 = false
-        TILE57 = false
-        TILE58 = false
-        TILE59 = false
-        TILE60 = false
-        TILE61 = false
-        TILE62 = false
-        TILE63 = false
-        TILE64 = false
-        TILE65 = false
-        TILE66 = false
-        TILE67 = false
-        TILE68 = false
-        TILE69 = false
-        TILE70 = false
-        TILE71 = false
-        TILE72 = false
-        TILE73 = false
-        TILE74 = false
-        TILE75 = false
-        TILE76 = false
-        TILE77 = false
-        TILE78 = false
-        TILE79 = false
-        TILE80 = false
-        TILE81 = false
-        TILE82 = false
-        TILE83 = false
-        TILE84 = false
-        TILE85 = false
-        TILE86 = false
-        TILE87 = false
-        TILE88 = false
-        TILE89 = false
-        TILE90 = false
-        val intent = Intent(this@MainActivity, StartActivity::class.java)
-        startActivity(intent)
-        finish()
+        Toast.makeText(applicationContext, "You Win!", Toast.LENGTH_LONG).show()
+        postGameText.visibility = View.VISIBLE
+        postGameText.text = "You won!\nTap your character to play again, or tap and hold to go to the main menu."
+
+        handler.postDelayed({
+            player.setOnClickListener {
+                TILE0 = false
+                TILE1 = false
+                TILE2 = false
+                TILE3 = false
+                TILE4 = false
+                TILE5 = false
+                TILE6 = false
+                TILE7 = false
+                TILE8 = false
+                TILE9 = false
+                TILE10 = false
+                TILE11 = false
+                TILE12 = false
+                TILE13 = false
+                TILE14 = false
+                TILE15 = false
+                TILE16 = false
+                TILE17 = false
+                TILE18 = false
+                TILE19 = false
+                TILE20 = false
+                TILE21 = false
+                TILE22 = false
+                TILE23 = false
+                TILE24 = false
+                TILE25 = false
+                TILE26 = false
+                TILE27 = false
+                TILE28 = false
+                TILE29 = false
+                TILE30 = false
+                TILE31 = false
+                TILE32 = false
+                TILE33 = false
+                TILE34 = false
+                TILE35 = false
+                TILE36 = false
+                TILE37 = false
+                TILE38 = false
+                TILE39 = false
+                TILE40 = false
+                TILE41 = false
+                TILE42 = false
+                TILE43 = false
+                TILE44 = false
+                TILE45 = false
+                TILE46 = false
+                TILE47 = false
+                TILE48 = false
+                TILE49 = false
+                TILE50 = false
+                TILE51 = false
+                TILE52 = false
+                TILE53 = false
+                TILE54 = false
+                TILE55 = false
+                TILE56 = false
+                TILE57 = false
+                TILE58 = false
+                TILE59 = false
+                TILE60 = false
+                TILE61 = false
+                TILE62 = false
+                TILE63 = false
+                TILE64 = false
+                TILE65 = false
+                TILE66 = false
+                TILE67 = false
+                TILE68 = false
+                TILE69 = false
+                TILE70 = false
+                TILE71 = false
+                TILE72 = false
+                TILE73 = false
+                TILE74 = false
+                TILE75 = false
+                TILE76 = false
+                TILE77 = false
+                TILE78 = false
+                TILE79 = false
+                TILE80 = false
+                TILE81 = false
+                TILE82 = false
+                TILE83 = false
+                TILE84 = false
+                TILE85 = false
+                TILE86 = false
+                TILE87 = false
+                TILE88 = false
+                TILE89 = false
+                TILE90 = false
+                val intent = Intent(this@MainActivity, StartActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            player.setOnLongClickListener {
+                TILE0 = false
+                TILE1 = false
+                TILE2 = false
+                TILE3 = false
+                TILE4 = false
+                TILE5 = false
+                TILE6 = false
+                TILE7 = false
+                TILE8 = false
+                TILE9 = false
+                TILE10 = false
+                TILE11 = false
+                TILE12 = false
+                TILE13 = false
+                TILE14 = false
+                TILE15 = false
+                TILE16 = false
+                TILE17 = false
+                TILE18 = false
+                TILE19 = false
+                TILE20 = false
+                TILE21 = false
+                TILE22 = false
+                TILE23 = false
+                TILE24 = false
+                TILE25 = false
+                TILE26 = false
+                TILE27 = false
+                TILE28 = false
+                TILE29 = false
+                TILE30 = false
+                TILE31 = false
+                TILE32 = false
+                TILE33 = false
+                TILE34 = false
+                TILE35 = false
+                TILE36 = false
+                TILE37 = false
+                TILE38 = false
+                TILE39 = false
+                TILE40 = false
+                TILE41 = false
+                TILE42 = false
+                TILE43 = false
+                TILE44 = false
+                TILE45 = false
+                TILE46 = false
+                TILE47 = false
+                TILE48 = false
+                TILE49 = false
+                TILE50 = false
+                TILE51 = false
+                TILE52 = false
+                TILE53 = false
+                TILE54 = false
+                TILE55 = false
+                TILE56 = false
+                TILE57 = false
+                TILE58 = false
+                TILE59 = false
+                TILE60 = false
+                TILE61 = false
+                TILE62 = false
+                TILE63 = false
+                TILE64 = false
+                TILE65 = false
+                TILE66 = false
+                TILE67 = false
+                TILE68 = false
+                TILE69 = false
+                TILE70 = false
+                TILE71 = false
+                TILE72 = false
+                TILE73 = false
+                TILE74 = false
+                TILE75 = false
+                TILE76 = false
+                TILE77 = false
+                TILE78 = false
+                TILE79 = false
+                TILE80 = false
+                TILE81 = false
+                TILE82 = false
+                TILE83 = false
+                TILE84 = false
+                TILE85 = false
+                TILE86 = false
+                TILE87 = false
+                TILE88 = false
+                TILE89 = false
+                TILE90 = false
+                vibrate(10)
+                val intent = Intent(this@MainActivity, MainMenuActivity::class.java)
+                startActivity(intent)
+                finish()
+                true
+            }
+        }, (500).toLong())
+        // wins++
+    }
+
+    private fun rainbowAll() {
+            val tile = allTiles.random()
+            if(tile.tag != "rainbow" && tile.tag != "finish" ) {
+                tile.tag = "rainbow"
+                tile.alpha = 0.75f
+                vibrate(10)
+                rainbowEffect(tile)
+            } else rainbowAll()
+
     }
 
     private fun loadNextLevel() {
@@ -1319,11 +1738,20 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
                                 }
 
                                 when {
-                                    getBackgroundColor(frameLayout) == warningColor -> warningBlockHit()
-                                    getBackgroundColor(frameLayout) == errorColor -> errorBlockHit()
+                                    getBackgroundColor(frameLayout) == warningColor -> {
+                                        if(mode == 7) gameOver()
+                                        else warningBlockHit()
+                                    }
+                                    getBackgroundColor(frameLayout) == errorColor -> {
+                                        if(mode == 7) gameOver()
+                                        else errorBlockHit()
+                                    }
                                     getBackgroundColor(frameLayout) == crashColor -> crashBlockHit()
                                     getBackgroundColor(frameLayout) == fixColor -> fixBlockHit(frameLayout)
-                                    getBackgroundColor(frameLayout) == glitchColor -> glitchBlockHit()
+                                    getBackgroundColor(frameLayout) == glitchColor -> {
+                                        if(mode == 7) gameOver()
+                                        else glitchBlockHit()
+                                    }
                                     getBackgroundColor(frameLayout) == optiColor -> optimizerCollect(frameLayout)
                                 }
                             } else if(frameLayout.alpha == 0.75f && frameLayout.tag == "finish") levelWin()
@@ -1336,25 +1764,60 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
 
     private fun glitchBlockHit() {
         val handler1 = Handler(Looper.getMainLooper())
-
         player.setColorFilter(getColor(R.color.glitch_block))
         handler1.postDelayed({
             player.colorFilter = null
         }, (150).toLong())
-        when((1..16).random()) {
-            in (1..2) -> issues += (1..3).random()
-            in (3..15) -> {
-                issues += (0..3).random()
-                repeat((2..6).random()) {
-                    highlightRandomTile(getColor(R.color.glitch_block))
+        if (mode != 4) {
+            when ((1..20).random()) {
+                in (1..2) -> {
+                    issues += (1..3).random()
+                    repeat((0..2).random()) {
+                        highlightRandomTile(getColor(R.color.glitch_block))
+                    }
+                }
+                in (3..19) -> {
+                    issues += (0..3).random()
+                    repeat((2..6).random()) {
+                        highlightRandomTile(getColor(R.color.glitch_block))
+                    }
+                }
+                20 -> {
+                    repeat((2..6).random()) {
+                        highlightRandomTile(getColor(R.color.glitch_block))
+                    }
+                    issues += 9
                 }
             }
-            16 -> {
-                repeat((2..6).random()) {
-                highlightRandomTile(getColor(R.color.glitch_block))
+        } else if (mode == 4) {
+            when ((1..24).random()) {
+                1 -> {
+                    issues += (1..3).random()
+                    repeat((2..7).random()) {
+                        highlightRandomTile(getColor(R.color.glitch_block))
+                        optimizers++
+                        when((1..6).random()) {
+                            5 -> generateFixBlock()
+                        }
+                    }
+                }
+
+                in (2..24) -> {
+                    issues += (0..2).random()
+                    repeat((3..6).random()) {
+                        highlightRandomTile(getColor(R.color.glitch_block))
+                        optimizers++
+                    }
+
+                    when((1..8).random()) {
+                        in 1..7 -> generateFixBlock()
+                    }
+                }
             }
-                gameOver()
-            }
+//            repeat((2..6).random()) {
+//                highlightRandomTile(getColor(R.color.glitch_block))
+//                optimizers++
+//            }
         }
         checkIssues()
         updateStats()
@@ -1621,80 +2084,80 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
                                                                                                                                                                                                                                                                                                             theScreen.setBackgroundColor(rainbow355.toColorInt())
                                                                                                                                                                                                                                                                                                             handler.postDelayed({
                                                                                                                                                                                                                                                                                                                 rainbowEffect(theScreen)
-                                                                                                                                                                                                                                                                                                            }, 150)
-                                                                                                                                                                                                                                                                                                        }, 150)
-                                                                                                                                                                                                                                                                                                    }, 150)
-                                                                                                                                                                                                                                                                                                }, 150)
-                                                                                                                                                                                                                                                                                            }, 150)
-                                                                                                                                                                                                                                                                                        }, 150)
-                                                                                                                                                                                                                                                                                    }, 150)
-                                                                                                                                                                                                                                                                                }, 150)
-                                                                                                                                                                                                                                                                            }, 150)
-                                                                                                                                                                                                                                                                        }, 150)
-                                                                                                                                                                                                                                                                    }, 150)
-                                                                                                                                                                                                                                                                }, 150)
-                                                                                                                                                                                                                                                            }, 150)
-                                                                                                                                                                                                                                                        }, 150)
-                                                                                                                                                                                                                                                    }, 150)
-                                                                                                                                                                                                                                                }, 150)
-                                                                                                                                                                                                                                            }, 150)
-                                                                                                                                                                                                                                        }, 150)
-                                                                                                                                                                                                                                    }, 150)
-                                                                                                                                                                                                                                }, 150)
-                                                                                                                                                                                                                            }, 150)
-                                                                                                                                                                                                                        }, 150)
-                                                                                                                                                                                                                    }, 150)
-                                                                                                                                                                                                                }, 150)
-                                                                                                                                                                                                            }, 150)
-                                                                                                                                                                                                        }, 150)
-                                                                                                                                                                                                    }, 150)
-                                                                                                                                                                                                }, 150)
-                                                                                                                                                                                            }, 150)
-                                                                                                                                                                                        }, 150)
-                                                                                                                                                                                    }, 150)
-                                                                                                                                                                                }, 150)
-                                                                                                                                                                            }, 150)
-                                                                                                                                                                        }, 150)
-                                                                                                                                                                    }, 150)
-                                                                                                                                                                }, 150)
-                                                                                                                                                            }, 150)
-                                                                                                                                                        }, 150)
-                                                                                                                                                    }, 150)
-                                                                                                                                                }, 150)
-                                                                                                                                            }, 150)
-                                                                                                                                        }, 150)
-                                                                                                                                    }, 150)
-                                                                                                                                }, 150)
-                                                                                                                            }, 150)
-                                                                                                                        }, 150)
-                                                                                                                    }, 150)
-                                                                                                                }, 150)
-                                                                                                            }, 150)
-                                                                                                        }, 150)
-                                                                                                    }, 150)
-                                                                                                }, 150)
-                                                                                            }, 150)
-                                                                                        }, 150)
-                                                                                    }, 150)
-                                                                                }, 150)
-                                                                            }, 150)
-                                                                        }, 150)
-                                                                    }, 150)
-                                                                }, 150)
-                                                            }, 150)
-                                                        }, 150)
-                                                    }, 150)
-                                                }, 150)
-                                            }, 150)
-                                        }, 150)
-                                    }, 150)
-                                }, 150)
-                            }, 150)
-                        }, 150)
-                    }, 150)
-                }, 150)
-            }, 150)
-        }, 150)
+                                                                                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                }, 35)
+                                                                                                                                                                            }, 35)
+                                                                                                                                                                        }, 35)
+                                                                                                                                                                    }, 35)
+                                                                                                                                                                }, 35)
+                                                                                                                                                            }, 35)
+                                                                                                                                                        }, 35)
+                                                                                                                                                    }, 35)
+                                                                                                                                                }, 35)
+                                                                                                                                            }, 35)
+                                                                                                                                        }, 35)
+                                                                                                                                    }, 35)
+                                                                                                                                }, 35)
+                                                                                                                            }, 35)
+                                                                                                                        }, 35)
+                                                                                                                    }, 35)
+                                                                                                                }, 35)
+                                                                                                            }, 35)
+                                                                                                        }, 35)
+                                                                                                    }, 35)
+                                                                                                }, 35)
+                                                                                            }, 35)
+                                                                                        }, 35)
+                                                                                    }, 35)
+                                                                                }, 35)
+                                                                            }, 35)
+                                                                        }, 35)
+                                                                    }, 35)
+                                                                }, 35)
+                                                            }, 35)
+                                                        }, 35)
+                                                    }, 35)
+                                                }, 35)
+                                            }, 35)
+                                        }, 35)
+                                    }, 35)
+                                }, 35)
+                            }, 35)
+                        }, 35)
+                    }, 35)
+                }, 35)
+            }, 35)
+        }, 35)
     }
 
 }
@@ -1712,4 +2175,4 @@ class MainActivity(gamemode: Int) : AppCompatActivity() {
 *
 *
 *
-* 563 | 4849 > 746 */
+* 563 | 4849 -> 746 */

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/black_gradient"
+    tools:context=".DifficultyActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro_semibold"
+        android:text=" CHOOSE YOUR DIFFICULTY "
+        android:textColor="@color/glow_teal"
+        android:textSize="32sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/row1"
+            android:padding="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_beginner"
+                android:layout_width="190dp"
+                android:layout_height="85dp"
+                android:backgroundTint="#00A3BF"
+                android:onClick="beginner"
+                android:padding="5dp"
+                android:text="BEGINNER"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:cornerRadius="28dp" />
+
+            <Button
+                android:id="@+id/btn_medium"
+                android:layout_width="190dp"
+                android:layout_height="85dp"
+                android:backgroundTint="@color/warning_block"
+                android:onClick="medium"
+                android:padding="5dp"
+                android:text="MEDUIM"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:cornerRadius="28dp" />
+
+            <Button
+                android:id="@+id/btn_harder"
+                android:layout_width="190dp"
+                android:layout_height="85dp"
+                android:backgroundTint="@color/error_block"
+                android:onClick="harder"
+                android:padding="5dp"
+                android:text="HARDER"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:cornerRadius="28dp" />
+
+
+            <Button
+                android:id="@+id/btn_impossible"
+                android:layout_width="190dp"
+                android:layout_height="85dp"
+                android:backgroundTint="@color/blue"
+                android:onClick="impossible"
+                android:padding="5dp"
+                android:text="IMPOSSIBLE"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:cornerRadius="28dp" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row2"
+        android:padding="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_easy"
+            android:layout_width="190dp"
+            android:layout_height="85dp"
+            android:backgroundTint="@color/green"
+            android:onClick="easy"
+            android:padding="5dp"
+            android:text="EASY"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="28dp" />
+
+        <Button
+            android:id="@+id/btn_hard"
+            android:layout_width="190dp"
+            android:layout_height="85dp"
+            android:backgroundTint="@color/orange"
+            android:onClick="hard"
+            android:padding="5dp"
+            android:text="HARD"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="28dp" />
+
+        <Button
+            android:id="@+id/btn_expert"
+            android:layout_width="190dp"
+            android:layout_height="85dp"
+            android:backgroundTint="#FF0084"
+            android:onClick="expert"
+            android:padding="5dp"
+            android:text="EXPERT"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="28dp" />
+
+        <Button
+            android:id="@+id/btn_impossiblePlus"
+            android:layout_width="190dp"
+            android:layout_height="85dp"
+            android:backgroundTint="@color/black"
+            android:onClick="impossiblePlus"
+            android:padding="5dp"
+            android:text="IMPOSSIBLE+"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="28dp" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Classic - original normal game rules -->
+    <!-- Speedrun - every second, error block code (minus add issues part; AND green tiles have a chance of turning to orange when chosen) plays.  so the player has to beat the round before the board becomes full of dangers -->
+    <!-- Speed Maze - No fixes or optimizers, but every unsafe tile is an instant game over. After 15 seconds or so, glitch tiles start appearing. -->
+    <!-- Glitch - Instead of collecting optimizers, the player spreads the glitch. Their score is the number of glitch tiles on the board when they loose. -->
+    <!-- God Mode - original game rules but the player can never die. -->

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_semibold"
-        android:text="CHOOSE YOUR GAMEMODE"
+        android:text=" CHOOSE YOUR GAMEMODE "
         android:textColor="@color/glow_teal"
         android:textSize="32sp"
         android:textStyle="bold|italic"
@@ -32,84 +32,126 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:padding="5dp"
             android:id="@+id/row1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <Button
-                android:backgroundTint="@color/optimizer_piece"
                 android:id="@+id/btn_classic"
-                android:layout_width="155dp"
+                android:layout_width="180dp"
                 android:layout_height="90dp"
-                android:text="CLASSIC"
-                android:textStyle="bold"
-                app:cornerRadius="28dp"
+                android:backgroundTint="@color/optimizer_piece"
                 android:onClick="classic"
-                android:textSize="20sp"/>
+                android:padding="10dp"
+                android:text="CLASSIC"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:cornerRadius="28dp" />
 
             <Button
-                android:backgroundTint="@color/orange"
                 android:id="@+id/btn_speed"
-                android:layout_width="155dp"
+                android:layout_width="180dp"
                 android:layout_height="90dp"
-                android:text="SPEEDRUN"
+                android:backgroundTint="@color/orange"
+                android:onClick="apocalypse"
+                android:padding="10dp"
+                android:text="APOCALYPSE"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:cornerRadius="28dp"
-                android:textSize="20sp"/>
+                app:cornerRadius="28dp" />
 
             <Button
-                android:backgroundTint="#170000"
                 android:id="@+id/btn_painmode"
-                android:layout_width="155dp"
+                android:layout_width="180dp"
                 android:layout_height="90dp"
+                android:backgroundTint="#170000"
                 android:onClick="painMode"
+                android:padding="10dp"
                 android:text="PAIN MODE"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:cornerRadius="28dp"
-                android:textSize="20sp"/>
+                app:cornerRadius="28dp" />
+
+
+            <Button
+                android:id="@+id/btn_suddendeath"
+                android:layout_width="180dp"
+                android:layout_height="90dp"
+                android:backgroundTint="@color/red"
+                android:onClick="suddenDeath"
+                android:padding="10dp"
+                android:text="SUDDEN DEATH"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:cornerRadius="28dp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:padding="5dp"
             android:id="@+id/row2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <Button
-                android:backgroundTint="@color/green"
                 android:id="@+id/btn_maze"
-                android:layout_width="155dp"
+                android:layout_width="180dp"
                 android:layout_height="90dp"
+                android:backgroundTint="@color/green"
+                android:padding="10dp"
                 android:text="SPEED MAZE"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:cornerRadius="28dp"
-                android:textSize="20sp"/>
+                app:cornerRadius="28dp" />
 
             <Button
-                android:backgroundTint="@color/glitch_block"
                 android:id="@+id/btn_glitch"
-                android:layout_width="155dp"
+                android:layout_width="180dp"
                 android:layout_height="90dp"
+                android:backgroundTint="@color/glitch_block"
+                android:onClick="glitchSpread"
+                android:padding="10dp"
                 android:text="GLITCH"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:cornerRadius="28dp"
-                android:textSize="20sp"/>
+                app:cornerRadius="28dp" />
 
             <Button
-                android:backgroundTint="@color/warning_block"
-                android:id="@+id/btn_godmode"
-                android:layout_width="155dp"
+                android:id="@+id/btn_infmode"
+                android:layout_width="180dp"
                 android:layout_height="90dp"
-                android:text="GOD MODE"
+                android:backgroundTint="@color/warning_block"
+                android:padding="10dp"
+                android:onClick="infmode"
+                android:text="INFINITE"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:cornerRadius="28dp"
-                android:textSize="20sp"/>
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/settingsBtn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="settings"
+        android:onClick="settings"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".999"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005"
+        app:srcCompat="@drawable/ic_baseline_settings_suggest_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
