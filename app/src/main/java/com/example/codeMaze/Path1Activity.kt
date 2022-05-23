@@ -1,104 +1,102 @@
-package com.example.minigame
+package com.example.codeMaze
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.example.minigame.MainMenuActivity.GameMode.gamemode
-import com.example.minigame.Path1Activity.Path1Tiles.TILE0
-import com.example.minigame.Path1Activity.Path1Tiles.TILE1
-import com.example.minigame.Path1Activity.Path1Tiles.TILE2
-import com.example.minigame.Path1Activity.Path1Tiles.TILE3
-import com.example.minigame.Path1Activity.Path1Tiles.TILE4
-import com.example.minigame.Path1Activity.Path1Tiles.TILE5
-import com.example.minigame.Path1Activity.Path1Tiles.TILE6
-import com.example.minigame.Path1Activity.Path1Tiles.TILE7
-import com.example.minigame.Path1Activity.Path1Tiles.TILE8
-import com.example.minigame.Path1Activity.Path1Tiles.TILE9
-import com.example.minigame.Path1Activity.Path1Tiles.TILE10
-import com.example.minigame.Path1Activity.Path1Tiles.TILE11
-import com.example.minigame.Path1Activity.Path1Tiles.TILE12
-import com.example.minigame.Path1Activity.Path1Tiles.TILE13
-import com.example.minigame.Path1Activity.Path1Tiles.TILE14
-import com.example.minigame.Path1Activity.Path1Tiles.TILE15
-import com.example.minigame.Path1Activity.Path1Tiles.TILE16
-import com.example.minigame.Path1Activity.Path1Tiles.TILE17
-import com.example.minigame.Path1Activity.Path1Tiles.TILE18
-import com.example.minigame.Path1Activity.Path1Tiles.TILE19
-import com.example.minigame.Path1Activity.Path1Tiles.TILE20
-import com.example.minigame.Path1Activity.Path1Tiles.TILE21
-import com.example.minigame.Path1Activity.Path1Tiles.TILE22
-import com.example.minigame.Path1Activity.Path1Tiles.TILE23
-import com.example.minigame.Path1Activity.Path1Tiles.TILE24
-import com.example.minigame.Path1Activity.Path1Tiles.TILE25
-import com.example.minigame.Path1Activity.Path1Tiles.TILE26
-import com.example.minigame.Path1Activity.Path1Tiles.TILE27
-import com.example.minigame.Path1Activity.Path1Tiles.TILE28
-import com.example.minigame.Path1Activity.Path1Tiles.TILE29
-import com.example.minigame.Path1Activity.Path1Tiles.TILE30
-import com.example.minigame.Path1Activity.Path1Tiles.TILE31
-import com.example.minigame.Path1Activity.Path1Tiles.TILE32
-import com.example.minigame.Path1Activity.Path1Tiles.TILE33
-import com.example.minigame.Path1Activity.Path1Tiles.TILE34
-import com.example.minigame.Path1Activity.Path1Tiles.TILE35
-import com.example.minigame.Path1Activity.Path1Tiles.TILE36
-import com.example.minigame.Path1Activity.Path1Tiles.TILE37
-import com.example.minigame.Path1Activity.Path1Tiles.TILE38
-import com.example.minigame.Path1Activity.Path1Tiles.TILE39
-import com.example.minigame.Path1Activity.Path1Tiles.TILE40
-import com.example.minigame.Path1Activity.Path1Tiles.TILE41
-import com.example.minigame.Path1Activity.Path1Tiles.TILE42
-import com.example.minigame.Path1Activity.Path1Tiles.TILE43
-import com.example.minigame.Path1Activity.Path1Tiles.TILE44
-import com.example.minigame.Path1Activity.Path1Tiles.TILE45
-import com.example.minigame.Path1Activity.Path1Tiles.TILE46
-import com.example.minigame.Path1Activity.Path1Tiles.TILE47
-import com.example.minigame.Path1Activity.Path1Tiles.TILE48
-import com.example.minigame.Path1Activity.Path1Tiles.TILE49
-import com.example.minigame.Path1Activity.Path1Tiles.TILE50
-import com.example.minigame.Path1Activity.Path1Tiles.TILE51
-import com.example.minigame.Path1Activity.Path1Tiles.TILE52
-import com.example.minigame.Path1Activity.Path1Tiles.TILE53
-import com.example.minigame.Path1Activity.Path1Tiles.TILE54
-import com.example.minigame.Path1Activity.Path1Tiles.TILE55
-import com.example.minigame.Path1Activity.Path1Tiles.TILE56
-import com.example.minigame.Path1Activity.Path1Tiles.TILE57
-import com.example.minigame.Path1Activity.Path1Tiles.TILE58
-import com.example.minigame.Path1Activity.Path1Tiles.TILE59
-import com.example.minigame.Path1Activity.Path1Tiles.TILE60
-import com.example.minigame.Path1Activity.Path1Tiles.TILE61
-import com.example.minigame.Path1Activity.Path1Tiles.TILE62
-import com.example.minigame.Path1Activity.Path1Tiles.TILE63
-import com.example.minigame.Path1Activity.Path1Tiles.TILE64
-import com.example.minigame.Path1Activity.Path1Tiles.TILE65
-import com.example.minigame.Path1Activity.Path1Tiles.TILE66
-import com.example.minigame.Path1Activity.Path1Tiles.TILE67
-import com.example.minigame.Path1Activity.Path1Tiles.TILE68
-import com.example.minigame.Path1Activity.Path1Tiles.TILE69
-import com.example.minigame.Path1Activity.Path1Tiles.TILE70
-import com.example.minigame.Path1Activity.Path1Tiles.TILE71
-import com.example.minigame.Path1Activity.Path1Tiles.TILE72
-import com.example.minigame.Path1Activity.Path1Tiles.TILE73
-import com.example.minigame.Path1Activity.Path1Tiles.TILE74
-import com.example.minigame.Path1Activity.Path1Tiles.TILE75
-import com.example.minigame.Path1Activity.Path1Tiles.TILE76
-import com.example.minigame.Path1Activity.Path1Tiles.TILE77
-import com.example.minigame.Path1Activity.Path1Tiles.TILE78
-import com.example.minigame.Path1Activity.Path1Tiles.TILE79
-import com.example.minigame.Path1Activity.Path1Tiles.TILE80
-import com.example.minigame.Path1Activity.Path1Tiles.TILE81
-import com.example.minigame.Path1Activity.Path1Tiles.TILE82
-import com.example.minigame.Path1Activity.Path1Tiles.TILE83
-import com.example.minigame.Path1Activity.Path1Tiles.TILE84
-import com.example.minigame.Path1Activity.Path1Tiles.TILE85
-import com.example.minigame.Path1Activity.Path1Tiles.TILE86
-import com.example.minigame.Path1Activity.Path1Tiles.TILE87
-import com.example.minigame.Path1Activity.Path1Tiles.TILE88
-import com.example.minigame.Path1Activity.Path1Tiles.TILE89
-import com.example.minigame.Path1Activity.Path1Tiles.TILE90
+import com.example.codeMaze.Path1Tiles.TILE0
+import com.example.codeMaze.Path1Tiles.TILE1
+import com.example.codeMaze.Path1Tiles.TILE10
+import com.example.codeMaze.Path1Tiles.TILE11
+import com.example.codeMaze.Path1Tiles.TILE12
+import com.example.codeMaze.Path1Tiles.TILE13
+import com.example.codeMaze.Path1Tiles.TILE14
+import com.example.codeMaze.Path1Tiles.TILE15
+import com.example.codeMaze.Path1Tiles.TILE16
+import com.example.codeMaze.Path1Tiles.TILE17
+import com.example.codeMaze.Path1Tiles.TILE18
+import com.example.codeMaze.Path1Tiles.TILE19
+import com.example.codeMaze.Path1Tiles.TILE2
+import com.example.codeMaze.Path1Tiles.TILE20
+import com.example.codeMaze.Path1Tiles.TILE21
+import com.example.codeMaze.Path1Tiles.TILE22
+import com.example.codeMaze.Path1Tiles.TILE23
+import com.example.codeMaze.Path1Tiles.TILE24
+import com.example.codeMaze.Path1Tiles.TILE25
+import com.example.codeMaze.Path1Tiles.TILE26
+import com.example.codeMaze.Path1Tiles.TILE27
+import com.example.codeMaze.Path1Tiles.TILE28
+import com.example.codeMaze.Path1Tiles.TILE29
+import com.example.codeMaze.Path1Tiles.TILE3
+import com.example.codeMaze.Path1Tiles.TILE30
+import com.example.codeMaze.Path1Tiles.TILE31
+import com.example.codeMaze.Path1Tiles.TILE32
+import com.example.codeMaze.Path1Tiles.TILE33
+import com.example.codeMaze.Path1Tiles.TILE34
+import com.example.codeMaze.Path1Tiles.TILE35
+import com.example.codeMaze.Path1Tiles.TILE36
+import com.example.codeMaze.Path1Tiles.TILE37
+import com.example.codeMaze.Path1Tiles.TILE38
+import com.example.codeMaze.Path1Tiles.TILE39
+import com.example.codeMaze.Path1Tiles.TILE4
+import com.example.codeMaze.Path1Tiles.TILE40
+import com.example.codeMaze.Path1Tiles.TILE41
+import com.example.codeMaze.Path1Tiles.TILE42
+import com.example.codeMaze.Path1Tiles.TILE43
+import com.example.codeMaze.Path1Tiles.TILE44
+import com.example.codeMaze.Path1Tiles.TILE45
+import com.example.codeMaze.Path1Tiles.TILE46
+import com.example.codeMaze.Path1Tiles.TILE47
+import com.example.codeMaze.Path1Tiles.TILE48
+import com.example.codeMaze.Path1Tiles.TILE49
+import com.example.codeMaze.Path1Tiles.TILE5
+import com.example.codeMaze.Path1Tiles.TILE50
+import com.example.codeMaze.Path1Tiles.TILE51
+import com.example.codeMaze.Path1Tiles.TILE52
+import com.example.codeMaze.Path1Tiles.TILE53
+import com.example.codeMaze.Path1Tiles.TILE54
+import com.example.codeMaze.Path1Tiles.TILE55
+import com.example.codeMaze.Path1Tiles.TILE56
+import com.example.codeMaze.Path1Tiles.TILE57
+import com.example.codeMaze.Path1Tiles.TILE58
+import com.example.codeMaze.Path1Tiles.TILE59
+import com.example.codeMaze.Path1Tiles.TILE6
+import com.example.codeMaze.Path1Tiles.TILE60
+import com.example.codeMaze.Path1Tiles.TILE61
+import com.example.codeMaze.Path1Tiles.TILE62
+import com.example.codeMaze.Path1Tiles.TILE63
+import com.example.codeMaze.Path1Tiles.TILE64
+import com.example.codeMaze.Path1Tiles.TILE65
+import com.example.codeMaze.Path1Tiles.TILE66
+import com.example.codeMaze.Path1Tiles.TILE67
+import com.example.codeMaze.Path1Tiles.TILE68
+import com.example.codeMaze.Path1Tiles.TILE69
+import com.example.codeMaze.Path1Tiles.TILE7
+import com.example.codeMaze.Path1Tiles.TILE70
+import com.example.codeMaze.Path1Tiles.TILE71
+import com.example.codeMaze.Path1Tiles.TILE72
+import com.example.codeMaze.Path1Tiles.TILE73
+import com.example.codeMaze.Path1Tiles.TILE74
+import com.example.codeMaze.Path1Tiles.TILE75
+import com.example.codeMaze.Path1Tiles.TILE76
+import com.example.codeMaze.Path1Tiles.TILE77
+import com.example.codeMaze.Path1Tiles.TILE78
+import com.example.codeMaze.Path1Tiles.TILE79
+import com.example.codeMaze.Path1Tiles.TILE8
+import com.example.codeMaze.Path1Tiles.TILE80
+import com.example.codeMaze.Path1Tiles.TILE81
+import com.example.codeMaze.Path1Tiles.TILE82
+import com.example.codeMaze.Path1Tiles.TILE83
+import com.example.codeMaze.Path1Tiles.TILE84
+import com.example.codeMaze.Path1Tiles.TILE85
+import com.example.codeMaze.Path1Tiles.TILE86
+import com.example.codeMaze.Path1Tiles.TILE87
+import com.example.codeMaze.Path1Tiles.TILE88
+import com.example.codeMaze.Path1Tiles.TILE89
+import com.example.codeMaze.Path1Tiles.TILE9
+import com.example.codeMaze.Path1Tiles.TILE90
 
 class Path1Activity : AppCompatActivity() {
 
@@ -398,7 +396,7 @@ class Path1Activity : AppCompatActivity() {
 
         val intent = Intent(this@Path1Activity, MainActivity::class.java)
         startActivity(intent)
-        finish()
+//        finish()
 
     }
 
@@ -499,100 +497,6 @@ class Path1Activity : AppCompatActivity() {
                 tile90 -> TILE90 = true
             }
         }
-    }
-
-    object Path1Tiles {
-        var TILE0 = false
-        var TILE1 = false
-        var TILE2 = false
-        var TILE3 = false
-        var TILE4 = false
-        var TILE5 = false
-        var TILE6 = false
-        var TILE7 = false
-        var TILE8 = false
-        var TILE9 = false
-        var TILE10 = false
-        var TILE11 = false
-        var TILE12 = false
-        var TILE13 = false
-        var TILE14 = false
-        var TILE15 = false
-        var TILE16 = false
-        var TILE17 = false
-        var TILE18 = false
-        var TILE19 = false
-        var TILE20 = false
-        var TILE21 = false
-        var TILE22 = false
-        var TILE23 = false
-        var TILE24 = false
-        var TILE25 = false
-        var TILE26 = false
-        var TILE27 = false
-        var TILE28 = false
-        var TILE29 = false
-        var TILE30 = false
-        var TILE31 = false
-        var TILE32 = false
-        var TILE33 = false
-        var TILE34 = false
-        var TILE35 = false
-        var TILE36 = false
-        var TILE37 = false
-        var TILE38 = false
-        var TILE39 = false
-        var TILE40 = false
-        var TILE41 = false
-        var TILE42 = false
-        var TILE43 = false
-        var TILE44 = false
-        var TILE45 = false
-        var TILE46 = false
-        var TILE47 = false
-        var TILE48 = false
-        var TILE49 = false
-        var TILE50 = false
-        var TILE51 = false
-        var TILE52 = false
-        var TILE53 = false
-        var TILE54 = false
-        var TILE55 = false
-        var TILE56 = false
-        var TILE57 = false
-        var TILE58 = false
-        var TILE59 = false
-        var TILE60 = false
-        var TILE61 = false
-        var TILE62 = false
-        var TILE63 = false
-        var TILE64 = false
-        var TILE65 = false
-        var TILE66 = false
-        var TILE67 = false
-        var TILE68 = false
-        var TILE69 = false
-        var TILE70 = false
-        var TILE71 = false
-        var TILE72 = false
-        var TILE73 = false
-        var TILE74 = false
-        var TILE75 = false
-        var TILE76 = false
-        var TILE77 = false
-        var TILE78 = false
-        var TILE79 = false
-        var TILE80 = false
-        var TILE81 = false
-        var TILE82 = false
-        var TILE83 = false
-        var TILE84 = false
-        var TILE85 = false
-        var TILE86 = false
-        var TILE87 = false
-        var TILE88 = false
-        var TILE89 = false
-        var TILE90 = false
     }
 
     fun identifyPath(): Array<FrameLayout> {

@@ -11,15 +11,19 @@
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/drawable/ic_baseline_android_24.xml" value="0.1365" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/drawable/ic_baseline_extension_24.xml" value="0.1365" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1365" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_about.xml" value="0.19383259911894274" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_begin_story.xml" value="0.17443351859769132" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_difficulty.xml" value="0.17443351859769132" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_main.xml" value="0.17" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_main_menu.xml" value="0.126953125" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_path1.xml" value="0.19" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/activity_story_start.xml" value="0.22905982905982905" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/path0_layout.xml" value="0.25" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/path10_layout.xml" value="0.22" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/path11_layout.xml" value="0.2" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/path12_layout.xml" value="0.22" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/path13_layout.xml" value="0.25" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/path14_layout.xml" value="0.17443351859769132" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/path1_layout.xml" value="0.2" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/path2_layout.xml" value="0.17443351859769132" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/path3_layout.xml" value="0.21" />
@@ -33,7 +37,7 @@
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/layout/test_layout.xml" value="0.16246259085079093" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1365" />
-        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/xml/root_preferences.xml" value="0.33" />
+        <entry key="..\:/Users/Owner/AndroidStudioProjects/Minigame/app/src/main/res/xml/root_preferences.xml" value="0.12359550561797752" />
       </map>
     </option>
   </component>

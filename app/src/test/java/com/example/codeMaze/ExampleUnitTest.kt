@@ -1,4 +1,4 @@
-package com.example.minigame
+package com.example.codeMaze
 
 import org.junit.Test
 

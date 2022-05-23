@@ -1,4 +1,4 @@
-package com.example.minigame
+package com.example.codeMaze
 
 import android.content.Intent
 import android.graphics.Color
@@ -6,99 +6,99 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.example.minigame.Path1Activity.Path1Tiles.TILE0
-import com.example.minigame.Path1Activity.Path1Tiles.TILE1
-import com.example.minigame.Path1Activity.Path1Tiles.TILE2
-import com.example.minigame.Path1Activity.Path1Tiles.TILE3
-import com.example.minigame.Path1Activity.Path1Tiles.TILE4
-import com.example.minigame.Path1Activity.Path1Tiles.TILE5
-import com.example.minigame.Path1Activity.Path1Tiles.TILE6
-import com.example.minigame.Path1Activity.Path1Tiles.TILE7
-import com.example.minigame.Path1Activity.Path1Tiles.TILE8
-import com.example.minigame.Path1Activity.Path1Tiles.TILE9
-import com.example.minigame.Path1Activity.Path1Tiles.TILE10
-import com.example.minigame.Path1Activity.Path1Tiles.TILE11
-import com.example.minigame.Path1Activity.Path1Tiles.TILE12
-import com.example.minigame.Path1Activity.Path1Tiles.TILE13
-import com.example.minigame.Path1Activity.Path1Tiles.TILE14
-import com.example.minigame.Path1Activity.Path1Tiles.TILE15
-import com.example.minigame.Path1Activity.Path1Tiles.TILE16
-import com.example.minigame.Path1Activity.Path1Tiles.TILE17
-import com.example.minigame.Path1Activity.Path1Tiles.TILE18
-import com.example.minigame.Path1Activity.Path1Tiles.TILE19
-import com.example.minigame.Path1Activity.Path1Tiles.TILE20
-import com.example.minigame.Path1Activity.Path1Tiles.TILE21
-import com.example.minigame.Path1Activity.Path1Tiles.TILE22
-import com.example.minigame.Path1Activity.Path1Tiles.TILE23
-import com.example.minigame.Path1Activity.Path1Tiles.TILE24
-import com.example.minigame.Path1Activity.Path1Tiles.TILE25
-import com.example.minigame.Path1Activity.Path1Tiles.TILE26
-import com.example.minigame.Path1Activity.Path1Tiles.TILE27
-import com.example.minigame.Path1Activity.Path1Tiles.TILE28
-import com.example.minigame.Path1Activity.Path1Tiles.TILE29
-import com.example.minigame.Path1Activity.Path1Tiles.TILE30
-import com.example.minigame.Path1Activity.Path1Tiles.TILE31
-import com.example.minigame.Path1Activity.Path1Tiles.TILE32
-import com.example.minigame.Path1Activity.Path1Tiles.TILE33
-import com.example.minigame.Path1Activity.Path1Tiles.TILE34
-import com.example.minigame.Path1Activity.Path1Tiles.TILE35
-import com.example.minigame.Path1Activity.Path1Tiles.TILE36
-import com.example.minigame.Path1Activity.Path1Tiles.TILE37
-import com.example.minigame.Path1Activity.Path1Tiles.TILE38
-import com.example.minigame.Path1Activity.Path1Tiles.TILE39
-import com.example.minigame.Path1Activity.Path1Tiles.TILE40
-import com.example.minigame.Path1Activity.Path1Tiles.TILE41
-import com.example.minigame.Path1Activity.Path1Tiles.TILE42
-import com.example.minigame.Path1Activity.Path1Tiles.TILE43
-import com.example.minigame.Path1Activity.Path1Tiles.TILE44
-import com.example.minigame.Path1Activity.Path1Tiles.TILE45
-import com.example.minigame.Path1Activity.Path1Tiles.TILE46
-import com.example.minigame.Path1Activity.Path1Tiles.TILE47
-import com.example.minigame.Path1Activity.Path1Tiles.TILE48
-import com.example.minigame.Path1Activity.Path1Tiles.TILE49
-import com.example.minigame.Path1Activity.Path1Tiles.TILE50
-import com.example.minigame.Path1Activity.Path1Tiles.TILE51
-import com.example.minigame.Path1Activity.Path1Tiles.TILE52
-import com.example.minigame.Path1Activity.Path1Tiles.TILE53
-import com.example.minigame.Path1Activity.Path1Tiles.TILE54
-import com.example.minigame.Path1Activity.Path1Tiles.TILE55
-import com.example.minigame.Path1Activity.Path1Tiles.TILE56
-import com.example.minigame.Path1Activity.Path1Tiles.TILE57
-import com.example.minigame.Path1Activity.Path1Tiles.TILE58
-import com.example.minigame.Path1Activity.Path1Tiles.TILE59
-import com.example.minigame.Path1Activity.Path1Tiles.TILE60
-import com.example.minigame.Path1Activity.Path1Tiles.TILE61
-import com.example.minigame.Path1Activity.Path1Tiles.TILE62
-import com.example.minigame.Path1Activity.Path1Tiles.TILE63
-import com.example.minigame.Path1Activity.Path1Tiles.TILE64
-import com.example.minigame.Path1Activity.Path1Tiles.TILE65
-import com.example.minigame.Path1Activity.Path1Tiles.TILE66
-import com.example.minigame.Path1Activity.Path1Tiles.TILE67
-import com.example.minigame.Path1Activity.Path1Tiles.TILE68
-import com.example.minigame.Path1Activity.Path1Tiles.TILE69
-import com.example.minigame.Path1Activity.Path1Tiles.TILE70
-import com.example.minigame.Path1Activity.Path1Tiles.TILE71
-import com.example.minigame.Path1Activity.Path1Tiles.TILE72
-import com.example.minigame.Path1Activity.Path1Tiles.TILE73
-import com.example.minigame.Path1Activity.Path1Tiles.TILE74
-import com.example.minigame.Path1Activity.Path1Tiles.TILE75
-import com.example.minigame.Path1Activity.Path1Tiles.TILE76
-import com.example.minigame.Path1Activity.Path1Tiles.TILE77
-import com.example.minigame.Path1Activity.Path1Tiles.TILE78
-import com.example.minigame.Path1Activity.Path1Tiles.TILE79
-import com.example.minigame.Path1Activity.Path1Tiles.TILE80
-import com.example.minigame.Path1Activity.Path1Tiles.TILE81
-import com.example.minigame.Path1Activity.Path1Tiles.TILE82
-import com.example.minigame.Path1Activity.Path1Tiles.TILE83
-import com.example.minigame.Path1Activity.Path1Tiles.TILE84
-import com.example.minigame.Path1Activity.Path1Tiles.TILE85
-import com.example.minigame.Path1Activity.Path1Tiles.TILE86
-import com.example.minigame.Path1Activity.Path1Tiles.TILE87
-import com.example.minigame.Path1Activity.Path1Tiles.TILE88
-import com.example.minigame.Path1Activity.Path1Tiles.TILE89
-import com.example.minigame.Path1Activity.Path1Tiles.TILE90
+import com.example.codeMaze.Path1Tiles.TILE0
+import com.example.codeMaze.Path1Tiles.TILE1
+import com.example.codeMaze.Path1Tiles.TILE10
+import com.example.codeMaze.Path1Tiles.TILE11
+import com.example.codeMaze.Path1Tiles.TILE12
+import com.example.codeMaze.Path1Tiles.TILE13
+import com.example.codeMaze.Path1Tiles.TILE14
+import com.example.codeMaze.Path1Tiles.TILE15
+import com.example.codeMaze.Path1Tiles.TILE16
+import com.example.codeMaze.Path1Tiles.TILE17
+import com.example.codeMaze.Path1Tiles.TILE18
+import com.example.codeMaze.Path1Tiles.TILE19
+import com.example.codeMaze.Path1Tiles.TILE2
+import com.example.codeMaze.Path1Tiles.TILE20
+import com.example.codeMaze.Path1Tiles.TILE21
+import com.example.codeMaze.Path1Tiles.TILE22
+import com.example.codeMaze.Path1Tiles.TILE23
+import com.example.codeMaze.Path1Tiles.TILE24
+import com.example.codeMaze.Path1Tiles.TILE25
+import com.example.codeMaze.Path1Tiles.TILE26
+import com.example.codeMaze.Path1Tiles.TILE27
+import com.example.codeMaze.Path1Tiles.TILE28
+import com.example.codeMaze.Path1Tiles.TILE29
+import com.example.codeMaze.Path1Tiles.TILE3
+import com.example.codeMaze.Path1Tiles.TILE30
+import com.example.codeMaze.Path1Tiles.TILE31
+import com.example.codeMaze.Path1Tiles.TILE32
+import com.example.codeMaze.Path1Tiles.TILE33
+import com.example.codeMaze.Path1Tiles.TILE34
+import com.example.codeMaze.Path1Tiles.TILE35
+import com.example.codeMaze.Path1Tiles.TILE36
+import com.example.codeMaze.Path1Tiles.TILE37
+import com.example.codeMaze.Path1Tiles.TILE38
+import com.example.codeMaze.Path1Tiles.TILE39
+import com.example.codeMaze.Path1Tiles.TILE4
+import com.example.codeMaze.Path1Tiles.TILE40
+import com.example.codeMaze.Path1Tiles.TILE41
+import com.example.codeMaze.Path1Tiles.TILE42
+import com.example.codeMaze.Path1Tiles.TILE43
+import com.example.codeMaze.Path1Tiles.TILE44
+import com.example.codeMaze.Path1Tiles.TILE45
+import com.example.codeMaze.Path1Tiles.TILE46
+import com.example.codeMaze.Path1Tiles.TILE47
+import com.example.codeMaze.Path1Tiles.TILE48
+import com.example.codeMaze.Path1Tiles.TILE49
+import com.example.codeMaze.Path1Tiles.TILE5
+import com.example.codeMaze.Path1Tiles.TILE50
+import com.example.codeMaze.Path1Tiles.TILE51
+import com.example.codeMaze.Path1Tiles.TILE52
+import com.example.codeMaze.Path1Tiles.TILE53
+import com.example.codeMaze.Path1Tiles.TILE54
+import com.example.codeMaze.Path1Tiles.TILE55
+import com.example.codeMaze.Path1Tiles.TILE56
+import com.example.codeMaze.Path1Tiles.TILE57
+import com.example.codeMaze.Path1Tiles.TILE58
+import com.example.codeMaze.Path1Tiles.TILE59
+import com.example.codeMaze.Path1Tiles.TILE6
+import com.example.codeMaze.Path1Tiles.TILE60
+import com.example.codeMaze.Path1Tiles.TILE61
+import com.example.codeMaze.Path1Tiles.TILE62
+import com.example.codeMaze.Path1Tiles.TILE63
+import com.example.codeMaze.Path1Tiles.TILE64
+import com.example.codeMaze.Path1Tiles.TILE65
+import com.example.codeMaze.Path1Tiles.TILE66
+import com.example.codeMaze.Path1Tiles.TILE67
+import com.example.codeMaze.Path1Tiles.TILE68
+import com.example.codeMaze.Path1Tiles.TILE69
+import com.example.codeMaze.Path1Tiles.TILE7
+import com.example.codeMaze.Path1Tiles.TILE70
+import com.example.codeMaze.Path1Tiles.TILE71
+import com.example.codeMaze.Path1Tiles.TILE72
+import com.example.codeMaze.Path1Tiles.TILE73
+import com.example.codeMaze.Path1Tiles.TILE74
+import com.example.codeMaze.Path1Tiles.TILE75
+import com.example.codeMaze.Path1Tiles.TILE76
+import com.example.codeMaze.Path1Tiles.TILE77
+import com.example.codeMaze.Path1Tiles.TILE78
+import com.example.codeMaze.Path1Tiles.TILE79
+import com.example.codeMaze.Path1Tiles.TILE8
+import com.example.codeMaze.Path1Tiles.TILE80
+import com.example.codeMaze.Path1Tiles.TILE81
+import com.example.codeMaze.Path1Tiles.TILE82
+import com.example.codeMaze.Path1Tiles.TILE83
+import com.example.codeMaze.Path1Tiles.TILE84
+import com.example.codeMaze.Path1Tiles.TILE85
+import com.example.codeMaze.Path1Tiles.TILE86
+import com.example.codeMaze.Path1Tiles.TILE87
+import com.example.codeMaze.Path1Tiles.TILE88
+import com.example.codeMaze.Path1Tiles.TILE89
+import com.example.codeMaze.Path1Tiles.TILE9
+import com.example.codeMaze.Path1Tiles.TILE90
 
-class Path11Activity : AppCompatActivity() {
+class Path7Activity : AppCompatActivity() {
 
     private var numb = 0
      lateinit var tile0: FrameLayout
@@ -196,7 +196,9 @@ class Path11Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.path11_layout)
+        setContentView(R.layout.path7_layout)
+
+        println("the")
 
         tile0 = findViewById(R.id.tile0)
         tile1 = findViewById(R.id.tile1)
@@ -303,9 +305,9 @@ class Path11Activity : AppCompatActivity() {
             }
         }
 
-        val intent = Intent(this@Path11Activity, MainActivity::class.java)
+        val intent = Intent(this@Path7Activity, MainActivity::class.java)
         startActivity(intent)
-        finish()
+//        finish()
 
     }
 

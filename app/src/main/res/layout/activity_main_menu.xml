@@ -25,117 +25,176 @@
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
-            android:padding="5dp"
-            android:id="@+id/row1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_classic"
-                android:layout_width="180dp"
-                android:layout_height="90dp"
-                android:backgroundTint="@color/optimizer_piece"
-                android:onClick="classic"
-                android:padding="10dp"
-                android:text="CLASSIC"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+            <LinearLayout
+                android:id="@+id/row1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-            <Button
-                android:id="@+id/btn_speed"
-                android:layout_width="180dp"
-                android:layout_height="90dp"
-                android:backgroundTint="@color/orange"
-                android:onClick="apocalypse"
-                android:padding="10dp"
-                android:text="APOCALYPSE"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+                <Button
+                    android:id="@+id/btn_classic"
+                    android:layout_width="185dp"
+                    android:layout_height="90dp"
+                    android:backgroundTint="@color/optimizer_piece"
+                    android:onClick="classic"
+                    android:padding="10dp"
+                    android:text="CLASSIC"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
 
-            <Button
-                android:id="@+id/btn_painmode"
-                android:layout_width="180dp"
-                android:layout_height="90dp"
-                android:backgroundTint="#170000"
-                android:onClick="painMode"
-                android:padding="10dp"
-                android:text="PAIN MODE"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+                <Button
+                    android:id="@+id/btn_speed"
+                    android:layout_width="185dp"
+                    android:layout_height="90dp"
+                    android:backgroundTint="@color/orange"
+                    android:onClick="apocalypse"
+                    android:padding="10dp"
+                    android:text="APOCALYPSE"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+                <Button
+                    android:id="@+id/btn_painmode"
+                    android:layout_width="185dp"
+                    android:layout_height="90dp"
+                    android:backgroundTint="#170000"
+                    android:onClick="painMode"
+                    android:padding="10dp"
+                    android:text="PAIN MODE"
+                    android:textColor="@color/white"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
 
 
-            <Button
-                android:id="@+id/btn_suddendeath"
-                android:layout_width="180dp"
-                android:layout_height="90dp"
-                android:backgroundTint="@color/red"
-                android:onClick="suddenDeath"
-                android:padding="10dp"
-                android:text="SUDDEN DEATH"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+                <Button
+                    android:id="@+id/btn_suddendeath"
+                    android:layout_width="185dp"
+                    android:layout_height="90dp"
+                    android:backgroundTint="@color/red"
+                    android:onClick="suddenDeath"
+                    android:padding="10dp"
+                    android:text="SUDDEN DEATH"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/row2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <Button
+                    android:id="@+id/btn_maze"
+                    android:layout_width="185dp"
+                    android:layout_height="90dp"
+                    android:backgroundTint="@color/green"
+                    android:onClick="speedMaze"
+                    android:padding="10dp"
+                    android:text="SPEED MAZE"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+                <Button
+                    android:id="@+id/btn_glitch"
+                    android:layout_width="185dp"
+                    android:layout_height="90dp"
+                    android:backgroundTint="@color/glitch_block"
+                    android:onClick="glitchSpread"
+                    android:padding="10dp"
+                    android:text="GLITCH"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+                <Button
+                    android:id="@+id/btn_infmode"
+                    android:layout_width="185dp"
+                    android:layout_height="90dp"
+                    android:backgroundTint="@color/warning_block"
+                    android:onClick="infmode"
+                    android:padding="10dp"
+                    android:text="INFINITE"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp"
+                    tools:ignore="HardcodedText" />
+
+                <Button
+                    android:id="@+id/btn_noMaze"
+                    android:layout_width="185dp"
+                    android:layout_height="90dp"
+                    android:backgroundTint="#00E668"
+                    android:onClick="noMaze"
+                    android:padding="10dp"
+                    android:text="NO MAZE"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:padding="5dp"
-            android:id="@+id/row2"
+        <Button
+            android:id="@+id/btn_storymode"
+            android:layout_width="220dp"
+            android:layout_height="95dp"
+            android:layout_gravity="center"
+            android:alpha="0.75"
+            android:backgroundTint="#575970"
+            android:enabled="true"
+            android:onClick="story"
+            android:padding="10dp"
+            android:text="STORY MODE"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:cornerRadius="30dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btn_maze"
-                android:layout_width="180dp"
-                android:layout_height="90dp"
-                android:backgroundTint="@color/green"
-                android:padding="10dp"
-                android:text="SPEED MAZE"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
-
-            <Button
-                android:id="@+id/btn_glitch"
-                android:layout_width="180dp"
-                android:layout_height="90dp"
-                android:backgroundTint="@color/glitch_block"
-                android:onClick="glitchSpread"
-                android:padding="10dp"
-                android:text="GLITCH"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
-
-            <Button
-                android:id="@+id/btn_infmode"
-                android:layout_width="180dp"
-                android:layout_height="90dp"
-                android:backgroundTint="@color/warning_block"
-                android:padding="10dp"
-                android:onClick="infmode"
-                android:text="INFINITE"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp"
-                tools:ignore="HardcodedText" />
-
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:text="(Coming Soon)"
+            android:textColor="#777777"
+            android:textSize="16dp"
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="185dp"
+        android:layout_height="185dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/ic_baseline_android_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu" />
+
 
     <ImageButton
         android:id="@+id/settingsBtn"
@@ -150,8 +209,24 @@
         app:layout_constraintHorizontal_bias=".999"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005"
+        app:layout_constraintVertical_bias="0.004"
         app:srcCompat="@drawable/ic_baseline_settings_suggest_24" />
+
+    <ImageButton
+        android:id="@+id/aboutBtn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="How to play"
+        android:onClick="about"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005"
+        app:srcCompat="@drawable/ic_baseline_info_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,4 +1,4 @@
-package com.example.minigame
+package com.example.codeMaze
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

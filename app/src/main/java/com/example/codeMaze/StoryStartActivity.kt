@@ -1,4 +1,4 @@
-package com.example.minigame
+package com.example.codeMaze
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
@@ -17,119 +17,125 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.gridlayout.widget.GridLayout
-import com.example.minigame.Path1Activity.Path1Tiles.TILE0
-import com.example.minigame.Path1Activity.Path1Tiles.TILE1
-import com.example.minigame.Path1Activity.Path1Tiles.TILE10
-import com.example.minigame.Path1Activity.Path1Tiles.TILE11
-import com.example.minigame.Path1Activity.Path1Tiles.TILE12
-import com.example.minigame.Path1Activity.Path1Tiles.TILE13
-import com.example.minigame.Path1Activity.Path1Tiles.TILE14
-import com.example.minigame.Path1Activity.Path1Tiles.TILE15
-import com.example.minigame.Path1Activity.Path1Tiles.TILE16
-import com.example.minigame.Path1Activity.Path1Tiles.TILE17
-import com.example.minigame.Path1Activity.Path1Tiles.TILE18
-import com.example.minigame.Path1Activity.Path1Tiles.TILE19
-import com.example.minigame.Path1Activity.Path1Tiles.TILE2
-import com.example.minigame.Path1Activity.Path1Tiles.TILE20
-import com.example.minigame.Path1Activity.Path1Tiles.TILE21
-import com.example.minigame.Path1Activity.Path1Tiles.TILE22
-import com.example.minigame.Path1Activity.Path1Tiles.TILE23
-import com.example.minigame.Path1Activity.Path1Tiles.TILE24
-import com.example.minigame.Path1Activity.Path1Tiles.TILE25
-import com.example.minigame.Path1Activity.Path1Tiles.TILE26
-import com.example.minigame.Path1Activity.Path1Tiles.TILE27
-import com.example.minigame.Path1Activity.Path1Tiles.TILE28
-import com.example.minigame.Path1Activity.Path1Tiles.TILE29
-import com.example.minigame.Path1Activity.Path1Tiles.TILE3
-import com.example.minigame.Path1Activity.Path1Tiles.TILE30
-import com.example.minigame.Path1Activity.Path1Tiles.TILE31
-import com.example.minigame.Path1Activity.Path1Tiles.TILE32
-import com.example.minigame.Path1Activity.Path1Tiles.TILE33
-import com.example.minigame.Path1Activity.Path1Tiles.TILE34
-import com.example.minigame.Path1Activity.Path1Tiles.TILE35
-import com.example.minigame.Path1Activity.Path1Tiles.TILE36
-import com.example.minigame.Path1Activity.Path1Tiles.TILE37
-import com.example.minigame.Path1Activity.Path1Tiles.TILE38
-import com.example.minigame.Path1Activity.Path1Tiles.TILE39
-import com.example.minigame.Path1Activity.Path1Tiles.TILE4
-import com.example.minigame.Path1Activity.Path1Tiles.TILE40
-import com.example.minigame.Path1Activity.Path1Tiles.TILE41
-import com.example.minigame.Path1Activity.Path1Tiles.TILE42
-import com.example.minigame.Path1Activity.Path1Tiles.TILE43
-import com.example.minigame.Path1Activity.Path1Tiles.TILE44
-import com.example.minigame.Path1Activity.Path1Tiles.TILE45
-import com.example.minigame.Path1Activity.Path1Tiles.TILE46
-import com.example.minigame.Path1Activity.Path1Tiles.TILE47
-import com.example.minigame.Path1Activity.Path1Tiles.TILE48
-import com.example.minigame.Path1Activity.Path1Tiles.TILE49
-import com.example.minigame.Path1Activity.Path1Tiles.TILE5
-import com.example.minigame.Path1Activity.Path1Tiles.TILE50
-import com.example.minigame.Path1Activity.Path1Tiles.TILE51
-import com.example.minigame.Path1Activity.Path1Tiles.TILE52
-import com.example.minigame.Path1Activity.Path1Tiles.TILE53
-import com.example.minigame.Path1Activity.Path1Tiles.TILE54
-import com.example.minigame.Path1Activity.Path1Tiles.TILE55
-import com.example.minigame.Path1Activity.Path1Tiles.TILE56
-import com.example.minigame.Path1Activity.Path1Tiles.TILE57
-import com.example.minigame.Path1Activity.Path1Tiles.TILE58
-import com.example.minigame.Path1Activity.Path1Tiles.TILE59
-import com.example.minigame.Path1Activity.Path1Tiles.TILE6
-import com.example.minigame.Path1Activity.Path1Tiles.TILE60
-import com.example.minigame.Path1Activity.Path1Tiles.TILE61
-import com.example.minigame.Path1Activity.Path1Tiles.TILE62
-import com.example.minigame.Path1Activity.Path1Tiles.TILE63
-import com.example.minigame.Path1Activity.Path1Tiles.TILE64
-import com.example.minigame.Path1Activity.Path1Tiles.TILE65
-import com.example.minigame.Path1Activity.Path1Tiles.TILE66
-import com.example.minigame.Path1Activity.Path1Tiles.TILE67
-import com.example.minigame.Path1Activity.Path1Tiles.TILE68
-import com.example.minigame.Path1Activity.Path1Tiles.TILE69
-import com.example.minigame.Path1Activity.Path1Tiles.TILE7
-import com.example.minigame.Path1Activity.Path1Tiles.TILE70
-import com.example.minigame.Path1Activity.Path1Tiles.TILE71
-import com.example.minigame.Path1Activity.Path1Tiles.TILE72
-import com.example.minigame.Path1Activity.Path1Tiles.TILE73
-import com.example.minigame.Path1Activity.Path1Tiles.TILE74
-import com.example.minigame.Path1Activity.Path1Tiles.TILE75
-import com.example.minigame.Path1Activity.Path1Tiles.TILE76
-import com.example.minigame.Path1Activity.Path1Tiles.TILE77
-import com.example.minigame.Path1Activity.Path1Tiles.TILE78
-import com.example.minigame.Path1Activity.Path1Tiles.TILE79
-import com.example.minigame.Path1Activity.Path1Tiles.TILE8
-import com.example.minigame.Path1Activity.Path1Tiles.TILE80
-import com.example.minigame.Path1Activity.Path1Tiles.TILE81
-import com.example.minigame.Path1Activity.Path1Tiles.TILE82
-import com.example.minigame.Path1Activity.Path1Tiles.TILE83
-import com.example.minigame.Path1Activity.Path1Tiles.TILE84
-import com.example.minigame.Path1Activity.Path1Tiles.TILE85
-import com.example.minigame.Path1Activity.Path1Tiles.TILE86
-import com.example.minigame.Path1Activity.Path1Tiles.TILE87
-import com.example.minigame.Path1Activity.Path1Tiles.TILE88
-import com.example.minigame.Path1Activity.Path1Tiles.TILE89
-import com.example.minigame.Path1Activity.Path1Tiles.TILE9
-import com.example.minigame.Path1Activity.Path1Tiles.TILE90
+import com.example.codeMaze.Path1Tiles.TILE0
+import com.example.codeMaze.Path1Tiles.TILE1
+import com.example.codeMaze.Path1Tiles.TILE10
+import com.example.codeMaze.Path1Tiles.TILE11
+import com.example.codeMaze.Path1Tiles.TILE12
+import com.example.codeMaze.Path1Tiles.TILE13
+import com.example.codeMaze.Path1Tiles.TILE14
+import com.example.codeMaze.Path1Tiles.TILE15
+import com.example.codeMaze.Path1Tiles.TILE16
+import com.example.codeMaze.Path1Tiles.TILE17
+import com.example.codeMaze.Path1Tiles.TILE18
+import com.example.codeMaze.Path1Tiles.TILE19
+import com.example.codeMaze.Path1Tiles.TILE2
+import com.example.codeMaze.Path1Tiles.TILE20
+import com.example.codeMaze.Path1Tiles.TILE21
+import com.example.codeMaze.Path1Tiles.TILE22
+import com.example.codeMaze.Path1Tiles.TILE23
+import com.example.codeMaze.Path1Tiles.TILE24
+import com.example.codeMaze.Path1Tiles.TILE25
+import com.example.codeMaze.Path1Tiles.TILE26
+import com.example.codeMaze.Path1Tiles.TILE27
+import com.example.codeMaze.Path1Tiles.TILE28
+import com.example.codeMaze.Path1Tiles.TILE29
+import com.example.codeMaze.Path1Tiles.TILE3
+import com.example.codeMaze.Path1Tiles.TILE30
+import com.example.codeMaze.Path1Tiles.TILE31
+import com.example.codeMaze.Path1Tiles.TILE32
+import com.example.codeMaze.Path1Tiles.TILE33
+import com.example.codeMaze.Path1Tiles.TILE34
+import com.example.codeMaze.Path1Tiles.TILE35
+import com.example.codeMaze.Path1Tiles.TILE36
+import com.example.codeMaze.Path1Tiles.TILE37
+import com.example.codeMaze.Path1Tiles.TILE38
+import com.example.codeMaze.Path1Tiles.TILE39
+import com.example.codeMaze.Path1Tiles.TILE4
+import com.example.codeMaze.Path1Tiles.TILE40
+import com.example.codeMaze.Path1Tiles.TILE41
+import com.example.codeMaze.Path1Tiles.TILE42
+import com.example.codeMaze.Path1Tiles.TILE43
+import com.example.codeMaze.Path1Tiles.TILE44
+import com.example.codeMaze.Path1Tiles.TILE45
+import com.example.codeMaze.Path1Tiles.TILE46
+import com.example.codeMaze.Path1Tiles.TILE47
+import com.example.codeMaze.Path1Tiles.TILE48
+import com.example.codeMaze.Path1Tiles.TILE49
+import com.example.codeMaze.Path1Tiles.TILE5
+import com.example.codeMaze.Path1Tiles.TILE50
+import com.example.codeMaze.Path1Tiles.TILE51
+import com.example.codeMaze.Path1Tiles.TILE52
+import com.example.codeMaze.Path1Tiles.TILE53
+import com.example.codeMaze.Path1Tiles.TILE54
+import com.example.codeMaze.Path1Tiles.TILE55
+import com.example.codeMaze.Path1Tiles.TILE56
+import com.example.codeMaze.Path1Tiles.TILE57
+import com.example.codeMaze.Path1Tiles.TILE58
+import com.example.codeMaze.Path1Tiles.TILE59
+import com.example.codeMaze.Path1Tiles.TILE6
+import com.example.codeMaze.Path1Tiles.TILE60
+import com.example.codeMaze.Path1Tiles.TILE61
+import com.example.codeMaze.Path1Tiles.TILE62
+import com.example.codeMaze.Path1Tiles.TILE63
+import com.example.codeMaze.Path1Tiles.TILE64
+import com.example.codeMaze.Path1Tiles.TILE65
+import com.example.codeMaze.Path1Tiles.TILE66
+import com.example.codeMaze.Path1Tiles.TILE67
+import com.example.codeMaze.Path1Tiles.TILE68
+import com.example.codeMaze.Path1Tiles.TILE69
+import com.example.codeMaze.Path1Tiles.TILE7
+import com.example.codeMaze.Path1Tiles.TILE70
+import com.example.codeMaze.Path1Tiles.TILE71
+import com.example.codeMaze.Path1Tiles.TILE72
+import com.example.codeMaze.Path1Tiles.TILE73
+import com.example.codeMaze.Path1Tiles.TILE74
+import com.example.codeMaze.Path1Tiles.TILE75
+import com.example.codeMaze.Path1Tiles.TILE76
+import com.example.codeMaze.Path1Tiles.TILE77
+import com.example.codeMaze.Path1Tiles.TILE78
+import com.example.codeMaze.Path1Tiles.TILE79
+import com.example.codeMaze.Path1Tiles.TILE8
+import com.example.codeMaze.Path1Tiles.TILE80
+import com.example.codeMaze.Path1Tiles.TILE81
+import com.example.codeMaze.Path1Tiles.TILE82
+import com.example.codeMaze.Path1Tiles.TILE83
+import com.example.codeMaze.Path1Tiles.TILE84
+import com.example.codeMaze.Path1Tiles.TILE85
+import com.example.codeMaze.Path1Tiles.TILE86
+import com.example.codeMaze.Path1Tiles.TILE87
+import com.example.codeMaze.Path1Tiles.TILE88
+import com.example.codeMaze.Path1Tiles.TILE89
+import com.example.codeMaze.Path1Tiles.TILE9
+import com.example.codeMaze.Path1Tiles.TILE90
+import java.math.BigDecimal
+import java.math.RoundingMode
 
-class MainActivity : AppCompatActivity() {
-    private var mode: Int = MainMenuActivity.GameMode.gamemode // 1 = classic; 2 = speed maze; 3 = speedrun; 4 = glitch; 5 = pain mode; 6 = infinite; 7 = sudden death;
+class StoryStartActivity : AppCompatActivity() {
+    private var hasWon: Boolean = false
+    private var timerStarted: Boolean = false
+    private var mode: Int = 8 // 1 = classic; 2 = speed maze; 3 = speedrun; 4 = glitch; 5 = pain mode; 6 = infinite; 7 = sudden death; 8 = no maze;
+//    private var difficulty: Int = DifficultyActivity.Difficulty.difficulty //0 //(1..4).random() // 0 - baby | 1 - beginner | 2 - easy | 3 - medium | 4 - hard | 5 - harder | 6 - expert | 7 - impossible | 8 - impossible++
     private var alphaUp: Boolean = true
     private var alphaDown: Boolean = false
     private var optiFails: Int = 0
     private var fixFails: Int = 0
+    private var fixFails2: Int = 0
     private var errorFails: Int = 0
     private var crashFails: Int = 0
+    private var glitchFails: Int = 0
 
     // ~ Stats: ~
     private var issues: Int = 0
     private var level: Int = 1
     private var optimizers: Int = 0
-    private var totalOptimizers: Int = 0
+    private var time: Double = 0.00
     private var optiGoal: Int = 25
-    private var difficulty: Int = DifficultyActivity.Difficulty.difficulty //0 //(1..4).random() // 0 - baby | 1 - beginner | 2 - easy | 3 - medium | 4 - hard | 5 - harder | 6 - expert | 7 - impossible | 8 - impossible++
     private var finBlockGenerated: Boolean = false
-    private lateinit var shared : SharedPreferences
+//    private lateinit var shared : SharedPreferences
     // ~ Stats ~
 
-    private lateinit var postGameText: TextView
+    private lateinit var storyText: TextView
     private lateinit var grid: GridLayout
     private lateinit var screen: ConstraintLayout
     private lateinit var issuesText: TextView
@@ -243,11 +249,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_story_start)
 
-        shared = getSharedPreferences("CodeMinigameDB", Context.MODE_PRIVATE)
+//        shared = getSharedPreferences("CodeMinigameDB", Context.MODE_PRIVATE)
 
-        postGameText = findViewById(R.id.pgtv)
+        storyText = findViewById(R.id.pgtv)
         grid = findViewById(R.id.grid)
         screen = findViewById(R.id.screen)
         issuesText = findViewById(R.id.textView2)
@@ -347,26 +353,15 @@ class MainActivity : AppCompatActivity() {
 
         optiFails = 0
         fixFails = 0
+        fixFails2 = 0
         errorFails = 0
         crashFails = 0
 
         allTiles = arrayOf(tile1, tile2, tile3, tile0, tile4, tile5, tile16, tile7, tile71, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile17, tile6, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27, tile28, tile29, tile30, tile31, tile32, tile33, tile34, tile35, tile36, tile37, tile38, tile39, tile40, tile41, tile42, tile43, tile44, tile45, tile46, tile47, tile48, tile49, tile50, tile51, tile52, tile53, tile54, tile55, tile56, tile57, tile58, tile59, tile60, tile61, tile62, tile63, tile64, tile65, tile66, tile67, tile68, tile69, tile70, tile8, tile72, tile73, tile74, tile75, tile76, tile77, tile78, tile79, tile80, tile81, tile82, tile83, tile84, tile85, tile86, tile87, tile88, tile89, tile90)
-        allTiles.shuffle()
         path1 = arrayOf(tile84, tile56, tile54, tile42, tile38, tile50, tile78, tile23, tile29, tile15, tile46, tile75, tile17, tile55, tile1, tile58, tile25, tile72, tile70, tile39, tile30, tile20, tile34, tile10, tile19, tile32, tile68, tile12, tile87, tile89, tile62, tile47, tile44, tile37, tile85, tile82, tile24, tile7, tile8, tile28, tile21, tile60, tile33, tile3, tile52)
-        when(difficulty) {
-            0 -> optiGoal = 5 //testing goal // baby
-            1 -> optiGoal = (15..30).random() // beginner
-            2 -> optiGoal = (30..50).random()  // easy
-            3 -> optiGoal = (50..100).random() // medium
-            4 -> optiGoal = (100..170).random() // hard
-            5 -> optiGoal = (175..275).random() // harder
-            6 -> optiGoal = (300..550).random() // expert
-            7 -> optiGoal = (700..1500).random() // impossible
-            8 -> optiGoal = (2500..4000).random() // impossible++
-        }
+//        optiGoal = 5
         mainLayout = findViewById<View>(R.id.main) as RelativeLayout
         player.setOnTouchListener(onTouchListener())
-
         if(mode == 7) screen.setBackgroundResource(R.drawable.death_gradient)
 
         val w: Window = window
@@ -374,15 +369,14 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
-
     val windowInsetsController =
             ViewCompat.getWindowInsetsController(window.decorView) ?: return
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
 
-        readData()
-        updateStats()
+//        readData()
+//        updateStats()
         checkIssues()
         generateTiles()
 
@@ -395,6 +389,8 @@ class MainActivity : AppCompatActivity() {
             loopError()
         }
 
+        if(mode == 2) optiText.text = getString(R.string.speed_score, time.toString())
+
         if (mode == 4) {
             optiText.text = getString(R.string.glitch_score, optimizers.toString())
             val handler = Handler(Looper.getMainLooper())
@@ -402,6 +398,20 @@ class MainActivity : AppCompatActivity() {
                 glitchUnspread()
             }, (3335).toLong())
         }
+
+    }
+
+    private fun startTimer() {
+        time += 0.05
+//        time.round
+        val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
+        println(decimal.toString())
+        optiText.text = getString(R.string.speed_score, decimal.toString())
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            if(!hasWon)
+            startTimer()
+        }, (50).toLong())
 
     }
 
@@ -654,6 +664,7 @@ class MainActivity : AppCompatActivity() {
         println(TILE56.toString())
         println(TILE57.toString())
         println(TILE58.toString())
+        println("58AAAAAA")
         println(TILE59.toString())
         println(TILE60.toString())
         println(TILE61.toString())
@@ -874,14 +885,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun generateTiles() {
-        generateLayout1()
-        generateFixes((6..10).random())
-        if(mode != 4) {
-            generateOptimizers(6)
+        if (mode != 8) {
+            generateLayout1()
+            if(mode != 2) {
+                generateFixes((6..10).random())
+                if (mode != 4) {
+                    generateOptimizers(6)
+                } else if (mode == 4) highlightRandomTile(getColor(R.color.glitch_block))
+            }
+            generateErrors((21..25).random())
+            generateCrashes((5..8).random())
+        } else if (mode == 8) {
+            generateLayout2()
+            generateFixes((14..21).random())
+            if (mode != 4) {
+                generateOptimizers(3)
+            } else if (mode == 4) highlightRandomTile(getColor(R.color.glitch_block))
+            generateErrors((15..23).random())
+            generateCrashes((2..7).random())
         }
-        generateErrors((20..25).random())
-        generateCrashes((5..7).random())
-        if(mode == 4) highlightRandomTile(getColor(R.color.glitch_block))
+    }
+
+    private fun generateLayout2() {
+        allTiles.forEach { frameLayout: FrameLayout ->
+            when((1..8).random()) {
+                in 1..5 -> frameLayout.setBackgroundColor(getColor(R.color.safe_block))
+                in 6..8 -> frameLayout.setBackgroundColor(getColor(R.color.warning_block))
+            }
+        }
     }
 
     private fun generateFixes(repeatNum: Int) {
@@ -955,7 +986,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateStats() {
         updateIssues()
         updateOptimizers()
-        saveStats()
+//        saveStats()
     }
 
     private fun selectRandomTile(): FrameLayout {
@@ -995,7 +1026,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkIssues() {
-        if (issues >= 10) {
+        var maxIssues: Int = 10
+        if(mode == 2) maxIssues = 5
+        if (issues >= maxIssues) {
             issues = 0
             gameOver()
         }
@@ -1032,9 +1065,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun optimizerCollect(tile: FrameLayout) {
+        vibrate(10)
         tile.setBackgroundColor(getColor(R.color.safe_block))
         optimizers++
-        totalOptimizers++
+//        totalOptimizers++
         allTiles.shuffle()
         when((1..4).random()) {
             1 -> {
@@ -1070,10 +1104,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun generateFixBlock() {
         val newTile = selectRandomTile()
-        if(getBackgroundColor(newTile) == getColor(R.color.safe_block)) {
+        if (getBackgroundColor(newTile) == getColor(R.color.safe_block)) {
             newTile.setBackgroundColor(getColor(R.color.fix_block))
         } else {
-            generateFixBlock()
+            fixFails2++
+            if(fixFails2 < 2000) {
+                generateFix()
+            }
         }
     }
 
@@ -1091,6 +1128,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun warningBlockHit() {
+        vibrate(25)
         issues += 1
         checkIssues()
         updateStats()
@@ -1102,6 +1140,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun errorBlockHit() {
+        vibrate(75)
         val selectedTile1 = selectRandomTile()
         val selectedTile2 = selectRandomTile()
         val selectedTile3 = selectRandomTile()
@@ -1118,20 +1157,30 @@ class MainActivity : AppCompatActivity() {
 
         when {
             getBackgroundColor(selectedTile1) == getColor(R.color.warning_block) -> selectedTile1.setBackgroundColor(getColor(R.color.error_block))
-            getBackgroundColor(selectedTile1) == getColor(R.color.error_block) -> selectedTile1.setBackgroundColor(getColor(R.color.black))
+            getBackgroundColor(selectedTile1) == getColor(R.color.error_block) -> {
+                when((1..2).random()) {
+                    1 -> selectedTile1.setBackgroundColor(getColor(R.color.tile_bomb_block))
+                    2 -> selectedTile1.setBackgroundColor(getColor(R.color.black))
+                }
+            }
             getBackgroundColor(selectedTile1) == getColor(R.color.black) -> {
-                when ((1..3).random()) {
-                    in (2..3) -> selectedTile1.setBackgroundColor(getColor(R.color.glitch_block))
+                when ((1..4).random()) {
+                    in (2..4) -> selectedTile1.setBackgroundColor(getColor(R.color.glitch_block))
                 }
             }
             else -> println("WIP code")
         }
         when {
             getBackgroundColor(selectedTile2) == getColor(R.color.warning_block) -> selectedTile2.setBackgroundColor(getColor(R.color.error_block))
-            getBackgroundColor(selectedTile2) == getColor(R.color.error_block) -> selectedTile2.setBackgroundColor(getColor(R.color.black))
+            getBackgroundColor(selectedTile2) == getColor(R.color.error_block) -> {
+                when((1..2).random()) {
+                    1 -> selectedTile2.setBackgroundColor(getColor(R.color.tile_bomb_block))
+                    2 -> selectedTile2.setBackgroundColor(getColor(R.color.black))
+                }
+            }
             getBackgroundColor(selectedTile2) == getColor(R.color.black) -> {
-                when ((1..3).random()) {
-                    in (2..3) -> selectedTile2.setBackgroundColor(getColor(R.color.glitch_block))
+                when ((1..4).random()) {
+                    in (2..4) -> selectedTile2.setBackgroundColor(getColor(R.color.glitch_block))
                 }
             }
         else -> println("WIP code")
@@ -1139,10 +1188,15 @@ class MainActivity : AppCompatActivity() {
 
             when {
         getBackgroundColor(selectedTile3) == getColor(R.color.warning_block) -> selectedTile3.setBackgroundColor(getColor(R.color.error_block))
-        getBackgroundColor(selectedTile3) == getColor(R.color.error_block) -> selectedTile3.setBackgroundColor(getColor(R.color.black))
+        getBackgroundColor(selectedTile3) == getColor(R.color.error_block) -> {
+            when((1..2).random()) {
+                1 -> selectedTile3.setBackgroundColor(getColor(R.color.tile_bomb_block))
+                2 -> selectedTile3.setBackgroundColor(getColor(R.color.black))
+            }
+        }
         getBackgroundColor(selectedTile3) == getColor(R.color.black) -> {
-            when ((1..3).random()) {
-                in (2..3) -> selectedTile3.setBackgroundColor(getColor(R.color.glitch_block))
+            when ((1..4).random()) {
+                in (2..4) -> selectedTile3.setBackgroundColor(getColor(R.color.glitch_block))
             }
         }
         else -> println("WIP code")
@@ -1150,10 +1204,15 @@ class MainActivity : AppCompatActivity() {
 
     when {
         getBackgroundColor(selectedTile4) == getColor(R.color.warning_block) -> selectedTile4.setBackgroundColor(getColor(R.color.error_block))
-        getBackgroundColor(selectedTile4) == getColor(R.color.error_block) -> selectedTile4.setBackgroundColor(getColor(R.color.black))
+        getBackgroundColor(selectedTile4) == getColor(R.color.error_block) -> {
+            when((1..2).random()) {
+                1 -> selectedTile4.setBackgroundColor(getColor(R.color.tile_bomb_block))
+                2 -> selectedTile4.setBackgroundColor(getColor(R.color.black))
+            }
+        }
         getBackgroundColor(selectedTile4) == getColor(R.color.black) -> {
-        when ((1..3).random()) {
-            in (2..3) -> selectedTile4.setBackgroundColor(getColor(R.color.glitch_block))
+        when ((1..4).random()) {
+            in (2..4) -> selectedTile4.setBackgroundColor(getColor(R.color.glitch_block))
         }
     }
         else -> println("WIP code")
@@ -1172,8 +1231,8 @@ class MainActivity : AppCompatActivity() {
 
         player.setOnTouchListener(null)
         Toast.makeText(applicationContext, "You Lost.", Toast.LENGTH_LONG).show()
-        postGameText.visibility = View.VISIBLE
-        postGameText.text = "Game Over.\nTap your character to play again, or tap and hold to go to the main menu."
+        storyText.visibility = View.VISIBLE
+        storyText.text = "Game Over.\nTap your character to play again, or tap and hold to go to the main menu."
 
         vibrate(250)
 
@@ -1210,7 +1269,7 @@ class MainActivity : AppCompatActivity() {
         handler1.postDelayed({
             player.colorFilter = null
 
-            saveStats()
+//            saveStats()
             player.setOnClickListener {
                 issues = 0
                 optimizers = 0
@@ -1305,7 +1364,7 @@ class MainActivity : AppCompatActivity() {
                 TILE88 = false
                 TILE89 = false
                 TILE90 = false
-                val intent = Intent(this@MainActivity, StartActivity::class.java)
+                val intent = Intent(this@StoryStartActivity, StartActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -1403,7 +1462,7 @@ class MainActivity : AppCompatActivity() {
                 TILE89 = false
                 TILE90 = false
                 vibrate(10)
-                val intent = Intent(this@MainActivity, MainMenuActivity::class.java)
+                val intent = Intent(this@StoryStartActivity, MainMenuActivity::class.java)
                 startActivity(intent)
                 finish()
                 true
@@ -1430,223 +1489,230 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun levelWin() {
-        vibrate(75)
-        player.setOnTouchListener(null)
-        val handler = Handler(Looper.getMainLooper())
-        repeat(90) {
-            handler.postDelayed({
-                rainbowAll()
-            }, ((95..3505).random()).toLong())
-        }
-        level++
-        issues = 0
+        if(!hasWon) {
+            var repeatNum: Int = 90
+            if(mode == 4) repeatNum = 91
+            hasWon = true
+            println("win!")
+            vibrate(75)
+            player.setOnTouchListener(null)
+            val handler = Handler(Looper.getMainLooper())
+            repeat(repeatNum) {
+                handler.postDelayed({
+                    rainbowAll()
+                }, ((95..3505).random()).toLong())
+            }
+            level++
+            issues = 0
 //        totalOptimizers += optimizers
-        optimizers = 0
-        saveStats()
+            optimizers = 0
+//            saveStats()
 //        loadNextLevel()
 //        recreate()
-        Toast.makeText(applicationContext, "You Win!", Toast.LENGTH_LONG).show()
-        postGameText.visibility = View.VISIBLE
-        postGameText.text = "You won!\nTap your character to play again, or tap and hold to go to the main menu."
+            Toast.makeText(applicationContext, "You Win!", Toast.LENGTH_LONG).show()
+            storyText.visibility = View.VISIBLE
+            storyText.text =
+                "You won!\nTap your character to play again, or tap and hold to go to the main menu."
 
-        handler.postDelayed({
-            player.setOnClickListener {
-                TILE0 = false
-                TILE1 = false
-                TILE2 = false
-                TILE3 = false
-                TILE4 = false
-                TILE5 = false
-                TILE6 = false
-                TILE7 = false
-                TILE8 = false
-                TILE9 = false
-                TILE10 = false
-                TILE11 = false
-                TILE12 = false
-                TILE13 = false
-                TILE14 = false
-                TILE15 = false
-                TILE16 = false
-                TILE17 = false
-                TILE18 = false
-                TILE19 = false
-                TILE20 = false
-                TILE21 = false
-                TILE22 = false
-                TILE23 = false
-                TILE24 = false
-                TILE25 = false
-                TILE26 = false
-                TILE27 = false
-                TILE28 = false
-                TILE29 = false
-                TILE30 = false
-                TILE31 = false
-                TILE32 = false
-                TILE33 = false
-                TILE34 = false
-                TILE35 = false
-                TILE36 = false
-                TILE37 = false
-                TILE38 = false
-                TILE39 = false
-                TILE40 = false
-                TILE41 = false
-                TILE42 = false
-                TILE43 = false
-                TILE44 = false
-                TILE45 = false
-                TILE46 = false
-                TILE47 = false
-                TILE48 = false
-                TILE49 = false
-                TILE50 = false
-                TILE51 = false
-                TILE52 = false
-                TILE53 = false
-                TILE54 = false
-                TILE55 = false
-                TILE56 = false
-                TILE57 = false
-                TILE58 = false
-                TILE59 = false
-                TILE60 = false
-                TILE61 = false
-                TILE62 = false
-                TILE63 = false
-                TILE64 = false
-                TILE65 = false
-                TILE66 = false
-                TILE67 = false
-                TILE68 = false
-                TILE69 = false
-                TILE70 = false
-                TILE71 = false
-                TILE72 = false
-                TILE73 = false
-                TILE74 = false
-                TILE75 = false
-                TILE76 = false
-                TILE77 = false
-                TILE78 = false
-                TILE79 = false
-                TILE80 = false
-                TILE81 = false
-                TILE82 = false
-                TILE83 = false
-                TILE84 = false
-                TILE85 = false
-                TILE86 = false
-                TILE87 = false
-                TILE88 = false
-                TILE89 = false
-                TILE90 = false
-                val intent = Intent(this@MainActivity, StartActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            handler.postDelayed({
+                player.setOnClickListener {
+                    TILE0 = false
+                    TILE1 = false
+                    TILE2 = false
+                    TILE3 = false
+                    TILE4 = false
+                    TILE5 = false
+                    TILE6 = false
+                    TILE7 = false
+                    TILE8 = false
+                    TILE9 = false
+                    TILE10 = false
+                    TILE11 = false
+                    TILE12 = false
+                    TILE13 = false
+                    TILE14 = false
+                    TILE15 = false
+                    TILE16 = false
+                    TILE17 = false
+                    TILE18 = false
+                    TILE19 = false
+                    TILE20 = false
+                    TILE21 = false
+                    TILE22 = false
+                    TILE23 = false
+                    TILE24 = false
+                    TILE25 = false
+                    TILE26 = false
+                    TILE27 = false
+                    TILE28 = false
+                    TILE29 = false
+                    TILE30 = false
+                    TILE31 = false
+                    TILE32 = false
+                    TILE33 = false
+                    TILE34 = false
+                    TILE35 = false
+                    TILE36 = false
+                    TILE37 = false
+                    TILE38 = false
+                    TILE39 = false
+                    TILE40 = false
+                    TILE41 = false
+                    TILE42 = false
+                    TILE43 = false
+                    TILE44 = false
+                    TILE45 = false
+                    TILE46 = false
+                    TILE47 = false
+                    TILE48 = false
+                    TILE49 = false
+                    TILE50 = false
+                    TILE51 = false
+                    TILE52 = false
+                    TILE53 = false
+                    TILE54 = false
+                    TILE55 = false
+                    TILE56 = false
+                    TILE57 = false
+                    TILE58 = false
+                    TILE59 = false
+                    TILE60 = false
+                    TILE61 = false
+                    TILE62 = false
+                    TILE63 = false
+                    TILE64 = false
+                    TILE65 = false
+                    TILE66 = false
+                    TILE67 = false
+                    TILE68 = false
+                    TILE69 = false
+                    TILE70 = false
+                    TILE71 = false
+                    TILE72 = false
+                    TILE73 = false
+                    TILE74 = false
+                    TILE75 = false
+                    TILE76 = false
+                    TILE77 = false
+                    TILE78 = false
+                    TILE79 = false
+                    TILE80 = false
+                    TILE81 = false
+                    TILE82 = false
+                    TILE83 = false
+                    TILE84 = false
+                    TILE85 = false
+                    TILE86 = false
+                    TILE87 = false
+                    TILE88 = false
+                    TILE89 = false
+                    TILE90 = false
+                    val intent = Intent(this@StoryStartActivity, StartActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
 
-            player.setOnLongClickListener {
-                TILE0 = false
-                TILE1 = false
-                TILE2 = false
-                TILE3 = false
-                TILE4 = false
-                TILE5 = false
-                TILE6 = false
-                TILE7 = false
-                TILE8 = false
-                TILE9 = false
-                TILE10 = false
-                TILE11 = false
-                TILE12 = false
-                TILE13 = false
-                TILE14 = false
-                TILE15 = false
-                TILE16 = false
-                TILE17 = false
-                TILE18 = false
-                TILE19 = false
-                TILE20 = false
-                TILE21 = false
-                TILE22 = false
-                TILE23 = false
-                TILE24 = false
-                TILE25 = false
-                TILE26 = false
-                TILE27 = false
-                TILE28 = false
-                TILE29 = false
-                TILE30 = false
-                TILE31 = false
-                TILE32 = false
-                TILE33 = false
-                TILE34 = false
-                TILE35 = false
-                TILE36 = false
-                TILE37 = false
-                TILE38 = false
-                TILE39 = false
-                TILE40 = false
-                TILE41 = false
-                TILE42 = false
-                TILE43 = false
-                TILE44 = false
-                TILE45 = false
-                TILE46 = false
-                TILE47 = false
-                TILE48 = false
-                TILE49 = false
-                TILE50 = false
-                TILE51 = false
-                TILE52 = false
-                TILE53 = false
-                TILE54 = false
-                TILE55 = false
-                TILE56 = false
-                TILE57 = false
-                TILE58 = false
-                TILE59 = false
-                TILE60 = false
-                TILE61 = false
-                TILE62 = false
-                TILE63 = false
-                TILE64 = false
-                TILE65 = false
-                TILE66 = false
-                TILE67 = false
-                TILE68 = false
-                TILE69 = false
-                TILE70 = false
-                TILE71 = false
-                TILE72 = false
-                TILE73 = false
-                TILE74 = false
-                TILE75 = false
-                TILE76 = false
-                TILE77 = false
-                TILE78 = false
-                TILE79 = false
-                TILE80 = false
-                TILE81 = false
-                TILE82 = false
-                TILE83 = false
-                TILE84 = false
-                TILE85 = false
-                TILE86 = false
-                TILE87 = false
-                TILE88 = false
-                TILE89 = false
-                TILE90 = false
-                vibrate(10)
-                val intent = Intent(this@MainActivity, MainMenuActivity::class.java)
-                startActivity(intent)
-                finish()
-                true
-            }
-        }, (500).toLong())
-        // wins++
+                player.setOnLongClickListener {
+                    TILE0 = false
+                    TILE1 = false
+                    TILE2 = false
+                    TILE3 = false
+                    TILE4 = false
+                    TILE5 = false
+                    TILE6 = false
+                    TILE7 = false
+                    TILE8 = false
+                    TILE9 = false
+                    TILE10 = false
+                    TILE11 = false
+                    TILE12 = false
+                    TILE13 = false
+                    TILE14 = false
+                    TILE15 = false
+                    TILE16 = false
+                    TILE17 = false
+                    TILE18 = false
+                    TILE19 = false
+                    TILE20 = false
+                    TILE21 = false
+                    TILE22 = false
+                    TILE23 = false
+                    TILE24 = false
+                    TILE25 = false
+                    TILE26 = false
+                    TILE27 = false
+                    TILE28 = false
+                    TILE29 = false
+                    TILE30 = false
+                    TILE31 = false
+                    TILE32 = false
+                    TILE33 = false
+                    TILE34 = false
+                    TILE35 = false
+                    TILE36 = false
+                    TILE37 = false
+                    TILE38 = false
+                    TILE39 = false
+                    TILE40 = false
+                    TILE41 = false
+                    TILE42 = false
+                    TILE43 = false
+                    TILE44 = false
+                    TILE45 = false
+                    TILE46 = false
+                    TILE47 = false
+                    TILE48 = false
+                    TILE49 = false
+                    TILE50 = false
+                    TILE51 = false
+                    TILE52 = false
+                    TILE53 = false
+                    TILE54 = false
+                    TILE55 = false
+                    TILE56 = false
+                    TILE57 = false
+                    TILE58 = false
+                    TILE59 = false
+                    TILE60 = false
+                    TILE61 = false
+                    TILE62 = false
+                    TILE63 = false
+                    TILE64 = false
+                    TILE65 = false
+                    TILE66 = false
+                    TILE67 = false
+                    TILE68 = false
+                    TILE69 = false
+                    TILE70 = false
+                    TILE71 = false
+                    TILE72 = false
+                    TILE73 = false
+                    TILE74 = false
+                    TILE75 = false
+                    TILE76 = false
+                    TILE77 = false
+                    TILE78 = false
+                    TILE79 = false
+                    TILE80 = false
+                    TILE81 = false
+                    TILE82 = false
+                    TILE83 = false
+                    TILE84 = false
+                    TILE85 = false
+                    TILE86 = false
+                    TILE87 = false
+                    TILE88 = false
+                    TILE89 = false
+                    TILE90 = false
+                    vibrate(10)
+                    val intent = Intent(this@StoryStartActivity, MainMenuActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+            }, (500).toLong())
+            // wins++
+        }
     }
 
     private fun rainbowAll() {
@@ -1711,21 +1777,21 @@ class MainActivity : AppCompatActivity() {
             val warningColor = getColor(R.color.warning_block)
             val fixColor = getColor(R.color.fix_block)
             val crashColor = getColor(R.color.black)
+            val bombColor = getColor(R.color.tile_bomb_block)
             val optiColor = getColor(R.color.optimizer_piece)
-        allTiles.onEach { frameLayout: FrameLayout ->
-
             val playerX = player.x
             val playerY = player.y
+        allTiles.onEach { frameLayout: FrameLayout ->
             val tileX = frameLayout.x
             val tileY = frameLayout.y
-            if(playerX <= (tileX + 155f)) {
-                if(playerX >= (tileX - 85f)) {
-                    println("X collision detected.")
-                    println("player's X is $playerX and tile's X is $tileX")
-                    if(playerY >= (tileY + 75f)) {
-                        if(playerY <= (tileY + 275f)) {
-                            println("Y collision detected.")
-                            println("player's Y is $playerY and tile's Y is $tileY")
+            if(playerX <= (tileX + 165f)) {
+                if(playerX >= (tileX - 80f)) {
+//                    println("X collision detected.")
+//                    println("player's X is $playerX and tile's X is $tileX")
+                    if(playerY >= (tileY + 65f)) {
+                        if(playerY <= (tileY + 270f)) {
+//                            println("Y collision detected.")
+//                            println("player's Y is $playerY and tile's Y is $tileY")
 
                             if(frameLayout.alpha == 0.55f) {
                                 frameLayout.alpha = 0.6f
@@ -1747,6 +1813,7 @@ class MainActivity : AppCompatActivity() {
                                         else errorBlockHit()
                                     }
                                     getBackgroundColor(frameLayout) == crashColor -> crashBlockHit()
+                                    getBackgroundColor(frameLayout) == bombColor -> tileBombBlockHit(frameLayout)
                                     getBackgroundColor(frameLayout) == fixColor -> fixBlockHit(frameLayout)
                                     getBackgroundColor(frameLayout) == glitchColor -> {
                                         if(mode == 7) gameOver()
@@ -1760,9 +1827,35 @@ class MainActivity : AppCompatActivity() {
                 } else if(frameLayout.alpha == 0.6f) frameLayout.alpha = 0.55f
             } else if(frameLayout.alpha == 0.6f) frameLayout.alpha = 0.55f
         }
+        if(playerY <= (tile9.y + 90f) && mode == 2) levelWin()
+        if(mode == 2 && !timerStarted) {
+            timerStarted = true
+            startTimer()
+        }
     }
 
+    private fun tileBombBlockHit(thisTile: FrameLayout) {
+        thisTile.setBackgroundColor(getColor(R.color.warning_block))
+        vibrate(250)
+        repeat((5..10).random()) {
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
+                when((1..10).random()) {
+                    in 1..3 -> highlightRandomTile(getColor(R.color.warning_block))
+                    in 4..6 -> highlightRandomTile(getColor(R.color.error_block))
+                    in 7..8 -> highlightRandomTile(getColor(R.color.black))
+                    9 -> highlightRandomTile(getColor(R.color.glitch_block))
+                    10 -> highlightRandomTile(getColor(R.color.tile_bomb_block))
+                }
+                vibrate(55)
+            }, ((15..450).random().toLong()))
+        }
+    }
+
+
+
     private fun glitchBlockHit() {
+        vibrate(20)
         val handler1 = Handler(Looper.getMainLooper())
         player.setColorFilter(getColor(R.color.glitch_block))
         handler1.postDelayed({
@@ -1805,8 +1898,7 @@ class MainActivity : AppCompatActivity() {
                 in (2..24) -> {
                     issues += (0..2).random()
                     repeat((3..6).random()) {
-                        highlightRandomTile(getColor(R.color.glitch_block))
-                        optimizers++
+                        glitchSpread()
                     }
 
                     when((1..8).random()) {
@@ -1823,28 +1915,43 @@ class MainActivity : AppCompatActivity() {
         updateStats()
     }
 
-    private fun readData() {
-//        issues = shared.getInt("issues", issues)
-        level = shared.getInt("level", level)
-//        optimizers = shared.getInt("optimizers", optimizers)
-        totalOptimizers = shared.getInt("totalOptimizers", totalOptimizers)
-//        raidPTS1 = shared.getInt("raidPTS", raidPTS1)
-//        pingVol = shared.getFloat("pingVol", pingVol)
-//        musicVol = shared.getFloat("musicVol", musicVol)
-//        pingPoints.text = getString(R.string.balance, pings1.toString())
+    private fun glitchSpread() {
+        var glitchScore: Int = 0
+        if(optimizers < 91) {
+            val tile = selectRandomTile()
+            if (getBackgroundColor(tile) != getColor(R.color.glitch_block)) {
+                tile.setBackgroundColor(getColor(R.color.glitch_block))
+            } else if(glitchFails <= 2000){
+                glitchFails++
+                glitchSpread()
+            }
+        }
+        allTiles.forEach { frameLayout: FrameLayout ->
+            if(getBackgroundColor(frameLayout) == getColor(R.color.glitch_block)) glitchScore++
+        }
+        optimizers = glitchScore
+        updateOptimizers()
+        if (glitchScore >= 91) levelWin()
     }
 
-    private fun saveStats() {
-        val edit = shared.edit()
-//        edit.putInt("issues" , issues )
-        edit.putInt("level" , level )
-//        edit.putInt("optimizers" , optimizers )
-        edit.putInt("totalOptimizers" , totalOptimizers )
-//        edit.putInt("raidPTS", raidPTS1 )
-//        edit.putFloat("pingVol", pingVol )
-//        edit.putFloat("musicVol", musicVol )
-        edit.apply()
-    }
+//    private fun readData() {
+////        issues = shared.getInt("issues", issues)
+//        level = shared.getInt("level", level)
+////        optimizers = shared.getInt("optimizers", optimizers)
+//        totalOptimizers = shared.getInt("totalOptimizers", totalOptimizers)
+//    }
+
+//    private fun saveStats() {
+//        val edit = shared.edit()
+////        edit.putInt("issues" , issues )
+//        edit.putInt("level" , level )
+////        edit.putInt("optimizers" , optimizers )
+//        edit.putInt("totalOptimizers" , totalOptimizers )
+////        edit.putInt("raidPTS", raidPTS1 )
+////        edit.putFloat("pingVol", pingVol )
+////        edit.putFloat("musicVol", musicVol )
+//        edit.apply()
+//    }
          private fun vibrate(time: Long) {
 
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator

@@ -22,6 +22,13 @@
             app:title="@string/vibrations_title"
             app:defaultValue="true"/>
 
+        <SwitchPreferenceCompat
+            app:key="KeepGeneratingOptis"
+            app:summaryOff="@string/kgo_summary_off"
+            app:summaryOn="@string/kgo_summary_on"
+            app:title="@string/keep_gen_opti_title"
+            app:defaultValue="true"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/misc_header">

@@ -1,0 +1,2969 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/black_gradient"
+    tools:context=".StoryStartActivity">
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/pgtv"
+        android:layout_width="wrap_content"
+        android:textColor="@color/glow_teal"
+        android:gravity="center"
+        android:foregroundGravity="center"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grid" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false"
+        android:fitsSystemWindows="true"
+        android:foregroundGravity="center"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:scrollbarThumbHorizontal="@null"
+        android:scrollbarThumbVertical="@null"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4">
+
+        <FrameLayout
+            android:id="@+id/tile155"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile154"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile153"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile156"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile157"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile158"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="5"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile159"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile170"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile141"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile144"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile163"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile148"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile146"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="10">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile147"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="10" />
+
+        <FrameLayout
+            android:id="@+id/tile161"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="15"
+            app:layout_row="10" />
+
+        <FrameLayout
+            android:id="@+id/tile160"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="10" />
+
+        <FrameLayout
+            android:id="@+id/tile162"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="10" />
+
+        <FrameLayout
+            android:id="@+id/tile140"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile138"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile139"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile137"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile136"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="5"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile142"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile167"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile171"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile164"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile165"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile166"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile169"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="9" />
+
+        <FrameLayout
+            android:id="@+id/tile168"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile149"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="9">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile150"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="9" />
+
+        <FrameLayout
+            android:id="@+id/tile151"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="15"
+            app:layout_row="9" />
+
+        <FrameLayout
+            android:id="@+id/tile152"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="9" />
+
+        <FrameLayout
+            android:id="@+id/tile102"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile103"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile134"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile105"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile106"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile107"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="5"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile108"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile110"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile109"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile111"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile112"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile113"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile98"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="8" />
+
+        <FrameLayout
+            android:id="@+id/tile114"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="8">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile118"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="15"
+            app:layout_row="8" />
+
+        <FrameLayout
+            android:id="@+id/tile115"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="8" />
+
+        <FrameLayout
+            android:id="@+id/tile116"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="8" />
+
+        <FrameLayout
+            android:id="@+id/tile135"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile119"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="15"
+            app:layout_row="7" />
+
+        <FrameLayout
+            android:id="@+id/tile120"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="7" />
+
+        <FrameLayout
+            android:id="@+id/tile121"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="7" />
+
+        <FrameLayout
+            android:id="@+id/tile122"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="7" />
+
+        <FrameLayout
+            android:id="@+id/tile123"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile124"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile125"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile127"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile126"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile128"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile129"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="5"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile130"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile131"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile132"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile133"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile10"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile101"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="6" />
+
+        <FrameLayout
+            android:id="@+id/tile97"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="6" />
+
+        <FrameLayout
+            android:id="@+id/tile117"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="6" />
+
+        <FrameLayout
+            android:id="@+id/tile99"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125" />
+
+        <FrameLayout
+            android:id="@+id/tile43"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile51"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile96"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile94"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="6" />
+
+        <FrameLayout
+            android:id="@+id/tile92"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile91"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile90"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile0"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile1"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile2"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile3"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile5"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="15"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile6"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="15"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile7"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile8"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile9"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile11"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="15"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile12"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile13"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile14"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="5"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile15"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile16"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile18"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile20"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile21"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile22"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile23"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile24"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile25"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile26"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile27"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile28"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile29"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile30"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile31"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile32"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile33"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile35"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile36"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile37"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile38"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile39"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile40"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile41"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile42"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile93"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile44"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="5"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile45"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile46"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile47"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="5"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile48"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile49"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="5"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile50"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile95"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile52"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="6" />
+
+        <FrameLayout
+            android:id="@+id/tile100"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_row="6" />
+
+        <FrameLayout
+            android:id="@+id/tile53"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile54"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile55"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile56"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="5"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile57"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile58"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile17"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile34"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile104"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="7">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile19"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile4"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile59"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile60"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="15"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile61"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile62"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile63"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="1"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile64"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile65"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile66"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="8"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile67"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile68"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile69"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile70"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="2"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile71"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="12"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile72"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile73"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile74"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile75"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="17"
+            app:layout_row="2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile76"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile77"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="4"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile78"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile79"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile80"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="11"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile81"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="13"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile82"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="15"
+            app:layout_row="4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile83"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="6"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile84"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="0"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile85"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="9"
+            app:layout_row="3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile86"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="3"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile87"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="14"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile88"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="7"
+            app:layout_row="1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tile89"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:alpha=".55"
+            android:background="@color/warning_block"
+            android:fitsSystemWindows="true"
+            android:foregroundGravity="center"
+            android:foregroundTint="#9C27B0"
+            android:foregroundTintMode="src_in"
+            android:scaleX="1.03125"
+            android:scaleY="1.03125"
+            app:layout_column="16"
+            app:layout_row="0">
+
+        </FrameLayout>
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <ImageView
+            android:id="@+id/player"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="189dp"
+            android:layout_marginEnd="849dp"
+            android:layout_marginBottom="189dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:fitsSystemWindows="true"
+            android:scaleType="fitCenter"
+            android:scaleX="3"
+            android:scaleY="3"
+            app:srcCompat="@drawable/ic_baseline_android_24" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/textView"
+        android:layout_width="404dp"
+        android:layout_height="48dp"
+        android:fontFamily="@font/press_start_2p"
+        android:foregroundGravity="bottom|center"
+        android:gravity="bottom|center"
+        android:includeFontPadding="false"
+        android:paddingBottom="6dp"
+        android:text="Hello World!"
+        android:textColor="@color/white"
+        android:textSize="16.5sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/issues"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.985"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/optimizers"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+ 

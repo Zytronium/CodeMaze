@@ -23,4 +23,5 @@
     <color name="fix_block">#00EDA2</color>
     <color name="glitch_block">#EE00FF</color>
     <color name="optimizer_piece">#6200FF</color>
+    <color name="tile_bomb_block">#FFFFFF</color>
 </resources>

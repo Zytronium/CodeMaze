@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">Minigame</string>>
+    <string name="app_name">CodeMaze</string>>
     <string name="issues">Issues: %s</string>
     <string name="optimizers">Optimizers: %s</string>
     <string name="optimizers_and_goal">Optimizers: %s/%s</string>
     <string name="glitch_score">Score: %s</string>
+    <string name="speed_score">Time: %s</string>
     <string name="path">%s</string>
 
     <string name="title_activity_settings">SettingzActivity</string>
@@ -27,5 +28,9 @@
 
     <string name="rainbow_title">Rainbow Character</string>
     <string name="rainbow_summary_on">Character constantly changes colors, cycling though the entire rainbow. *may interfere with character color blinking during things like collisions with tiles and game over animations.</string>
-    <string name="rainbow_summary_off">Character stays normal white color.\n*WIP setting, currently not available*</string>
+    <string name="rainbow_summary_off">When off, Character stays normal white color. \nWhen on, Character constantly changes colors, cycling though the entire rainbow.\n*WIP setting, currently will not work*</string>
+
+    <string name="keep_gen_opti_title">Keep generating optimizers after goal has been met</string>
+    <string name="kgo_summary_on">When on, after the optimizers goal has been met, optimizer tiles will still keep appearing forever.\n*WIP setting, toggling off currently will not affect anything* </string>
+    <string name="kgo_summary_off">When off, no more optimizers will appear after the goal has been met and the Finish tile has appeared.</string>
 </resources>

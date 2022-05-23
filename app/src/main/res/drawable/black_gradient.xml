@@ -8,6 +8,6 @@
         android:centerColor="#151515"
         android:endColor="#202020"
         android:type="linear"
-        android:angle="60"/>
+        android:angle="-90"/>
 
 </shape>
