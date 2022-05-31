@@ -44,7 +44,7 @@ class DifficultyActivity : AppCompatActivity() {
         startActivity(intent)
 //        finish()
     }
-    fun harder(view: View) {
+    fun experienced(view: View) {
         Difficulty.difficulty = 5
         var intent = Intent(this@DifficultyActivity, StartActivity::class.java)
         if (gamemode == 8) intent = Intent(this@DifficultyActivity, MainActivity::class.java)
@@ -58,15 +58,29 @@ class DifficultyActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-    fun impossible(view: View) {
+    fun master(view: View) {
         Difficulty.difficulty = 7
         var intent = Intent(this@DifficultyActivity, StartActivity::class.java)
         if (gamemode == 8) intent = Intent(this@DifficultyActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
-    fun impossiblePlus(view: View) {
+    fun deity(view: View) {
         Difficulty.difficulty = 8
+        var intent = Intent(this@DifficultyActivity, StartActivity::class.java)
+        if (gamemode == 8) intent = Intent(this@DifficultyActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+    fun impossible(view: View) {
+        Difficulty.difficulty = 9
+        var intent = Intent(this@DifficultyActivity, StartActivity::class.java)
+        if (gamemode == 8) intent = Intent(this@DifficultyActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+    fun impossiblePlus(view: View) {
+        Difficulty.difficulty = 10
         var intent = Intent(this@DifficultyActivity, StartActivity::class.java)
         if (gamemode == 8) intent = Intent(this@DifficultyActivity, MainActivity::class.java)
         startActivity(intent)

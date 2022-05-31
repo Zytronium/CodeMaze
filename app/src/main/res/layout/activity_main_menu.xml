@@ -164,7 +164,7 @@
             android:layout_gravity="center"
             android:alpha="0.75"
             android:backgroundTint="#575970"
-            android:enabled="true"
+            android:enabled="false"
             android:onClick="story"
             android:padding="10dp"
             android:text="STORY MODE"

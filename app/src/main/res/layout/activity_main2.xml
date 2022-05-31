@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/black_gradient"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity2">
 
     <TextView
         android:id="@+id/pgtv"
@@ -14,16 +14,13 @@
         android:layout_height="wrap_content"
         android:foregroundGravity="center"
         android:gravity="center"
-        android:maxWidth="130dp"
         android:padding="10dp"
         android:textColor="@color/glow_teal"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_goto_menu"
-        app:layout_constraintStart_toEndOf="@+id/btn_restart"
-        app:layout_constraintTop_toBottomOf="@+id/grid"
-        tools:text="You managed to win and loose simultaneously somehow!"
-        tools:visibility="visible" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grid" />
 
     <Button
         android:id="@+id/btn_goto_menu"
@@ -71,6 +68,8 @@
         android:fitsSystemWindows="true"
         android:foregroundGravity="center"
         android:overScrollMode="ifContentScrolls"
+        android:scaleX="1"
+        android:scaleY="1"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="false"
         android:scrollbarThumbHorizontal="@null"
@@ -79,13 +78,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".4">
+        app:layout_constraintTop_toTopOf="parent">
         <!-- austin phone vertical_bias = 0.48 -->
         <FrameLayout
             android:id="@+id/tile0"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -101,8 +99,8 @@
 
         <FrameLayout
             android:id="@+id/tile1"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -118,8 +116,8 @@
 
         <FrameLayout
             android:id="@+id/tile2"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -135,8 +133,8 @@
 
         <FrameLayout
             android:id="@+id/tile3"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -152,8 +150,8 @@
 
         <FrameLayout
             android:id="@+id/tile4"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -169,8 +167,8 @@
 
         <FrameLayout
             android:id="@+id/tile5"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -186,8 +184,8 @@
 
         <FrameLayout
             android:id="@+id/tile6"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -203,8 +201,8 @@
 
         <FrameLayout
             android:id="@+id/tile7"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -220,8 +218,8 @@
 
         <FrameLayout
             android:id="@+id/tile8"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -237,8 +235,8 @@
 
         <FrameLayout
             android:id="@+id/tile9"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -254,8 +252,8 @@
 
         <FrameLayout
             android:id="@+id/tile10"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -271,8 +269,8 @@
 
         <FrameLayout
             android:id="@+id/tile11"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -288,8 +286,8 @@
 
         <FrameLayout
             android:id="@+id/tile12"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -305,8 +303,8 @@
 
         <FrameLayout
             android:id="@+id/tile13"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -322,8 +320,8 @@
 
         <FrameLayout
             android:id="@+id/tile14"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -339,8 +337,8 @@
 
         <FrameLayout
             android:id="@+id/tile15"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -356,8 +354,8 @@
 
         <FrameLayout
             android:id="@+id/tile16"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -373,8 +371,8 @@
 
         <FrameLayout
             android:id="@+id/tile17"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -390,8 +388,8 @@
 
         <FrameLayout
             android:id="@+id/tile18"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -407,8 +405,8 @@
 
         <FrameLayout
             android:id="@+id/tile19"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -424,8 +422,8 @@
 
         <FrameLayout
             android:id="@+id/tile20"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -441,8 +439,8 @@
 
         <FrameLayout
             android:id="@+id/tile21"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -458,8 +456,8 @@
 
         <FrameLayout
             android:id="@+id/tile22"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -475,8 +473,8 @@
 
         <FrameLayout
             android:id="@+id/tile23"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -492,8 +490,8 @@
 
         <FrameLayout
             android:id="@+id/tile24"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -509,8 +507,8 @@
 
         <FrameLayout
             android:id="@+id/tile25"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -526,8 +524,8 @@
 
         <FrameLayout
             android:id="@+id/tile26"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -543,8 +541,8 @@
 
         <FrameLayout
             android:id="@+id/tile27"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -560,8 +558,8 @@
 
         <FrameLayout
             android:id="@+id/tile28"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -577,8 +575,8 @@
 
         <FrameLayout
             android:id="@+id/tile29"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -594,8 +592,8 @@
 
         <FrameLayout
             android:id="@+id/tile30"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -611,8 +609,8 @@
 
         <FrameLayout
             android:id="@+id/tile31"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -628,8 +626,8 @@
 
         <FrameLayout
             android:id="@+id/tile32"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -645,8 +643,8 @@
 
         <FrameLayout
             android:id="@+id/tile33"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -662,8 +660,8 @@
 
         <FrameLayout
             android:id="@+id/tile34"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -679,8 +677,8 @@
 
         <FrameLayout
             android:id="@+id/tile35"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -696,8 +694,8 @@
 
         <FrameLayout
             android:id="@+id/tile36"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -713,8 +711,8 @@
 
         <FrameLayout
             android:id="@+id/tile37"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -730,8 +728,8 @@
 
         <FrameLayout
             android:id="@+id/tile38"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -747,8 +745,8 @@
 
         <FrameLayout
             android:id="@+id/tile39"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -764,8 +762,8 @@
 
         <FrameLayout
             android:id="@+id/tile40"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -781,8 +779,8 @@
 
         <FrameLayout
             android:id="@+id/tile41"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -798,8 +796,8 @@
 
         <FrameLayout
             android:id="@+id/tile42"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -815,8 +813,8 @@
 
         <FrameLayout
             android:id="@+id/tile43"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -832,8 +830,8 @@
 
         <FrameLayout
             android:id="@+id/tile44"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -849,8 +847,8 @@
 
         <FrameLayout
             android:id="@+id/tile45"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -866,8 +864,8 @@
 
         <FrameLayout
             android:id="@+id/tile46"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -883,8 +881,8 @@
 
         <FrameLayout
             android:id="@+id/tile47"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -900,8 +898,8 @@
 
         <FrameLayout
             android:id="@+id/tile48"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -917,8 +915,8 @@
 
         <FrameLayout
             android:id="@+id/tile49"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -934,8 +932,8 @@
 
         <FrameLayout
             android:id="@+id/tile50"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -951,8 +949,8 @@
 
         <FrameLayout
             android:id="@+id/tile51"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -968,8 +966,8 @@
 
         <FrameLayout
             android:id="@+id/tile52"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -983,8 +981,8 @@
 
         <FrameLayout
             android:id="@+id/tile53"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1000,8 +998,8 @@
 
         <FrameLayout
             android:id="@+id/tile54"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1017,8 +1015,8 @@
 
         <FrameLayout
             android:id="@+id/tile55"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1034,8 +1032,8 @@
 
         <FrameLayout
             android:id="@+id/tile56"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1051,8 +1049,8 @@
 
         <FrameLayout
             android:id="@+id/tile57"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1068,8 +1066,8 @@
 
         <FrameLayout
             android:id="@+id/tile58"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1085,8 +1083,8 @@
 
         <FrameLayout
             android:id="@+id/tile59"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1102,8 +1100,8 @@
 
         <FrameLayout
             android:id="@+id/tile60"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1119,8 +1117,8 @@
 
         <FrameLayout
             android:id="@+id/tile61"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1136,8 +1134,8 @@
 
         <FrameLayout
             android:id="@+id/tile62"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1153,8 +1151,8 @@
 
         <FrameLayout
             android:id="@+id/tile63"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1170,8 +1168,8 @@
 
         <FrameLayout
             android:id="@+id/tile64"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1187,8 +1185,8 @@
 
         <FrameLayout
             android:id="@+id/tile65"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1204,8 +1202,8 @@
 
         <FrameLayout
             android:id="@+id/tile66"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1221,8 +1219,8 @@
 
         <FrameLayout
             android:id="@+id/tile67"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1238,8 +1236,8 @@
 
         <FrameLayout
             android:id="@+id/tile68"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1255,8 +1253,8 @@
 
         <FrameLayout
             android:id="@+id/tile69"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1272,8 +1270,8 @@
 
         <FrameLayout
             android:id="@+id/tile70"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1289,8 +1287,8 @@
 
         <FrameLayout
             android:id="@+id/tile71"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1306,8 +1304,8 @@
 
         <FrameLayout
             android:id="@+id/tile72"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1323,8 +1321,8 @@
 
         <FrameLayout
             android:id="@+id/tile73"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1340,8 +1338,8 @@
 
         <FrameLayout
             android:id="@+id/tile74"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1357,8 +1355,8 @@
 
         <FrameLayout
             android:id="@+id/tile75"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1374,8 +1372,8 @@
 
         <FrameLayout
             android:id="@+id/tile76"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1391,8 +1389,8 @@
 
         <FrameLayout
             android:id="@+id/tile77"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1408,8 +1406,8 @@
 
         <FrameLayout
             android:id="@+id/tile78"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1425,8 +1423,8 @@
 
         <FrameLayout
             android:id="@+id/tile79"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1442,8 +1440,8 @@
 
         <FrameLayout
             android:id="@+id/tile80"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1459,8 +1457,8 @@
 
         <FrameLayout
             android:id="@+id/tile81"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1476,8 +1474,8 @@
 
         <FrameLayout
             android:id="@+id/tile82"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1493,8 +1491,8 @@
 
         <FrameLayout
             android:id="@+id/tile83"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1510,8 +1508,8 @@
 
         <FrameLayout
             android:id="@+id/tile84"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1527,8 +1525,8 @@
 
         <FrameLayout
             android:id="@+id/tile85"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1544,8 +1542,8 @@
 
         <FrameLayout
             android:id="@+id/tile86"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1561,8 +1559,8 @@
 
         <FrameLayout
             android:id="@+id/tile87"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1578,8 +1576,8 @@
 
         <FrameLayout
             android:id="@+id/tile88"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1595,8 +1593,8 @@
 
         <FrameLayout
             android:id="@+id/tile89"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -1612,8 +1610,8 @@
 
         <FrameLayout
             android:id="@+id/tile90"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"

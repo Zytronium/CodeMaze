@@ -305,7 +305,7 @@ class Path11Activity : AppCompatActivity() {
 
         val intent = Intent(this@Path11Activity, MainActivity::class.java)
         startActivity(intent)
-//        finish()
+        finish()
 
     }
 

@@ -24,4 +24,8 @@
     <color name="glitch_block">#EE00FF</color>
     <color name="optimizer_piece">#6200FF</color>
     <color name="tile_bomb_block">#FFFFFF</color>
+    <color name="player_color_green">#A1FF5E</color>
+    <color name="player_color_orange">#FFB55C</color>
+    <color name="player_color_red">#FF5959</color>
+    <color name="player_color_dark_red">#4C0D10</color>
 </resources>

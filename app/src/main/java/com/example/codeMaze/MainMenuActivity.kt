@@ -17,7 +17,6 @@ class MainMenuActivity : AppCompatActivity() {
 //            // of cores on the device.
 //            .setExecutor(Executors.newFixedThreadPool(100))
 //            .build()
-//
 //        WorkManager.initialize(context, configuration)
 //        WindowCompat.setDecorFitsSystemWindows(window, true)
     }

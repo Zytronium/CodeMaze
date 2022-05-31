@@ -304,7 +304,8 @@ class Path14Activity : AppCompatActivity() {
         }
         val intent = Intent(this@Path14Activity, MainActivity::class.java)
         startActivity(intent)
-//        finish()
+        finish()
+
     }
 
     fun passPathTiles(tile: FrameLayout) {

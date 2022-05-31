@@ -305,7 +305,7 @@ class Path8Activity : AppCompatActivity() {
 
         val intent = Intent(this@Path8Activity, MainActivity::class.java)
         startActivity(intent)
-//        finish()
+        finish()
 
     }
 

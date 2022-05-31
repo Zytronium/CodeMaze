@@ -6,12 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.drawable.ColorDrawable
 import android.os.*
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.graphics.toColorInt
 import androidx.core.view.*
 import androidx.gridlayout.widget.GridLayout
 import com.example.codeMaze.Path1Tiles.TILE0
@@ -105,11 +107,11 @@ import com.example.codeMaze.Path1Tiles.TILE88
 import com.example.codeMaze.Path1Tiles.TILE89
 import com.example.codeMaze.Path1Tiles.TILE9
 import com.example.codeMaze.Path1Tiles.TILE90
+import java.lang.Float.POSITIVE_INFINITY
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class MainActivity : AppCompatActivity() {
-    private var playing: Boolean = true
+class MainActivity2 : AppCompatActivity() {
     private var timerStarted: Boolean = false
     private var playerColor: Int = Color.WHITE
     private var hasLost: Boolean = false
@@ -239,7 +241,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tile90: FrameLayout
 
     private lateinit var allTiles: Array<FrameLayout>
-//    private lateinit var path1: Array<FrameLayout>
+    private lateinit var path1: Array<FrameLayout>
 
     private var mainLayout: ViewGroup? = null
     private var xDelta = 0
@@ -261,7 +263,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main2)
 
         shared = getSharedPreferences("CodeMinigameDB", Context.MODE_PRIVATE)
 
@@ -374,19 +376,17 @@ class MainActivity : AppCompatActivity() {
 
         allTiles = arrayOf(tile1, tile2, tile3, tile0, tile4, tile5, tile16, tile7, tile71, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile17, tile6, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27, tile28, tile29, tile30, tile31, tile32, tile33, tile34, tile35, tile36, tile37, tile38, tile39, tile40, tile41, tile42, tile43, tile44, tile45, tile46, tile47, tile48, tile49, tile50, tile51, tile52, tile53, tile54, tile55, tile56, tile57, tile58, tile59, tile60, tile61, tile62, tile63, tile64, tile65, tile66, tile67, tile68, tile69, tile70, tile8, tile72, tile73, tile74, tile75, tile76, tile77, tile78, tile79, tile80, tile81, tile82, tile83, tile84, tile85, tile86, tile87, tile88, tile89, tile90)
         allTiles.shuffle()
-//        path1 = arrayOf(tile84, tile56, tile54, tile42, tile38, tile50, tile78, tile23, tile29, tile15, tile46, tile75, tile17, tile55, tile1, tile58, tile25, tile72, tile70, tile39, tile30, tile20, tile34, tile10, tile19, tile32, tile68, tile12, tile87, tile89, tile62, tile47, tile44, tile37, tile85, tile82, tile24, tile7, tile8, tile28, tile21, tile60, tile33, tile3, tile52)
+        path1 = arrayOf(tile84, tile56, tile54, tile42, tile38, tile50, tile78, tile23, tile29, tile15, tile46, tile75, tile17, tile55, tile1, tile58, tile25, tile72, tile70, tile39, tile30, tile20, tile34, tile10, tile19, tile32, tile68, tile12, tile87, tile89, tile62, tile47, tile44, tile37, tile85, tile82, tile24, tile7, tile8, tile28, tile21, tile60, tile33, tile3, tile52)
         when(difficulty) {
-            0 -> optiGoal = 3   //testing goal    // baby
-            1 -> optiGoal = (5..10).random()      // beginner
-            2 -> optiGoal = (10..15).random()     // easy
-            3 -> optiGoal = (15..25).random()     // normal
-            4 -> optiGoal = (30..60).random()     // hard
-            5 -> optiGoal = (65..135).random()    // experienced
-            6 -> optiGoal = (145..275).random()   // expert
-            7 -> optiGoal = (300..425).random()   // master
-            8 -> optiGoal = (445..777).random()   // deity
-            9 -> optiGoal = (800..1500).random()  // impossible
-            10 -> optiGoal = (2000..5000).random()// impossible++
+            0 -> optiGoal = 5 //testing goal // baby
+            1 -> optiGoal = (10..20).random() // beginner
+            2 -> optiGoal = (20..45).random()  // easy
+            3 -> optiGoal = (45..80).random() // medium
+            4 -> optiGoal = (85..170).random() // hard
+            5 -> optiGoal = (175..275).random() // harder
+            6 -> optiGoal = (300..550).random() // expert
+            7 -> optiGoal = (675..1500).random() // impossible
+            8 -> optiGoal = (2500..4000).random() // impossible++
         }
         mainLayout = findViewById<View>(R.id.main) as ConstraintLayout
         player.setOnTouchListener(onTouchListener())
@@ -708,6 +708,7 @@ class MainActivity : AppCompatActivity() {
         println(TILE56.toString())
         println(TILE57.toString())
         println(TILE58.toString())
+        println("58AAAAAA")
         println(TILE59.toString())
         println(TILE60.toString())
         println(TILE61.toString())
@@ -1168,16 +1169,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun generateFinishBlock() {
-            val newTile = selectRandomTile()
-            if (getBackgroundColor(newTile) == getColor(R.color.safe_block)) {
-                newTile.setBackgroundColor(getColor(R.color.white))
-                newTile.tag = "finish"
-                rainbow(newTile, 0f, 6, 2f, false)
-                newTile.alpha = 0.75f
-            } else {
-                generateFinishBlock()
-            }
-
+        val newTile = selectRandomTile()
+        if(getBackgroundColor(newTile) == getColor(R.color.safe_block)) {
+              newTile.setBackgroundColor(getColor(R.color.white))
+            newTile.tag = "finish"
+            rainbowEffect(newTile)
+            newTile.alpha = 0.75f
+        } else {
+            generateFinishBlock()
+        }
     }
 
     private fun generateFixBlock() {
@@ -1319,12 +1319,8 @@ class MainActivity : AppCompatActivity() {
 
             Toast.makeText(applicationContext, "You Lost.", Toast.LENGTH_LONG).show()
             postGameText.visibility = View.VISIBLE
-            postGameText.text = "Game Over"
-
-            if (hasLost && hasWon) {
-                postGameText.text = "You managed to win and loose simultaneously!"
-                rainbow(grid, 145f, 6, 1f, true)
-            }
+            postGameText.text =
+                "Game Over"
 
             vibrate(250)
 
@@ -1417,7 +1413,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun levelWin() {
         if(!hasWon) {
-            var repeatNum = 90
+            var repeatNum: Int = 90
             if(mode == 4) repeatNum = 91
             hasWon = true
             println("win!")
@@ -1436,6 +1432,7 @@ class MainActivity : AppCompatActivity() {
             optimizers = 0
             saveStats()
 //        loadNextLevel()
+//        recreate()
             Toast.makeText(applicationContext, "You Win!", Toast.LENGTH_LONG).show()
             postGameText.visibility = View.VISIBLE
 //            postGameText.text = "You won!\nTap your character to play again, or tap and hold to go to the main menu."
@@ -1444,10 +1441,6 @@ class MainActivity : AppCompatActivity() {
                 restartButton.visibility = View.VISIBLE
                 menuButton.visibility = View.VISIBLE
             // wins++
-            if (hasLost && hasWon) {
-                postGameText.text = "You managed to win and loose simultaneously!"
-                rainbow(grid, 345f, 5, 1f, true)
-            }
         }
     }
 
@@ -1457,7 +1450,7 @@ class MainActivity : AppCompatActivity() {
                 tile.tag = "rainbow"
                 tile.alpha = 0.75f
                 vibrate(10)
-                rainbow(tile, 0f, 6, 2f, false)
+                rainbowEffect(tile)
             } else rainbowAll()
     }
 
@@ -1566,12 +1559,12 @@ class MainActivity : AppCompatActivity() {
             val tileX = frameLayout.x
             val tileY = frameLayout.y
 //            println(frameLayout.height.toString())
-            if(playerX <= (tileX + 165)) { // up = left | left | Johnathan phone: +115 | Austin phone before: same | me before: + 165f | me: 165 | Xavier: 165f
-                if(playerX >= (tileX - 90f)) { // up = left (remember number is negative rn) | right | Johnathan phone: -70 | Austin phone before: same | me before: - 80f | me: -90 | Xavier: -90f
+            if(playerX <= (tileX + 110f)) { // up = left | left | Johnathan phone: +115 | Austin phone before: same | me before: + 165f | me: 165
+                if(playerX >= (tileX - 65f)) { // up = left (remember number is negative rn) | right | Johnathan phone: -70 | Austin phone before: same | me before: - 80f | me: -90
 //                    println("X collision detected.")
 //                    println("player's X is $playerX and tile's X is $tileX")
-                    if(playerY >= (tileY + 102)) { // up = up | bottom | Johnathan phone: -25 | Austin phone before: 102f | me before: + 65f | me: 102 | Xavier: +85f
-                        if(playerY <= (tileY + 310f)) { // up = up | top | Johnathan phone: +120 | Austin phone before: 303f | me before + 270f | me: 310 | Xavier: +285f
+                    if(playerY >= (tileY + 60)) { // up = up | bottom | Johnathan phone: -25 | Austin phone before: 102f | me before: + 65f | me: 102
+                        if(playerY <= (tileY + 205f)) { // up = up | top | Johnathan phone: +120 | Austin phone before: 303f | me before + 270f | me: 310
 //                            println("Y collision detected.")
 //                            println("player's Y is $playerY and tile's Y is $tileY")
 //                            checkIssues()
@@ -1752,15 +1745,306 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun rainbow(target: View, hue: Float, speed: Long, strength: Float, ignoreHasLost: Boolean) {
-        if((playing && !hasLost) || (playing && ignoreHasLost)) {
-            var h = hue
-            if (h >= 360f) h = 0f
-            target.setBackgroundColor(Color.HSVToColor(floatArrayOf(h, 100f, 100f)))
-            Handler(Looper.getMainLooper()).postDelayed({
-                rainbow(target, (h + strength), speed, strength, ignoreHasLost)
-            }, (speed))
-        }
+    private fun rainbowEffect(theScreen: FrameLayout) {
+
+        val rainbow0 = "#FF0000"
+        val rainbow5 = "#ff1500"
+        val rainbow10 = "#ff2a00"
+        val rainbow15 = "#ff4000"
+        val rainbow20 = "#ff5500"
+        val rainbow25 = "#ff6a00"
+        val rainbow30 = "#ff8000"
+        val rainbow35 = "#ff9500"
+        val rainbow40 = "#ffaa00"
+        val rainbow45 = "#ffbf00"
+        val rainbow50 = "#ffd500"// Fiftey
+        val rainbow55 = "#ffea00"
+        val rainbow60 = "#ffff00"
+        val rainbow65 = "#eaff00"
+        val rainbow70 = "#d4ff00"
+        val rainbow75 = "#bfff00"
+        val rainbow80 = "#aaff00"
+        val rainbow85 = "#95ff00"
+        val rainbow90 = "#80ff00"
+        val rainbow95 = "#6aff00"
+        val rainbow100 = "#55ff00"
+        val rainbow105 = "#40ff00"
+        val rainbow110 = "#2bff00"
+        val rainbow115 = "#15ff00"
+        val rainbow120 = "#00ff00"
+        val rainbow125 = "#00ff15"
+        val rainbow130 = "#00ff2a"
+        val rainbow135 = "#00ff40"
+        val rainbow140 = "#00ff55"
+        val rainbow145 = "#00ff6a"
+        val rainbow150 = "#00ff80"
+        val rainbow155 = "#00ff95"
+        val rainbow160 = "#00ffaa"
+        val rainbow165 = "#00ffbf"
+        val rainbow170 = "#00ffd5"
+        val rainbow175 = "#00ffea"
+        val rainbow180 = "#00ffff"
+        val rainbow185 = "#00eaff"
+        val rainbow190 = "#00d4ff"
+        val rainbow195 = "#00bfff"
+        val rainbow200 = "#00aaff"
+        val rainbow205 = "#0095ff"
+        val rainbow210 = "#0080ff"
+        val rainbow215 = "#006aff"
+        val rainbow220 = "#0055ff"
+        val rainbow225 = "#0040ff"
+        val rainbow230 = "#002aff"
+        val rainbow235 = "#0015ff"
+        val rainbow240 = "#0000ff"
+        val rainbow245 = "#1500ff"
+        val rainbow250 = "#2b00ff"//no crying until 2:50
+        val rainbow255 = "#4000ff"
+        val rainbow260 = "#5500ff"
+        val rainbow265 = "#6a00ff"
+        val rainbow270 = "#8000ff"
+        val rainbow275 = "#9500ff"
+        val rainbow280 = "#aa00ff"
+        val rainbow285 = "#bf00ff"
+        val rainbow290 = "#d400ff"
+        val rainbow295 = "#ea00ff"
+        val rainbow300 = "#ff00ff"
+        val rainbow305 = "#ff00ea"
+        val rainbow310 = "#ff00d4"
+        val rainbow315 = "#ff00bf"
+        val rainbow320 = "#ff00aa"
+        val rainbow325 = "#ff0095"
+        val rainbow330 = "#ff0080"
+        val rainbow335 = "#ff006a"
+        val rainbow340 = "#ff0055"
+        val rainbow345 = "#ff0040"
+        val rainbow350 = "#ff002b"
+        val rainbow355 = "#ff0015"
+
+        theScreen.setBackgroundColor(rainbow0.toColorInt())
+
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            theScreen.setBackgroundColor(rainbow5.toColorInt())
+            handler.postDelayed({
+                theScreen.setBackgroundColor(rainbow10.toColorInt())
+                handler.postDelayed({
+                    theScreen.setBackgroundColor(rainbow15.toColorInt())
+                    handler.postDelayed({
+                        theScreen.setBackgroundColor(rainbow15.toColorInt())
+                        handler.postDelayed({
+                            theScreen.setBackgroundColor(rainbow20.toColorInt())
+                            handler.postDelayed({
+                                theScreen.setBackgroundColor(rainbow25.toColorInt())
+                                handler.postDelayed({
+                                    theScreen.setBackgroundColor(rainbow30.toColorInt())
+                                    handler.postDelayed({
+                                        theScreen.setBackgroundColor(rainbow35.toColorInt())
+                                        handler.postDelayed({
+                                            theScreen.setBackgroundColor(rainbow40.toColorInt())
+                                            handler.postDelayed({
+                                                theScreen.setBackgroundColor(rainbow45.toColorInt())
+                                                handler.postDelayed({
+                                                    theScreen.setBackgroundColor(rainbow50.toColorInt())
+                                                    handler.postDelayed({
+                                                        theScreen.setBackgroundColor(rainbow55.toColorInt())
+                                                        handler.postDelayed({
+                                                            theScreen.setBackgroundColor(rainbow60.toColorInt())
+                                                            handler.postDelayed({
+                                                                theScreen.setBackgroundColor(rainbow65.toColorInt())
+                                                                handler.postDelayed({
+                                                                    theScreen.setBackgroundColor(rainbow70.toColorInt())
+                                                                    handler.postDelayed({
+                                                                        theScreen.setBackgroundColor(rainbow75.toColorInt())
+                                                                        handler.postDelayed({
+                                                                            theScreen.setBackgroundColor(rainbow80.toColorInt())
+                                                                            handler.postDelayed({
+                                                                                theScreen.setBackgroundColor(rainbow85.toColorInt())
+                                                                                handler.postDelayed({
+                                                                                    theScreen.setBackgroundColor(rainbow90.toColorInt())
+                                                                                    handler.postDelayed({
+                                                                                        theScreen.setBackgroundColor(rainbow95.toColorInt())
+                                                                                        handler.postDelayed({
+                                                                                            theScreen.setBackgroundColor(rainbow100.toColorInt())
+                                                                                            handler.postDelayed({
+                                                                                                theScreen.setBackgroundColor(rainbow105.toColorInt())
+                                                                                                handler.postDelayed({
+                                                                                                    theScreen.setBackgroundColor(rainbow110.toColorInt())
+                                                                                                    handler.postDelayed({
+                                                                                                        theScreen.setBackgroundColor(rainbow115.toColorInt())
+                                                                                                        handler.postDelayed({
+                                                                                                            theScreen.setBackgroundColor(rainbow120.toColorInt())
+                                                                                                            handler.postDelayed({
+                                                                                                                theScreen.setBackgroundColor(rainbow125.toColorInt())
+                                                                                                                handler.postDelayed({
+                                                                                                                    theScreen.setBackgroundColor(rainbow130.toColorInt())
+                                                                                                                    handler.postDelayed({
+                                                                                                                        theScreen.setBackgroundColor(rainbow135.toColorInt())
+                                                                                                                        handler.postDelayed({
+                                                                                                                            theScreen.setBackgroundColor(rainbow140.toColorInt())
+                                                                                                                            handler.postDelayed({
+                                                                                                                                theScreen.setBackgroundColor(rainbow145.toColorInt())
+                                                                                                                                handler.postDelayed({
+                                                                                                                                    theScreen.setBackgroundColor(rainbow150.toColorInt())
+                                                                                                                                    handler.postDelayed({
+                                                                                                                                        theScreen.setBackgroundColor(rainbow155.toColorInt())
+                                                                                                                                        handler.postDelayed({
+                                                                                                                                            theScreen.setBackgroundColor(rainbow160.toColorInt())
+                                                                                                                                            handler.postDelayed({
+                                                                                                                                                theScreen.setBackgroundColor(rainbow165.toColorInt())
+                                                                                                                                                handler.postDelayed({
+                                                                                                                                                    theScreen.setBackgroundColor(rainbow170.toColorInt())
+                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                        theScreen.setBackgroundColor(rainbow175.toColorInt())
+                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                            theScreen.setBackgroundColor(rainbow180.toColorInt())
+                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                theScreen.setBackgroundColor(rainbow185.toColorInt())
+                                                                                                                                                                handler.postDelayed({
+                                                                                                                                                                    theScreen.setBackgroundColor(rainbow190.toColorInt())
+                                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                                        theScreen.setBackgroundColor(rainbow195.toColorInt())
+                                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                                            theScreen.setBackgroundColor(rainbow200.toColorInt())
+                                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                                theScreen.setBackgroundColor(rainbow205.toColorInt())
+                                                                                                                                                                                handler.postDelayed({
+                                                                                                                                                                                    theScreen.setBackgroundColor(rainbow210.toColorInt())
+                                                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                                                        theScreen.setBackgroundColor(rainbow215.toColorInt())
+                                                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                                                            theScreen.setBackgroundColor(rainbow220.toColorInt())
+                                                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                                                theScreen.setBackgroundColor(rainbow225.toColorInt())
+                                                                                                                                                                                                handler.postDelayed({
+                                                                                                                                                                                                    theScreen.setBackgroundColor(rainbow230.toColorInt())
+                                                                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                                                                        theScreen.setBackgroundColor(rainbow235.toColorInt())
+                                                                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                                                                            theScreen.setBackgroundColor(rainbow240.toColorInt())
+                                                                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                                                                theScreen.setBackgroundColor(rainbow245.toColorInt())
+                                                                                                                                                                                                                handler.postDelayed({
+                                                                                                                                                                                                                    theScreen.setBackgroundColor(rainbow250.toColorInt())// K its 2:50 U can cry now.
+                                                                                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                                                                                        theScreen.setBackgroundColor(rainbow255.toColorInt())
+                                                                                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                                                                                            theScreen.setBackgroundColor(rainbow260.toColorInt())
+                                                                                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                                                                                theScreen.setBackgroundColor(rainbow265.toColorInt())
+                                                                                                                                                                                                                                handler.postDelayed({
+                                                                                                                                                                                                                                    theScreen.setBackgroundColor(rainbow270.toColorInt())
+                                                                                                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                                                                                                        theScreen.setBackgroundColor(rainbow275.toColorInt())
+                                                                                                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                                                                                                            theScreen.setBackgroundColor(rainbow280.toColorInt())
+                                                                                                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                                                                                                theScreen.setBackgroundColor(rainbow285.toColorInt())
+                                                                                                                                                                                                                                                handler.postDelayed({
+                                                                                                                                                                                                                                                    theScreen.setBackgroundColor(rainbow290.toColorInt())
+                                                                                                                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                                                                                                                        theScreen.setBackgroundColor(rainbow295.toColorInt())
+                                                                                                                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                                                                                                                            theScreen.setBackgroundColor(rainbow300.toColorInt())
+                                                                                                                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                                                                                                                theScreen.setBackgroundColor(rainbow305.toColorInt())
+                                                                                                                                                                                                                                                                handler.postDelayed({
+                                                                                                                                                                                                                                                                    theScreen.setBackgroundColor(rainbow310.toColorInt())
+                                                                                                                                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                                                                                                                                        theScreen.setBackgroundColor(rainbow315.toColorInt())
+                                                                                                                                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                                                                                                                                            theScreen.setBackgroundColor(rainbow320.toColorInt())
+                                                                                                                                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                                                                                                                                theScreen.setBackgroundColor(rainbow325.toColorInt())
+                                                                                                                                                                                                                                                                                handler.postDelayed({
+                                                                                                                                                                                                                                                                                    theScreen.setBackgroundColor(rainbow330.toColorInt())
+                                                                                                                                                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                                                                                                                                                        theScreen.setBackgroundColor(rainbow330.toColorInt())
+                                                                                                                                                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                                                                                                                                                            theScreen.setBackgroundColor(rainbow335.toColorInt())
+                                                                                                                                                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                                                                                                                                                theScreen.setBackgroundColor(rainbow340.toColorInt())
+                                                                                                                                                                                                                                                                                                handler.postDelayed({
+                                                                                                                                                                                                                                                                                                    theScreen.setBackgroundColor(rainbow345.toColorInt())
+                                                                                                                                                                                                                                                                                                    handler.postDelayed({
+                                                                                                                                                                                                                                                                                                        theScreen.setBackgroundColor(rainbow350.toColorInt())
+                                                                                                                                                                                                                                                                                                        handler.postDelayed({
+                                                                                                                                                                                                                                                                                                            theScreen.setBackgroundColor(rainbow355.toColorInt())
+                                                                                                                                                                                                                                                                                                            handler.postDelayed({
+                                                                                                                                                                                                                                                                                                                rainbowEffect(theScreen)
+                                                                                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                                }, 35)
+                                                                                                                                                                                            }, 35)
+                                                                                                                                                                                        }, 35)
+                                                                                                                                                                                    }, 35)
+                                                                                                                                                                                }, 35)
+                                                                                                                                                                            }, 35)
+                                                                                                                                                                        }, 35)
+                                                                                                                                                                    }, 35)
+                                                                                                                                                                }, 35)
+                                                                                                                                                            }, 35)
+                                                                                                                                                        }, 35)
+                                                                                                                                                    }, 35)
+                                                                                                                                                }, 35)
+                                                                                                                                            }, 35)
+                                                                                                                                        }, 35)
+                                                                                                                                    }, 35)
+                                                                                                                                }, 35)
+                                                                                                                            }, 35)
+                                                                                                                        }, 35)
+                                                                                                                    }, 35)
+                                                                                                                }, 35)
+                                                                                                            }, 35)
+                                                                                                        }, 35)
+                                                                                                    }, 35)
+                                                                                                }, 35)
+                                                                                            }, 35)
+                                                                                        }, 35)
+                                                                                    }, 35)
+                                                                                }, 35)
+                                                                            }, 35)
+                                                                        }, 35)
+                                                                    }, 35)
+                                                                }, 35)
+                                                            }, 35)
+                                                        }, 35)
+                                                    }, 35)
+                                                }, 35)
+                                            }, 35)
+                                        }, 35)
+                                    }, 35)
+                                }, 35)
+                            }, 35)
+                        }, 35)
+                    }, 35)
+                }, 35)
+            }, 35)
+        }, 35)
     }
 
     fun goToMenu(view: View) {
@@ -1856,8 +2140,7 @@ class MainActivity : AppCompatActivity() {
         TILE89 = false
         TILE90 = false
         vibrate(5)
-        val intent = Intent(this@MainActivity, MainMenuActivity::class.java)
-        playing = false
+        val intent = Intent(this@MainActivity2, MainMenuActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -1957,8 +2240,7 @@ class MainActivity : AppCompatActivity() {
         TILE89 = false
         TILE90 = false
         vibrate(5)
-        val intent = Intent(this@MainActivity, StartActivity::class.java)
-        playing = false
+        val intent = Intent(this@MainActivity2, StartActivity::class.java)
         startActivity(intent)
         finish()
     }
