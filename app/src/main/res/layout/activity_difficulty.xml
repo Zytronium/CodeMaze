@@ -9,6 +9,7 @@
     tools:context=".DifficultyActivity">
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_semibold"
@@ -23,162 +24,253 @@
 
     <LinearLayout
         android:id="@+id/menu"
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.40">
 
         <LinearLayout
-            android:id="@+id/row1"
-            android:padding="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_beginner"
-                android:layout_width="190dp"
-                android:layout_height="85dp"
-                android:backgroundTint="#00AFBF"
-                android:onClick="beginner"
-                android:padding="5dp"
-                android:text="BEGINNER"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+            <LinearLayout
+                android:id="@+id/row1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="3dp">
 
-            <Button
-                android:id="@+id/btn_medium"
-                android:layout_width="190dp"
-                android:layout_height="85dp"
-                android:backgroundTint="#FFF200"
-                android:onClick="medium"
-                android:padding="5dp"
-                android:textColor="@color/black"
-                android:text="NORMAL"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+                <Button
+                    android:id="@+id/btn_beginner"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#00AFBF"
+                    android:onClick="beginner"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="BEGINNER"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
 
-            <Button
-                android:id="@+id/btn_experienced"
-                android:layout_width="190dp"
-                android:layout_height="85dp"
-                android:backgroundTint="#FF1500"
-                android:onClick="experienced"
-                android:textColor="@color/black"
-                android:padding="5dp"
-                android:text="EXPERIENCED"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+                <Button
+                    android:id="@+id/btn_medium"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#FFF200"
+                    android:onClick="medium"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="NORMAL"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
 
-            <Button
-                android:id="@+id/btn_master"
-                android:layout_width="190dp"
-                android:layout_height="85dp"
-                android:backgroundTint="#8000FF"
-                android:onClick="master"
-                android:textColor="@color/black"
-                android:padding="5dp"
-                android:text="MASTER"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+                <Button
+                    android:id="@+id/btn_experienced"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#FF1500"
+                    android:onClick="experienced"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="EXPERIENCED"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
 
-            <Button
-                android:id="@+id/btn_impossible"
-                android:layout_width="190dp"
-                android:layout_height="85dp"
-                android:backgroundTint="@color/error_block"
-                android:onClick="impossible"
-                android:padding="5dp"
-                android:textColor="@color/black"
-                android:text="IMPOSSIBLE"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+                <Button
+                    android:id="@+id/btn_master"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#9D00FF"
+                    android:onClick="master"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="MASTER"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+                <Button
+                    android:id="@+id/btn_impossible"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="@color/error_block"
+                    android:onClick="impossible"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="IMPOSSIBLE"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/row2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="3dp">
+
+                <Button
+                    android:id="@+id/btn_easy"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="@color/green"
+                    android:onClick="easy"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="EASY"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+                <Button
+                    android:id="@+id/btn_hard"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#FF7700"
+                    android:onClick="hard"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="HARD"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+                <Button
+                    android:id="@+id/btn_expert"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#FF0066"
+                    android:onClick="expert"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="EXPERT"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+                <Button
+                    android:id="@+id/btn_deity"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="@color/blue"
+                    android:onClick="deity"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="DEITY"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+                <Button
+                    android:id="@+id/btn_impossiblePlus"
+                    android:layout_width="190dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="@color/black"
+                    android:onClick="impossiblePlus"
+                    android:padding="5dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:text="IMPOSSIBLE+"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="28dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/row2"
-        android:padding="3dp"
+        <Button
+            android:id="@+id/btn_custard"
+            android:layout_width="350dp"
+            android:layout_height="85dp"
+            android:backgroundTint="@color/glow_teal"
+            android:onClick="custom"
+            android:padding="10dp"
+            android:scaleX="0.95"
+            android:scaleY="0.95"
+            android:text="CUSTOM"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:cornerRadius="28dp"
+            tools:targetApi="o" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="8sp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeStepGranularity="2sp"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:paddingStart="15dp"
+        android:paddingTop="1dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="1dp"
+        android:text="@string/diff_text"
+        android:textColor="@color/glow_teal"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@id/startBtn"
+        app:layout_constraintEnd_toEndOf="@+id/menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_easy"
-            android:layout_width="190dp"
-            android:layout_height="85dp"
-            android:backgroundTint="@color/green"
-            android:onClick="easy"
-            android:padding="5dp"
-            android:text="EASY"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:cornerRadius="28dp" />
-
-        <Button
-            android:id="@+id/btn_hard"
-            android:layout_width="190dp"
-            android:layout_height="85dp"
-            android:backgroundTint="#FF7700"
-            android:onClick="hard"
-            android:padding="5dp"
-            android:text="HARD"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:cornerRadius="28dp" />
-
-        <Button
-            android:id="@+id/btn_expert"
-            android:layout_width="190dp"
-            android:layout_height="85dp"
-            android:backgroundTint="#FF0066"
-            android:onClick="expert"
-            android:padding="5dp"
-            android:textColor="@color/black"
-            android:text="EXPERT"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:cornerRadius="28dp" />
-
-        <Button
-            android:id="@+id/btn_deity"
-            android:layout_width="190dp"
-            android:layout_height="85dp"
-            android:backgroundTint="@color/blue"
-            android:onClick="deity"
-            android:textColor="@color/black"
-            android:padding="5dp"
-            android:text="DEITY"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:cornerRadius="28dp" />
-        <Button
-            android:id="@+id/btn_impossiblePlus"
-            android:layout_width="190dp"
-            android:layout_height="85dp"
-            android:backgroundTint="@color/black"
-            android:onClick="impossiblePlus"
-            android:padding="5dp"
-            android:text="IMPOSSIBLE+"
-            android:textColor="@color/red"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:cornerRadius="28dp" />
-
-    </LinearLayout>
-
-    </LinearLayout>
+        android:backgroundTint="#3F4AC6"
+        android:enabled="false"
+        android:onClick="start"
+        android:padding="19dp"
+        android:text="Start Game"
+        android:textColor="#B58EFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu"
+        app:layout_constraintVertical_bias="0.85"
+        tools:backgroundTint="@color/blue"
+        tools:textColor="@color/glow_teal" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

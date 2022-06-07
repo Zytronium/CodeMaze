@@ -5,12 +5,28 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import java.util.concurrent.Executors
 
 class MainMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
+
+        val windowInsetsController =
+            ViewCompat.getWindowInsetsController(window.decorView) ?: return
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+        windowInsetsController.hide(WindowInsetsCompat.Type.displayCutout())
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+
 //        val configuration = Configuration.Builder()
 //            // Defines a thread pool with 10 threads.
 //            // Ideally you would choose a number that is dynamic based on the number
@@ -19,6 +35,10 @@ class MainMenuActivity : AppCompatActivity() {
 //            .build()
 //        WorkManager.initialize(context, configuration)
 //        WindowCompat.setDecorFitsSystemWindows(window, true)
+    }
+
+    object GameMode {
+        var gamemode: Int = 1
     }
 
     fun classic(view: View) {
@@ -31,10 +51,6 @@ class MainMenuActivity : AppCompatActivity() {
         GameMode.gamemode = 5
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
-    }
-
-    object GameMode {
-        var gamemode: Int = 1
     }
 
     fun apocalypse(view: View) {
@@ -79,6 +95,12 @@ class MainMenuActivity : AppCompatActivity() {
 
     fun speedMaze(view: View) {
         GameMode.gamemode = 2
+        val intent = Intent(this@MainMenuActivity, StartActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun corruption(view: View) {
+        GameMode.gamemode = 9
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
     }

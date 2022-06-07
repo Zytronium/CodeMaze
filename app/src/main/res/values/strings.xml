@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">CodeMaze</string>>
-    <string name="issues">Issues: %s</string>
+    <string name="issues">Issues: %s / %s</string>
     <string name="optimizers">Optimizers: %s</string>
     <string name="optimizers_and_goal">Optimizers: %s/%s</string>
     <string name="glitch_score">Score: %s</string>
     <string name="speed_score">Time: %s</string>
     <string name="path">%s</string>
+    <string name="diff_text">%s</string>
 
     <string name="title_activity_settings">SettingzActivity</string>
 

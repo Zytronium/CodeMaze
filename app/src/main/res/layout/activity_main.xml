@@ -90,10 +90,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="12">
 
@@ -107,10 +107,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="4">
 
@@ -124,10 +124,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="9">
 
@@ -141,10 +141,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="11">
 
@@ -158,10 +158,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="5">
 
@@ -175,10 +175,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="6">
 
@@ -192,10 +192,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="6">
 
@@ -209,10 +209,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="11">
 
@@ -226,10 +226,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="11">
 
@@ -243,10 +243,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="0">
 
@@ -260,10 +260,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="5">
 
@@ -277,10 +277,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="6">
 
@@ -294,10 +294,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="3">
 
@@ -311,10 +311,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="1">
 
@@ -328,10 +328,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="2">
 
@@ -345,10 +345,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="2">
 
@@ -362,10 +362,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="0">
 
@@ -379,10 +379,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="5">
 
@@ -396,10 +396,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="9">
 
@@ -413,10 +413,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="5">
 
@@ -430,10 +430,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="8">
 
@@ -447,10 +447,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="9">
 
@@ -464,10 +464,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="11">
 
@@ -481,10 +481,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="1">
 
@@ -498,10 +498,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="11">
 
@@ -515,10 +515,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="6">
 
@@ -532,10 +532,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="8">
 
@@ -549,10 +549,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="10">
 
@@ -566,10 +566,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="10">
 
@@ -583,10 +583,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="1">
 
@@ -600,10 +600,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="8">
 
@@ -617,10 +617,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="10">
 
@@ -634,10 +634,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="4">
 
@@ -651,10 +651,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="10">
 
@@ -668,10 +668,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="5">
 
@@ -685,10 +685,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="2">
 
@@ -702,10 +702,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="9">
 
@@ -719,10 +719,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="8">
 
@@ -736,10 +736,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="1">
 
@@ -753,10 +753,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="8">
 
@@ -770,10 +770,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="3">
 
@@ -787,10 +787,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="12">
 
@@ -804,10 +804,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="1">
 
@@ -821,10 +821,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="12">
 
@@ -838,10 +838,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="8">
 
@@ -855,10 +855,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="6">
 
@@ -872,10 +872,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="3">
 
@@ -889,10 +889,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="7">
 
@@ -906,10 +906,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="2">
 
@@ -923,10 +923,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="4">
 
@@ -940,10 +940,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="10">
 
@@ -957,10 +957,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="12">
 
@@ -974,10 +974,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="12" />
 
@@ -989,10 +989,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="7">
 
@@ -1006,10 +1006,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="7">
 
@@ -1023,10 +1023,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="4">
 
@@ -1040,10 +1040,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="0">
 
@@ -1057,10 +1057,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="6">
 
@@ -1074,10 +1074,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="5">
 
@@ -1091,10 +1091,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="5">
 
@@ -1108,10 +1108,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="10">
 
@@ -1125,10 +1125,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="1"
             app:layout_row="2">
 
@@ -1142,10 +1142,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="6">
 
@@ -1159,10 +1159,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="0">
 
@@ -1176,10 +1176,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="8">
 
@@ -1193,10 +1193,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="4">
 
@@ -1210,10 +1210,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="9">
 
@@ -1227,10 +1227,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="12">
 
@@ -1244,10 +1244,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="3">
 
@@ -1261,10 +1261,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="7">
 
@@ -1278,10 +1278,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="7">
 
@@ -1295,10 +1295,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="11">
 
@@ -1312,10 +1312,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="7">
 
@@ -1329,10 +1329,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="11">
 
@@ -1346,10 +1346,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="5"
             app:layout_row="12">
 
@@ -1363,10 +1363,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="2"
             app:layout_row="4">
 
@@ -1380,10 +1380,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="2">
 
@@ -1397,10 +1397,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="0">
 
@@ -1414,10 +1414,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="1">
 
@@ -1431,10 +1431,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="0">
 
@@ -1448,10 +1448,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="3">
 
@@ -1465,10 +1465,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="9">
 
@@ -1482,10 +1482,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="10">
 
@@ -1499,10 +1499,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="7">
 
@@ -1516,10 +1516,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="2">
 
@@ -1533,10 +1533,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="4"
             app:layout_row="9">
 
@@ -1550,10 +1550,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="3"
             app:layout_row="0">
 
@@ -1567,10 +1567,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="3">
 
@@ -1584,10 +1584,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="3">
 
@@ -1601,10 +1601,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="6"
             app:layout_row="4">
 
@@ -1618,10 +1618,10 @@
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
             android:foregroundGravity="center"
-            android:foregroundTint="#9C27B0"
+            android:foregroundTint="@color/optimizer_piece"
             android:foregroundTintMode="src_in"
-            android:scaleX="1.03125"
-            android:scaleY="1.03125"
+            android:scaleX="1.0312"
+            android:scaleY="1.0312"
             app:layout_column="0"
             app:layout_row="1">
 
