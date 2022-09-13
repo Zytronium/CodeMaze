@@ -12,7 +12,6 @@ import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.*
 import androidx.gridlayout.widget.GridLayout
 import com.example.codeMaze.Path1Tiles.TILE0
@@ -110,14 +109,17 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class MainActivity : AppCompatActivity() {
+    // 1 = classic; 2 = speed maze; 3 = speedrun;
+    // 4 = glitch; 5 = pain mode; 6 = infinite;
+    // 7 = sudden death; 8 = no maze; 9 = corruption
     private var loopTime = 1000
     private var playing: Boolean = true
     private var timerStarted: Boolean = false
     private var playerColor: Int = Color.WHITE
     private var hasLost: Boolean = false
     private var hasWon: Boolean = false
-    private var mode: Int = MainMenuActivity.GameMode.gamemode // 1 = classic; 2 = speed maze; 3 = speedrun; 4 = glitch; 5 = pain mode; 6 = infinite; 7 = sudden death; 8 = no maze; 9 = corruption
-    private var difficulty: Int = DifficultyActivity.Difficulty.difficulty //0 //(1..4).random() // 0 - baby | 1 - beginner | 2 - easy | 3 - medium | 4 - hard | 5 - harder | 6 - expert | 7 - impossible | 8 - impossible++
+    /* */ private var mode: MainMenuActivity.Gamemode = MainMenuActivity.GameGm.gamemode // 1 = classic; 2 = speed maze; 3 = speedrun; 4 = glitch; 5 = pain mode; 6 = infinite; 7 = sudden death; 8 = no maze; 9 = corruption
+    /* */ private var difficulty: Int = DifficultyActivity.Difficulty.difficulty //0 //(1..4).random() // 0 - baby | 1 - beginner | 2 - easy | 3 - medium | 4 - hard | 5 - harder | 6 - expert | 7 - impossible | 8 - impossible++
     private var alphaUp: Boolean = true
     private var alphaDown: Boolean = false
     private var playerShaking: Boolean = false
@@ -132,10 +134,10 @@ class MainActivity : AppCompatActivity() {
 
     // ~ Stats: ~
     private var issues: Int = 0
-    private var level: Int = 1
+    /* */ private var level: Int = 1
     private var optimizers: Int = 0
     private var time: Double = 0.00
-    private var totalOptimizers: Int = 0
+    /* */ private var totalOptimizers: Int = 0
     private var optiGoal: Int = 25
     private var maxIssues = 10
     // ~ Stats ~
@@ -416,11 +418,11 @@ class MainActivity : AppCompatActivity() {
                 optiGoal = (30..60).random()     // hard
             }
             5 -> {
-                maxIssues = 9
+                maxIssues = 9 // make 10 maybe?
                 optiGoal = (65..135).random()    // experienced
             }
             6 -> {
-                maxIssues = 8
+                maxIssues = 8 // make 9 maybe?
                 optiGoal = (145..275).random()   // expert
             }
             7 -> {
@@ -443,11 +445,11 @@ class MainActivity : AppCompatActivity() {
                 maxIssues = 10; optiGoal = 25
             }
         }
-        if(mode == 2) maxIssues = 5
+        if(mode == MainMenuActivity.Gamemode.SpeedMaze) maxIssues = 5
         mainLayout = findViewById<View>(R.id.main) as ConstraintLayout
         player.setOnTouchListener(onTouchListener())
 
-        if(mode == 7) screen.setBackgroundResource(R.drawable.death_gradient)
+        if(mode == MainMenuActivity.Gamemode.SuddenDeath) screen.setBackgroundResource(R.drawable.death_gradient)
 
         val w: Window = window
         w.setFlags(
@@ -469,16 +471,16 @@ class MainActivity : AppCompatActivity() {
         checkIssues()
         generateTiles()
 
-        if (mode == 9 ) {
+        if (mode == MainMenuActivity.Gamemode.Corruption ) {
             allTiles.forEach { the: FrameLayout -> loopCorrupt(the) }
         }
 
-        if(mode == 5) {
+        if(mode == MainMenuActivity.Gamemode.PainMode) {
             loopShake()
             alphaFluctuate()
         }
 
-        if(mode == 3) {
+        if(mode == MainMenuActivity.Gamemode.Apocalypse) {
             loopError()
 
             when(difficulty) {
@@ -497,9 +499,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if(mode == 2) optiText.text = getString(R.string.speed_score, time.toString())
+        if(mode == MainMenuActivity.Gamemode.SpeedMaze) optiText.text = getString(R.string.speed_score, time.toString())
 
-        if (mode == 4) {
+        if (mode == MainMenuActivity.Gamemode.Glitch) {
             optiText.text = getString(R.string.glitch_score, optimizers.toString())
             val handler = Handler(Looper.getMainLooper())
             handler.postDelayed({
@@ -531,7 +533,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun startTimer() {
         time += 0.05
-//        time.round
         val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
         println(decimal.toString())
         optiText.text = getString(R.string.speed_score, decimal.toString())
@@ -1044,22 +1045,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun generateTiles() {
-        if (mode != 8) {
+        if (mode != MainMenuActivity.Gamemode.NoMaze) {
             generateLayout1()
-            if(mode != 2) {
+            if(mode != MainMenuActivity.Gamemode.SpeedMaze) {
                 generateFixes((6..10).random())
-                if (mode != 4) {
+                if (mode != MainMenuActivity.Gamemode.Glitch) {
                     generateOptimizers(6)
-                } else if (mode == 4) highlightRandomTile(getColor(R.color.glitch_block))
+                } else if (mode == MainMenuActivity.Gamemode.Glitch) highlightRandomTile(getColor(R.color.glitch_block))
             }
             generateErrors((21..25).random())
             generateCrashes((5..8).random())
-        } else if (mode == 8) {
+        } else if (mode == MainMenuActivity.Gamemode.NoMaze) {
             generateLayout2()
             generateFixes((14..21).random())
-            if (mode != 4) {
+            if (mode != MainMenuActivity.Gamemode.Glitch) {
                 generateOptimizers(3)
-            } else if (mode == 4) highlightRandomTile(getColor(R.color.glitch_block))
+            } else if (mode == MainMenuActivity.Gamemode.Glitch) highlightRandomTile(getColor(R.color.glitch_block))
             generateErrors((15..23).random())
             generateCrashes((2..7).random())
         }
@@ -1195,39 +1196,39 @@ class MainActivity : AppCompatActivity() {
     private fun updateIssues() {
         issuesText.text = getString(R.string.issues, issues.toString(), maxIssues.toString())
         when(issues) {
-            in 0..1 -> {
+            in 0..(maxIssues*0.125).toInt() -> {
                 playerColor = getColor(R.color.glow_teal)
                 player.colorFilter = null
                 playerShaking = false
             }
-            in 2..3 -> {
+            in (maxIssues*0.125).toInt()..(maxIssues*0.315).toInt() -> {
                 playerColor = getColor(R.color.player_color_green)
                 player.setColorFilter(playerColor) //green
                 playerShaking = false
                  }
-            in 4..5 -> {
+            in (maxIssues*0.315).toInt()..(maxIssues*0.58).toInt() -> {
                 playerColor = getColor(R.color.player_color_orange)
                     player.setColorFilter(playerColor) //orange
                 playerShaking = false
                  }
-            in 6..8 -> {
+            in (maxIssues*0.58).toInt()..(maxIssues - 1) -> {
                 playerColor = getColor(R.color.player_color_red)
                     player.setColorFilter(playerColor) //red
                 playerShaking = false
                  }
-            9 -> {
+            (maxIssues - 1) -> {
                 playerColor = getColor(R.color.player_color_dark_red)
                 player.setColorFilter(playerColor) // dark red & shake
                 if(!playerShaking) loopShakePlayer()
 
              }
-            10 -> {
+            maxIssues -> {
                 playerColor = getColor(R.color.glow_teal)
                 player.setColorFilter(playerColor) //glowTeal
                 shakePlayer()
                 playerShaking = false
             }
-            11 -> {
+            (maxIssues + 1) -> {
                 playerColor = getColor(R.color.blue)
                 player.setColorFilter(playerColor) // blue
                 shakePlayer()
@@ -1238,10 +1239,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateOptimizers() {
         val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
-        if(mode !=4 && mode != 6 && mode != 2) optiText.text = getString(R.string.optimizers_and_goal, optimizers.toString(), optiGoal.toString())
-        else if (mode == 4) optiText.text = getString(R.string.glitch_score, optimizers.toString())
-        else if (mode == 6) optiText.text = getString(R.string.optimizers, optimizers.toString())
-        else if(mode == 2) optiText.text = getString(R.string.speed_score, decimal.toString())
+        if(mode != MainMenuActivity.Gamemode.Glitch && mode != MainMenuActivity.Gamemode.Inf && mode != MainMenuActivity.Gamemode.SpeedMaze) optiText.text = getString(R.string.optimizers_and_goal, optimizers.toString(), optiGoal.toString())
+        else if (mode == MainMenuActivity.Gamemode.Glitch) optiText.text = getString(R.string.glitch_score, optimizers.toString())
+        else if (mode == MainMenuActivity.Gamemode.Inf) optiText.text = getString(R.string.optimizers, optimizers.toString())
+        else if(mode == MainMenuActivity.Gamemode.SpeedMaze) optiText.text = getString(R.string.speed_score, decimal.toString())
     }
 
     private fun generateOptimizers(repeatNum: Int) {
@@ -1281,7 +1282,7 @@ class MainActivity : AppCompatActivity() {
                 if(issues != 0) issues -= 1
             }
         }
-        if(optimizers >= optiGoal && !finBlockGenerated && mode !=6) {
+        if(optimizers >= optiGoal && !finBlockGenerated && mode != MainMenuActivity.Gamemode.Inf) {
             generateFinishBlock()
             finBlockGenerated = true
         }
@@ -1563,8 +1564,9 @@ class MainActivity : AppCompatActivity() {
     private fun levelWin() {
         if(!hasWon) {
             var repeatNum = 90
-            if(mode == 4 || mode == 2) repeatNum = 91
+            if(mode == MainMenuActivity.Gamemode.Glitch || mode == MainMenuActivity.Gamemode.SpeedMaze) repeatNum = 91
             hasWon = true
+
             println("win!")
             vibrate(75)
             player.setOnTouchListener(null)
@@ -1728,7 +1730,7 @@ class MainActivity : AppCompatActivity() {
 
                             if(frameLayout.alpha == 0.55f) {
                                 frameLayout.alpha = 0.6f
-                                if(mode == 5) {
+                                if(mode == MainMenuActivity.Gamemode.PainMode) {
                                     vibrate((150..1000).random().toLong())
                                     when((1..573).random()) {
                                         in 1..52 -> frameLayout.setBackgroundColor(Color.TRANSPARENT)
@@ -1740,18 +1742,18 @@ class MainActivity : AppCompatActivity() {
 
                                 when {
                                     getBackgroundColor(frameLayout) == warningColor -> {
-                                        if(mode == 7) gameOver()
+                                        if(mode == MainMenuActivity.Gamemode.SuddenDeath) gameOver()
                                         else warningBlockHit()
                                     }
                                     getBackgroundColor(frameLayout) == errorColor -> {
-                                        if(mode == 7) gameOver()
+                                        if(mode == MainMenuActivity.Gamemode.SuddenDeath) gameOver()
                                         else errorBlockHit()
                                     }
                                     getBackgroundColor(frameLayout) == crashColor -> crashBlockHit()
                                     getBackgroundColor(frameLayout) == bombColor -> tileBombBlockHit(frameLayout)
                                     getBackgroundColor(frameLayout) == fixColor -> fixBlockHit(frameLayout)
                                     getBackgroundColor(frameLayout) == glitchColor -> {
-                                        if(mode == 7) gameOver()
+                                        if(mode == MainMenuActivity.Gamemode.SuddenDeath) gameOver()
                                         else glitchBlockHit()
                                     }
 
@@ -1762,8 +1764,8 @@ class MainActivity : AppCompatActivity() {
                 } else if(frameLayout.alpha == 0.6f) frameLayout.alpha = 0.55f
             } else if(frameLayout.alpha == 0.6f) frameLayout.alpha = 0.55f
         }
-        if(playerY <= (tile9.y + 90f) && mode == 2) levelWin()
-        if(mode == 2 && !timerStarted) {
+        if(playerY <= (tile9.y + 90f) && mode == MainMenuActivity.Gamemode.SpeedMaze) levelWin()
+        if(mode == MainMenuActivity.Gamemode.SpeedMaze && !timerStarted) {
             timerStarted = true
             startTimer()
         }
@@ -1797,7 +1799,7 @@ class MainActivity : AppCompatActivity() {
                 player.setColorFilter(playerColor) //sus250x
             } else player.colorFilter = null
         }, (150).toLong())
-        if (mode != 4) {
+        if (mode != MainMenuActivity.Gamemode.Glitch) {
             when ((1..20).random()) {
                 in (1..2) -> {
                     issues += (1..3).random()
@@ -1818,7 +1820,7 @@ class MainActivity : AppCompatActivity() {
                     issues += (maxIssues - 1)
                 }
             }
-        } else if (mode == 4) {
+        } else if (mode == MainMenuActivity.Gamemode.Glitch) {
             when ((1..24).random()) {
                 1 -> {
                     issues += (1..3).random()

@@ -3,7 +3,6 @@ package com.example.codeMaze
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.GetChars
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
@@ -14,8 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.core.widget.TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration
-import com.example.codeMaze.MainMenuActivity.GameMode.gamemode
+import com.example.codeMaze.MainMenuActivity.GameGm.gamemode
 
 class DifficultyActivity : AppCompatActivity() {
     private lateinit var diffText: TextView
@@ -254,7 +252,7 @@ class DifficultyActivity : AppCompatActivity() {
 
     fun start(view: View) {
         var intent = Intent(this@DifficultyActivity, StartActivity::class.java)
-        if (gamemode == 8) intent = Intent(this@DifficultyActivity, MainActivity::class.java)
+        if (gamemode == MainMenuActivity.Gamemode.NoMaze) intent = Intent(this@DifficultyActivity, MainActivity::class.java)
         if (Difficulty.difficulty == -1) intent = Intent(this@DifficultyActivity, CustomizeDifficultyActivity::class.java)
         startActivity(intent)
         finish()

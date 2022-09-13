@@ -37,22 +37,22 @@ class CustomizeDifficultyActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
-        if(MainMenuActivity.GameMode.gamemode == 3) apocSpeedSet.visibility = View.VISIBLE
+        if(MainMenuActivity.GameGm.gamemode == MainMenuActivity.Gamemode.Apocalypse) apocSpeedSet.visibility = View.VISIBLE
 
     }
 
     fun start(view: View) {
         var intent = Intent(this@CustomizeDifficultyActivity, StartActivity::class.java)
-        if (MainMenuActivity.GameMode.gamemode == 8) intent = Intent(this@CustomizeDifficultyActivity, MainActivity::class.java)
+        if (MainMenuActivity.GameGm.gamemode == MainMenuActivity.Gamemode.NoMaze) intent = Intent(this@CustomizeDifficultyActivity, MainActivity::class.java)
 
         if (!optiMinNum.text.isNullOrEmpty() && !optiMaxNum.text.isNullOrEmpty() && !issueMax.text.isNullOrEmpty()) {
             if (optiMinNum.text.toString().toInt() <= optiMaxNum.text.toString().toInt()) {
-                if ((MainMenuActivity.GameMode.gamemode == 3 && !apocLoopSpeed.text.isNullOrEmpty()) || MainMenuActivity.GameMode.gamemode != 3) {
+                if ((MainMenuActivity.GameGm.gamemode == MainMenuActivity.Gamemode.Apocalypse && !apocLoopSpeed.text.isNullOrEmpty()) || MainMenuActivity.GameGm.gamemode != MainMenuActivity.Gamemode.Apocalypse) {
 
                     CustomDifficulty.optiMin = optiMinNum.text.toString().toInt()
                     CustomDifficulty.optiMax = optiMaxNum.text.toString().toInt()
                     CustomDifficulty.issuesMax = issueMax.text.toString().toInt()
-                    if (MainMenuActivity.GameMode.gamemode == 3) {
+                    if (MainMenuActivity.GameGm.gamemode == MainMenuActivity.Gamemode.Apocalypse) {
                         val loopTime = (apocLoopSpeed.text.toString().toDouble() * 1000).roundToInt()
                         CustomDifficulty.apocLoopTime = loopTime
                         if (loopTime <= 60000) {
@@ -64,7 +64,7 @@ class CustomizeDifficultyActivity : AppCompatActivity() {
                         finish()
                     }
 
-                } else if (MainMenuActivity.GameMode.gamemode == 3 && apocLoopSpeed.text.isNullOrEmpty()) Toast.makeText(applicationContext, "Please fill out every option.", Toast.LENGTH_SHORT).show()
+                } else if (MainMenuActivity.GameGm.gamemode == MainMenuActivity.Gamemode.Apocalypse && apocLoopSpeed.text.isNullOrEmpty()) Toast.makeText(applicationContext, "Please fill out every option.", Toast.LENGTH_SHORT).show()
             } else Toast.makeText(applicationContext, "Make sure the Minimum Optimizers Goal you set is less than the maximum you set.", Toast.LENGTH_LONG).show()
 
         } else Toast.makeText(applicationContext, "Please fill out every option.", Toast.LENGTH_SHORT).show()

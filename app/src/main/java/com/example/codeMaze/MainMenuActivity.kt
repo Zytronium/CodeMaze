@@ -1,7 +1,6 @@
 package com.example.codeMaze
 
 import android.content.Intent
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import java.util.concurrent.Executors
 
 class MainMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,48 +35,51 @@ class MainMenuActivity : AppCompatActivity() {
 //        WindowCompat.setDecorFitsSystemWindows(window, true)
     }
 
-    object GameMode {
-        var gamemode: Int = 1
+    enum class Gamemode { // 1 = Classic, 2 = SpeedMaze, 3 = Apocalypse, 4 = Glitch, 5 = PainMode, 6 = Inf, 7 SuddenDeath, 8 = NoMaze, 9 = Corruption. | 10 = Scavenger, 11 = TimeTrials, 0 = Story
+        Classic, SpeedMaze, Apocalypse, Glitch, PainMode, Inf, SuddenDeath, NoMaze, Corruption, Scavenger, TimeTrials, Story
+    }
+    object GameGm {
+        var gamemode: Gamemode = Gamemode.Classic
     }
 
     fun classic(view: View) {
-        GameMode.gamemode = 1
+        GameGm.gamemode = Gamemode.Classic
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
     }
 
     fun painMode(view: View) {
-        GameMode.gamemode = 5
+        GameGm.gamemode = Gamemode.PainMode
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
     }
 
     fun apocalypse(view: View) {
-        GameMode.gamemode = 3
+        GameGm.gamemode = Gamemode.Apocalypse
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
     }
 
     fun glitchSpread(view: View) {
-        GameMode.gamemode = 4
+        GameGm.gamemode = Gamemode.Glitch
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
     }
 
     fun infmode(view: View) {
-        GameMode.gamemode = 6
+        GameGm.gamemode = Gamemode.Inf
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
     }
 
     fun suddenDeath(view: View) {
-    GameMode.gamemode = 7
+    GameGm.gamemode = Gamemode.SuddenDeath
     val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
     startActivity(intent)
     }
 
     fun noMaze(view: View) {
-        GameMode.gamemode = 8
+        GameGm.gamemode = Gamemode.NoMaze
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
     }
@@ -94,13 +95,13 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     fun speedMaze(view: View) {
-        GameMode.gamemode = 2
+        GameGm.gamemode = Gamemode.SpeedMaze
         val intent = Intent(this@MainMenuActivity, StartActivity::class.java)
         startActivity(intent)
     }
 
     fun corruption(view: View) {
-        GameMode.gamemode = 9
+        GameGm.gamemode = Gamemode.Corruption
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
         startActivity(intent)
     }
