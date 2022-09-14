@@ -105,6 +105,7 @@ import com.example.codeMaze.Path1Tiles.TILE88
 import com.example.codeMaze.Path1Tiles.TILE89
 import com.example.codeMaze.Path1Tiles.TILE9
 import com.example.codeMaze.Path1Tiles.TILE90
+import com.google.android.material.internal.ViewUtils.getBackgroundColor
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -1194,48 +1195,82 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateIssues() {
-        val ic = maxIssues.toDouble()
+        val stage1: Int = if(maxIssues*0.215 >= 1.0) (maxIssues*0.215).toInt() else 1 // >= st1 = green
+        val stage2: Int = if(maxIssues*(1f/3f) >= (stage1+1)) (maxIssues*(1f/3f)).toInt() else (stage1+1)// >= st2 = orange
+        val st3: Int = if((maxIssues*0.8).toInt() <= (maxIssues - 2)) (maxIssues*0.8).toInt() else (maxIssues - 2) // >= st3 = red
+            val stage3: Int = if(st3 >= (maxIssues - 5)) st3 else (maxIssues - 5)
         issuesText.text = getString(R.string.issues, issues.toString(), maxIssues.toString())
-        when(issues) {
-            in 0..(if (ic * 0.125 >= 1.0) ic * 0.125 else 1).toInt() -> {
+
+        if (issues != (maxIssues - 1)) {
+            if (issues !in 0..stage1) {
+                if (issues !in stage3..(maxIssues - 2)) {
+                    when (issues) {
+                        in stage1..stage2 -> {
+                            playerColor = getColor(R.color.player_color_green)
+                            player.setColorFilter(playerColor) //green
+                            playerShaking = false
+                        }
+                        in stage2..stage3 -> {
+                            playerColor = getColor(R.color.player_color_orange)
+                            player.setColorFilter(playerColor) //orange
+                            playerShaking = false
+                        }
+                    }
+                } else {
+                    playerColor = getColor(R.color.player_color_red)
+                    player.setColorFilter(playerColor) //red
+                    playerShaking = false
+                }
+            } else {
                 playerColor = getColor(R.color.glow_teal)
                 player.colorFilter = null
                 playerShaking = false
             }
-            (maxIssues - 1) -> {
-                playerColor = getColor(R.color.player_color_dark_red)
-                player.setColorFilter(playerColor) // dark red & shake
-                if (!playerShaking) loopShakePlayer()
-
-            }
-            in (if (maxIssues - 2 < ic * 0.65.toInt()) maxIssues - 2 else if (ic * 0.65.toInt() >= 3) ic * 0.65 else 3).toInt()..(maxIssues - 2) -> {
-                playerColor = getColor(R.color.player_color_red)
-                player.setColorFilter(playerColor) //red
-                playerShaking = false
-            }
-            in (if (ic * 0.355 >= 2) ic * 0.355 else 2).toInt()..(if (ic * 0.65 >= 3) ic * 0.65 else 3).toInt() -> {
-                playerColor = getColor(R.color.player_color_orange)
-                player.setColorFilter(playerColor) //orange
-                playerShaking = false
-            }
-            in (if (ic * 0.125 >= 1) ic * 0.125 else 1).toInt()..(if (ic * 0.355 >= 2) ic * 0.355 else 2).toInt() -> {
-                playerColor = getColor(R.color.player_color_green)
-                player.setColorFilter(playerColor) //green
-                playerShaking = false
-            }
-            maxIssues -> {
-                playerColor = getColor(R.color.glow_teal)
-                player.setColorFilter(playerColor) //glowTeal
-                shakePlayer()
-                playerShaking = false
-            }
-            (maxIssues + 1) -> {
-                playerColor = getColor(R.color.blue)
-                player.setColorFilter(playerColor) // blue
-                shakePlayer()
-                playerShaking = false
-            }
+        } else {
+            playerColor = getColor(R.color.player_color_dark_red)
+            player.setColorFilter(playerColor) // dark red & shake
+            if (!playerShaking) loopShakePlayer()
         }
+//        when(issues) {
+//            in 0..(if (ic * 0.125 >= 1.0) (ic * 0.125) else 1).toInt() -> {
+//                playerColor = getColor(R.color.glow_teal)
+//                player.colorFilter = null
+//                playerShaking = false
+//            }
+//            (maxIssues - 1) -> {
+//                playerColor = getColor(R.color.player_color_dark_red)
+//                player.setColorFilter(playerColor) // dark red & shake
+//                if (!playerShaking) loopShakePlayer()
+//
+//            }
+//            in (if (maxIssues - 2 < ic * 0.65.toInt()) maxIssues - 2 else if (ic * 0.65.toInt() >= 3) ic * 0.65 else 3).toInt()..(maxIssues - 2) -> {
+//                playerColor = getColor(R.color.player_color_red)
+//                player.setColorFilter(playerColor) //red
+//                playerShaking = false
+//            }
+//            in (if (ic * 0.355 >= 2) ic * 0.355 else 2).toInt()..(if (ic * 0.65 >= 3) ic * 0.65 else 3).toInt() -> {
+//                playerColor = getColor(R.color.player_color_orange)
+//                player.setColorFilter(playerColor) //orange
+//                playerShaking = false
+//            }
+//            in (if (ic * 0.125 >= 1) ic * 0.125 else 1).toInt()..(if (ic * 0.355 >= 2) ic * 0.355 else 2).toInt() -> {
+//                playerColor = getColor(R.color.player_color_green)
+//                player.setColorFilter(playerColor) //green
+//                playerShaking = false
+//            }
+//            maxIssues -> {
+//                playerColor = getColor(R.color.glow_teal)
+//                player.setColorFilter(playerColor) //glowTeal
+//                shakePlayer()
+//                playerShaking = false
+//            }
+//            (maxIssues + 1) -> {
+//                playerColor = getColor(R.color.blue)
+//                player.setColorFilter(playerColor) // blue
+//                shakePlayer()
+//                playerShaking = false
+//            }
+//        }
     }
 
     private fun updateOptimizers() {
