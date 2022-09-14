@@ -1194,34 +1194,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateIssues() {
+        val ic = maxIssues.toDouble()
         issuesText.text = getString(R.string.issues, issues.toString(), maxIssues.toString())
         when(issues) {
-            in 0..(maxIssues*0.125).toInt() -> {
+            in 0..(if (ic * 0.125 >= 1.0) ic * 0.125 else 1).toInt() -> {
                 playerColor = getColor(R.color.glow_teal)
                 player.colorFilter = null
                 playerShaking = false
             }
-            in (maxIssues*0.125).toInt()..(maxIssues*0.315).toInt() -> {
-                playerColor = getColor(R.color.player_color_green)
-                player.setColorFilter(playerColor) //green
-                playerShaking = false
-                 }
-            in (maxIssues*0.315).toInt()..(maxIssues*0.58).toInt() -> {
-                playerColor = getColor(R.color.player_color_orange)
-                    player.setColorFilter(playerColor) //orange
-                playerShaking = false
-                 }
-            in (maxIssues*0.58).toInt()..(maxIssues - 1) -> {
-                playerColor = getColor(R.color.player_color_red)
-                    player.setColorFilter(playerColor) //red
-                playerShaking = false
-                 }
             (maxIssues - 1) -> {
                 playerColor = getColor(R.color.player_color_dark_red)
                 player.setColorFilter(playerColor) // dark red & shake
-                if(!playerShaking) loopShakePlayer()
+                if (!playerShaking) loopShakePlayer()
 
-             }
+            }
+            in (if (maxIssues - 2 < ic * 0.65.toInt()) maxIssues - 2 else if (ic * 0.65.toInt() >= 3) ic * 0.65 else 3).toInt()..(maxIssues - 2) -> {
+                playerColor = getColor(R.color.player_color_red)
+                player.setColorFilter(playerColor) //red
+                playerShaking = false
+            }
+            in (if (ic * 0.355 >= 2) ic * 0.355 else 2).toInt()..(if (ic * 0.65 >= 3) ic * 0.65 else 3).toInt() -> {
+                playerColor = getColor(R.color.player_color_orange)
+                player.setColorFilter(playerColor) //orange
+                playerShaking = false
+            }
+            in (if (ic * 0.125 >= 1) ic * 0.125 else 1).toInt()..(if (ic * 0.355 >= 2) ic * 0.355 else 2).toInt() -> {
+                playerColor = getColor(R.color.player_color_green)
+                player.setColorFilter(playerColor) //green
+                playerShaking = false
+            }
             maxIssues -> {
                 playerColor = getColor(R.color.glow_teal)
                 player.setColorFilter(playerColor) //glowTeal
@@ -1674,7 +1675,7 @@ class MainActivity : AppCompatActivity() {
             shakePlayer()
             val handler = Handler(Looper.getMainLooper())
             handler.postDelayed({
-                if (issues == 9) loopShakePlayer()
+                if (issues == (maxIssues - 1)) loopShakePlayer()
                 else {
                     val animator =
                         ObjectAnimator.ofFloat(player, View.ROTATION, (player.rotation), (0f))
