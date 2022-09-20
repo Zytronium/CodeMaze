@@ -110,6 +110,11 @@ class MainMenuActivity : AppCompatActivity() {
         val intent = Intent(this@MainMenuActivity, StoryStartActivity::class.java)
         startActivity(intent)}
 
+    fun timeTrial(view: View) {
+        GameGm.gamemode = Gamemode.TimeTrials
+        val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
+        startActivity(intent)}
+
 }
 
 // Ideas: each gamemode has its own separate StartActivity. For example, GlitchModeStartActivity for Glitch mode.

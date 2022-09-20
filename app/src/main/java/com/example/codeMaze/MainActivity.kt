@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.*
+import android.os.VibrationEffect.createWaveform
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -105,7 +106,6 @@ import com.example.codeMaze.Path1Tiles.TILE88
 import com.example.codeMaze.Path1Tiles.TILE89
 import com.example.codeMaze.Path1Tiles.TILE9
 import com.example.codeMaze.Path1Tiles.TILE90
-import com.google.android.material.internal.ViewUtils.getBackgroundColor
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -137,7 +137,8 @@ class MainActivity : AppCompatActivity() {
     private var issues: Int = 0
     /* */ private var level: Int = 1
     private var optimizers: Int = 0
-    private var time: Double = 0.00
+    private var time: Double = 5.0 // 0.0
+    private var maxTime: Double = 30.0 // change
     /* */ private var totalOptimizers: Int = 0
     private var optiGoal: Int = 25
     private var maxIssues = 10
@@ -150,6 +151,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var screen: ConstraintLayout
     private lateinit var issuesText: TextView
     private lateinit var optiText: TextView
+    private lateinit var timeBar: ProgressBar
     private lateinit var player: ImageView
 
     private lateinit var tile1: FrameLayout
@@ -278,6 +280,7 @@ class MainActivity : AppCompatActivity() {
         screen = findViewById(R.id.screen)
         issuesText = findViewById(R.id.textView2)
         optiText = findViewById(R.id.textView3)
+        timeBar = findViewById(R.id.timeBar)
         player = findViewById(R.id.player)
         tile0 = findViewById(R.id.tile0)
         tile1 = findViewById(R.id.tile1)
@@ -368,8 +371,8 @@ class MainActivity : AppCompatActivity() {
         tile86 = findViewById(R.id.tile86)
         tile87 = findViewById(R.id.tile87)
         tile88 = findViewById(R.id.tile88)
-        tile89 = findViewById(R.id.tile89)
         tile90 = findViewById(R.id.tile90)
+        tile89 = findViewById(R.id.tile89)
         playerColor = getColor(R.color.glow_teal)
         // to edo : add joke EULA rkrl
         optiFails = 0
@@ -394,56 +397,68 @@ class MainActivity : AppCompatActivity() {
 //            10 -> optiGoal = (2000..5000).random()// impossible++
 //        }
         when(difficulty) {
-            -1 -> {                              // custom
+            -1 -> {         //* add for maxTime for time trials        // custom
                 maxIssues = CustomizeDifficultyActivity.CustomDifficulty.issuesMax
                 optiGoal = (CustomizeDifficultyActivity.CustomDifficulty.optiMin..CustomizeDifficultyActivity.CustomDifficulty.optiMax).random()
             }
             0 -> {
+                maxTime = 270.0
                 maxIssues = 30
                 optiGoal = 3   //testing goal    // baby
             }
             1 -> {
+                maxTime = 50.0
                 maxIssues = 20
                 optiGoal = (5..10).random()      // beginner
             }
             2 -> {
+                maxTime = 25.0
                 maxIssues = 15
                 optiGoal = (10..15).random()     // easy
             }
             3 -> {
+                maxTime = 15.0
                 maxIssues = 10
                 optiGoal = (15..25).random()     // normal
             }
             4 -> {
+                maxTime = 10.0
                 maxIssues = 10
                 optiGoal = (30..60).random()     // hard
             }
             5 -> {
+                maxTime = 8.0
                 maxIssues = 9 // make 10 maybe?
                 optiGoal = (65..135).random()    // experienced
             }
             6 -> {
+                maxTime = 6.5
                 maxIssues = 8 // make 9 maybe?
                 optiGoal = (145..275).random()   // expert
             }
             7 -> {
+                maxTime = 3.5
                 maxIssues = 7
                 optiGoal = (300..425).random()   // master
             }
             8 -> {
+                maxTime = 2.5
                 maxIssues = 6
                 optiGoal = (444..777).random()   // deity
             }
             9 -> {
+                maxTime = 2.0
                 maxIssues = 5
                 optiGoal = (800..1500).random()  // impossible
             }
             10 -> {
+                maxTime = 1.5
                 maxIssues = 3
                 optiGoal = (2000..5000).random()// impossible++
             }
             else -> {
-                maxIssues = 10; optiGoal = 25
+                maxTime = 20.0; maxIssues = 10; optiGoal = 20
+                Toast.makeText(this, "Unknown difficulty loaded; setting makeshift difficulty.", Toast.LENGTH_LONG).show()
             }
         }
         if(mode == MainMenuActivity.Gamemode.SpeedMaze) maxIssues = 5
@@ -452,8 +467,12 @@ class MainActivity : AppCompatActivity() {
 
         if(mode == MainMenuActivity.Gamemode.SuddenDeath) screen.setBackgroundResource(R.drawable.death_gradient)
 
-        val w: Window = window
-        w.setFlags(
+        if(mode == MainMenuActivity.Gamemode.TimeTrials) {
+            time = maxTime
+            timeTrialStart()
+        } else time = 0.0//0.0
+
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
@@ -512,6 +531,56 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun timeTrialStart() {
+        timeBar.visibility = View.VISIBLE
+        timeBar.max = (maxTime * 10.0).toInt()
+        startTimerTrial()
+    }
+
+    private fun startTimerTrial() {
+
+        time -= 0.05
+        val strength = (((time * 85.0)-255.0)* -1.0).toInt()
+
+        if(time in 0.05..3.0) {
+            try {
+                vibrate(50, strength)
+            } catch(e: Exception) {
+//                Toast.makeText(this, "error:"+e.message, Toast.LENGTH_LONG).show()
+                try {
+                    vibrate(50, strength+1)
+                } catch(e: Exception) {
+//                    Toast.makeText(this, "error2:"+e.message, Toast.LENGTH_SHORT).show()
+                    try {
+                        vibrate(50, strength-1)
+                    } catch(e: Exception) {
+//                        Toast.makeText(this, "error3:"+e.message, Toast.LENGTH_SHORT).show()
+                        try {
+                            vibrate(50)
+                        } catch(e: Exception) {
+                            Toast.makeText(this, "error: "+e.message, Toast.LENGTH_SHORT).show()
+                            vibrate(50)
+                        }
+                    }
+                }
+            }
+        } else if(time <= 0.0) {
+            gameOver()
+            time = 0.0
+        } //vibrate(1500, strength)
+
+        val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
+//        println(decimal.toString())
+        optiText.text = getString(R.string.speed_score, decimal.toString()) //*
+        timeBar.progress = (time * 10.0).toInt()
+        //setcolor etc
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            if(!hasWon && !hasLost)
+                startTimerTrial()
+        }, (50).toLong())
+    }
+
     private fun loopCorrupt(thisTile: FrameLayout) {
 
         val handler = Handler(Looper.getMainLooper())
@@ -533,7 +602,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startTimer() {
-        time += 0.05
+
+        time += 0.05 //+
+
         val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
         println(decimal.toString())
         optiText.text = getString(R.string.speed_score, decimal.toString())
@@ -1305,6 +1376,22 @@ class MainActivity : AppCompatActivity() {
         vibrate(10)
 //        tile.setBackgroundColor(getColor(R.color.safe_block))
         tile.foreground = null
+        if(mode == MainMenuActivity.Gamemode.TimeTrials) {
+            time += when (difficulty) {
+                0 -> 15.0
+                1 -> 10.0
+                2 -> 5.0
+                3 -> 3.0
+                4 -> 2.5
+                5 -> 2.25
+                6 -> 2.0
+                7 -> 1.75
+                8 -> 1.5
+                9 -> 1.25
+                10 -> 1.0
+                else -> 10.0
+            }
+        }
         optimizers++
         totalOptimizers++
         allTiles.shuffle()
@@ -1333,8 +1420,12 @@ class MainActivity : AppCompatActivity() {
             if (getBackgroundColor(newTile) == getColor(R.color.safe_block)) {
                 newTile.setBackgroundColor(getColor(R.color.white))
                 newTile.tag = "finish"
-                rainbow(newTile, 0f, 6, 2f, false)
+                rainbow(newTile, 0f, 9, 2f, false)
                 newTile.alpha = 0.75f
+                if(newTile.foreground != null) {
+//                    newTile.foreground = null
+                    optimizerCollect(newTile)
+                }
             } else {
                 generateFinishBlock()
             }
@@ -1356,7 +1447,7 @@ class MainActivity : AppCompatActivity() {
     private fun fixBlockHit(tile: FrameLayout) {
         if (issues != 0) {
             issues -= 1
-        }
+        } else if(issues == 0 && mode == MainMenuActivity.Gamemode.TimeTrials) time += 0.25
 
         updateStats()
         tile.setBackgroundColor(getColor(R.color.safe_block))
@@ -1606,7 +1697,7 @@ class MainActivity : AppCompatActivity() {
             println("win!")
             vibrate(75)
             player.setOnTouchListener(null)
-            spin(player, 400, "z", 0f, 360f,)
+            spin(player, 400, "z", 0f, 360f)
             val handler = Handler(Looper.getMainLooper())
             repeat(repeatNum) {
                 handler.postDelayed({
@@ -1622,13 +1713,13 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "You Win!", Toast.LENGTH_LONG).show()
             postGameText.visibility = View.VISIBLE
 //            postGameText.text = "You won!\nTap your character to play again, or tap and hold to go to the main menu."
-            postGameText.text = "You win!"
+            postGameText.text = "You win!" //as CharSequence
 
                 restartButton.visibility = View.VISIBLE
                 menuButton.visibility = View.VISIBLE
             // wins++
             if (hasLost && hasWon) {
-                postGameText.text = "You managed to win and loose simultaneously!"
+                postGameText.text = "You managed to win and loose simultaneously!" //as String
                 issues++
                 updateIssues()
                 rainbow(grid, 350f, 1, 10f, true)
@@ -1643,7 +1734,7 @@ class MainActivity : AppCompatActivity() {
                 tile.alpha = 0.75f
                 vibrate(10)
                 if(tile.foreground != null) tile.foreground = null
-                rainbow(tile, 0f, 6, 2f, false)
+                rainbow(tile, 0f, 9, 2f, false)
             } else rainbowAll()
     }
 
@@ -1787,7 +1878,10 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     getBackgroundColor(frameLayout) == crashColor -> crashBlockHit()
                                     getBackgroundColor(frameLayout) == bombColor -> tileBombBlockHit(frameLayout)
-                                    getBackgroundColor(frameLayout) == fixColor -> fixBlockHit(frameLayout)
+                                    getBackgroundColor(frameLayout) == fixColor -> {
+                                        fixBlockHit(frameLayout)
+                                        if(mode == MainMenuActivity.Gamemode.TimeTrials) time += 1.0
+                                    }
                                     getBackgroundColor(frameLayout) == glitchColor -> {
                                         if(mode == MainMenuActivity.Gamemode.SuddenDeath) gameOver()
                                         else glitchBlockHit()
@@ -1924,22 +2018,27 @@ class MainActivity : AppCompatActivity() {
         edit.putInt("totalOptimizers" , totalOptimizers )
         edit.apply()
     }
-         private fun vibrate(time: Long) {
+         private fun vibrate(time: Long, strength: Int = -1) {
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (vibrator.hasVibrator()) { // Vibrator availability checking
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-                vibrator.vibrate(VibrationEffect.createOneShot(time, VibrationEffect.DEFAULT_AMPLITUDE)) // New vibrate method for API Level 26 or higher
+//                vibrator.vibrate(createWaveform(
+//                    timings = longArrayOf(0L, 100L, 20L, 100L),
+//                    amplitudes = intArrayOf(145, 40),
+//                    repeat = -1
+//                ))
+                vibrator.vibrate(VibrationEffect.createOneShot(time, strength/*VibrationEffect.DEFAULT_AMPLITUDE)*/)) // New vibrate method for API Level 26 or higher
             } else {
                 vibrator.vibrate(time) // Vibrate method for below API Level 26
             }
         }
     }
 
-    private fun rainbow(target: View, hue: Float, speed: Long, strength: Float, ignoreHasLost: Boolean) {
+    private fun rainbow(target: View, hue: Float, speed: Long, strength: Float, ignoreHasLost: Boolean = false) {
         if((playing && !hasLost) || (playing && ignoreHasLost)) {
             var h = hue
-            if (h >= 360f) h = 0f
+            if (h >= 360f) h -= 360f
             target.setBackgroundColor(Color.HSVToColor(floatArrayOf(h, 100f, 100f)))
             Handler(Looper.getMainLooper()).postDelayed({
                 rainbow(target, (h + strength), speed, strength, ignoreHasLost)
@@ -1948,97 +2047,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goToMenu(view: View) {
-        TILE0 = false
-        TILE1 = false
-        TILE2 = false
-        TILE3 = false
-        TILE4 = false
-        TILE5 = false
-        TILE6 = false
-        TILE7 = false
-        TILE8 = false
-        TILE9 = false
-        TILE10 = false
-        TILE11 = false
-        TILE12 = false
-        TILE13 = false
-        TILE14 = false
-        TILE15 = false
-        TILE16 = false
-        TILE17 = false
-        TILE18 = false
-        TILE19 = false
-        TILE20 = false
-        TILE21 = false
-        TILE22 = false
-        TILE23 = false
-        TILE24 = false
-        TILE25 = false
-        TILE26 = false
-        TILE27 = false
-        TILE28 = false
-        TILE29 = false
-        TILE30 = false
-        TILE31 = false
-        TILE32 = false
-        TILE33 = false
-        TILE34 = false
-        TILE35 = false
-        TILE36 = false
-        TILE37 = false
-        TILE38 = false
-        TILE39 = false
-        TILE40 = false
-        TILE41 = false
-        TILE42 = false
-        TILE43 = false
-        TILE44 = false
-        TILE45 = false
-        TILE46 = false
-        TILE47 = false
-        TILE48 = false
-        TILE49 = false
-        TILE50 = false
-        TILE51 = false
-        TILE52 = false
-        TILE53 = false
-        TILE54 = false
-        TILE55 = false
-        TILE56 = false
-        TILE57 = false
-        TILE58 = false
-        TILE59 = false
-        TILE60 = false
-        TILE61 = false
-        TILE62 = false
-        TILE63 = false
-        TILE64 = false
-        TILE65 = false
-        TILE66 = false
-        TILE67 = false
-        TILE68 = false
-        TILE69 = false
-        TILE70 = false
-        TILE71 = false
-        TILE72 = false
-        TILE73 = false
-        TILE74 = false
-        TILE75 = false
-        TILE76 = false
-        TILE77 = false
-        TILE78 = false
-        TILE79 = false
-        TILE80 = false
-        TILE81 = false
-        TILE82 = false
-        TILE83 = false
-        TILE84 = false
-        TILE85 = false
-        TILE86 = false
-        TILE87 = false
-        TILE88 = false
-        TILE89 = false
-        TILE90 = false
+        resetTileData()
         vibrate(5)
         val intent = Intent(this@MainActivity, MainMenuActivity::class.java)
         playing = false
@@ -2046,9 +2055,7 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    fun restart(view: View) {
-        issues = 0
-        optimizers = 0
+    private fun resetTileData() {
         TILE0 = false
         TILE1 = false
         TILE2 = false
@@ -2140,6 +2147,12 @@ class MainActivity : AppCompatActivity() {
         TILE88 = false
         TILE89 = false
         TILE90 = false
+    }
+
+    fun restart(view: View) {
+        issues = 0
+        optimizers = 0
+        resetTileData()
         vibrate(5)
         val intent = Intent(this@MainActivity, StartActivity::class.java)
         playing = false
@@ -2159,7 +2172,8 @@ class MainActivity : AppCompatActivity() {
 /* ~FEATURE IDEAS~
 *  Hitting an Error Block makes the phone vibrate and screen shake via 3D rotation -- already implemented (final feature modified slightly from this)
 *  Idea: White Blocks: Ad Blocks; gives the user a frikin' ad -- idea scrapped
-*  Story Mode
+*  Story Mode -- idk
 *  Sound effects
+*  Color mode(?): tell user color, user navigates to tile of this color before time runs out
 *
-* 563 | 4849 -> 746 */
+* 563 | 4849 -> 746 ~ 2179 */

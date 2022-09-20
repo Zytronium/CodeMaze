@@ -14,6 +14,7 @@
         <activity
             android:name=".CustomizeDifficultyActivity"
             android:exported="false"
+            android:showWhenLocked="true"
             android:screenOrientation="portrait"  />
         <activity
             android:name=".BeginStoryActivity"
@@ -26,6 +27,7 @@
         <activity
             android:name=".DifficultyActivity"
             android:exported="false"
+            android:showWhenLocked="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainMenuActivity"
@@ -41,10 +43,12 @@
         <activity
             android:name=".AboutActivity"
             android:exported="false"
+            android:showWhenLocked="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".StartActivity"
             android:exported="true"
+            android:showWhenLocked="true"
             android:screenOrientation="portrait">
 
             <!-- <intent-filter> -->
@@ -63,6 +67,7 @@
         <activity
             android:name=".MainActivity2"
             android:configChanges="orientation"
+            android:showWhenLocked="true"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
