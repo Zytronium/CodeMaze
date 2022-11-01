@@ -3,6 +3,7 @@ package com.example.codeMaze
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.random.Random
 
 class StartActivity : AppCompatActivity() {
 
@@ -15,7 +16,7 @@ class StartActivity : AppCompatActivity() {
 //        println(" starting PathTiles object")
 //        finish()
 
-        when((1..14).random()) {
+        when(Random(System.currentTimeMillis()+System.nanoTime()+(-7000..20000002L).random()/2L).nextInt(1, 14)) {
             1 -> {
                 val intent = Intent(this@StartActivity, Path1Activity::class.java)
                 startActivity(intent)

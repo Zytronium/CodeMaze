@@ -6,11 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.RenderEffect
+import android.graphics.Shader
 import android.graphics.drawable.ColorDrawable
 import android.os.*
 import android.os.VibrationEffect.createWaveform
 import android.view.*
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.*
@@ -106,6 +109,7 @@ import com.example.codeMaze.Path1Tiles.TILE88
 import com.example.codeMaze.Path1Tiles.TILE89
 import com.example.codeMaze.Path1Tiles.TILE9
 import com.example.codeMaze.Path1Tiles.TILE90
+import com.google.android.material.internal.ViewUtils.getBackgroundColor
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -267,6 +271,7 @@ class MainActivity : AppCompatActivity() {
     private var pRot3start =  0f
     private var pRot3end =  (-4..4).random().toFloat()
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -496,6 +501,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if(mode == MainMenuActivity.Gamemode.PainMode) {
+            screen.setRenderEffect(RenderEffect.createBlurEffect(22F, 13F, Shader.TileMode.DECAL))
             loopShake()
             alphaFluctuate()
         }
@@ -543,7 +549,16 @@ class MainActivity : AppCompatActivity() {
         val strength = (((time * 85.0)-255.0)* -1.0).toInt()
 
         if(time in 0.05..3.0) {
-            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    screen.setRenderEffect(
+                        RenderEffect.createBlurEffect(
+                            strength / 5F,
+                            strength / 5F,
+                            Shader.TileMode.DECAL
+                        )
+                    )
+                }
+                    try {
                 vibrate(50, strength)
             } catch(e: Exception) {
 //                Toast.makeText(this, "error:"+e.message, Toast.LENGTH_LONG).show()
@@ -568,6 +583,10 @@ class MainActivity : AppCompatActivity() {
             gameOver()
             time = 0.0
         } //vibrate(1500, strength)
+        else
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                screen.setRenderEffect(null)
+            }
 
         val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
 //        println(decimal.toString())
@@ -1571,6 +1590,10 @@ class MainActivity : AppCompatActivity() {
 
             screen.setBackgroundResource(R.drawable.death_gradient)
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val r = if(mode != MainMenuActivity.Gamemode.PainMode) 4F else 14f
+                screen.setRenderEffect(RenderEffect.createBlurEffect(r, r, Shader.TileMode.DECAL))
+            }
             Toast.makeText(applicationContext, "You Lost.", Toast.LENGTH_LONG).show()
             postGameText.visibility = View.VISIBLE
             postGameText.text = "Game Over"
@@ -2048,7 +2071,7 @@ class MainActivity : AppCompatActivity() {
 
     fun goToMenu(view: View) {
         resetTileData()
-        vibrate(5)
+        vibrate(4)
         val intent = Intent(this@MainActivity, MainMenuActivity::class.java)
         playing = false
         startActivity(intent)
