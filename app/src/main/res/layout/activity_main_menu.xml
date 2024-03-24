@@ -210,6 +210,7 @@
                     android:padding="10dp"
                     android:text="COMING SOON"
                     android:textSize="21sp"
+                    android:textColor="#D4D4D4"
                     android:textStyle="bold"
                     app:cornerRadius="28dp" />
 
