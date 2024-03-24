@@ -10,7 +10,6 @@ import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.graphics.drawable.ColorDrawable
 import android.os.*
-import android.os.Looper.loop
 import android.view.*
 import android.widget.*
 import androidx.annotation.RequiresApi
