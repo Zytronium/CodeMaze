@@ -409,8 +409,8 @@ class StoryStartActivity : AppCompatActivity() {
         optiText.text = getString(R.string.speed_score, decimal.toString())
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            if(!hasWon)
-            startTimer()
+            if (!hasWon)
+                startTimer()
         }, (50).toLong())
 
     }

@@ -16,14 +16,14 @@
 <!--            app:useSimpleSummaryProvider="true" />-->
 
         <SwitchPreferenceCompat
-            app:key="vibrations"
-            app:summaryOff="@string/vibrations_summary_off"
-            app:summaryOn="@string/vibrations_summary_on"
-            app:title="@string/vibrations_title"
+            app:key="visualGen"
+            app:summaryOff="@string/visual_maze_generation_summary_off"
+            app:summaryOn="@string/visual_maze_generation_summary_on"
+            app:title="@string/visual_maze_generation_title"
             app:defaultValue="true"/>
 
         <SwitchPreferenceCompat
-            app:key="KeepGeneratingOptis"
+            app:key="KeepGenOptis"
             app:summaryOff="@string/kgo_summary_off"
             app:summaryOn="@string/kgo_summary_on"
             app:title="@string/keep_gen_opti_title"
@@ -45,11 +45,19 @@
 <!--            app:title="@string/attachment_title" />-->
 
         <SwitchPreferenceCompat
-            app:dependency="rainbowCharacter"
             app:key="rainbowCharacter"
             app:summaryOff="@string/rainbow_summary_off"
             app:summaryOn="@string/rainbow_summary_on"
-            app:title="@string/rainbow_title" />
+            app:title="@string/rainbow_title"
+            app:defaultValue="false" />
+<!--        app:dependency="rainbowCharacter"-->
+
+        <SwitchPreferenceCompat
+            app:key="vibrations"
+            app:summaryOff="@string/vibrations_summary_off"
+            app:summaryOn="@string/vibrations_summary_on"
+            app:title="@string/vibrations_title"
+            app:defaultValue="true"/>
 
     </PreferenceCategory>
 

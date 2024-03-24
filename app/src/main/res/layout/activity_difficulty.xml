@@ -272,6 +272,20 @@
         tools:backgroundTint="@color/blue"
         tools:textColor="@color/glow_teal" />
 
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#00FFFFFF"
+        android:onClick="back"
+        android:scaleType="fitCenter"
+        android:scaleX="1.7625"
+        android:scaleY="1.75"
+        app:tint="#FF9800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

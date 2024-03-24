@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.codeMaze">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -116,6 +115,9 @@
             android:exported="true" />
         <activity
             android:name=".Path14Activity"
+            android:exported="true" />
+        <activity
+            android:name=".PathGenActivity"
             android:exported="true" />
 
         <meta-data

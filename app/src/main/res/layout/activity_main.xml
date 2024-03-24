@@ -65,31 +65,26 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/grid"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="7:13"
-        android:fadeScrollbars="false"
         android:fitsSystemWindows="true"
         android:foregroundGravity="center"
         android:gravity="center"
         android:overScrollMode="ifContentScrolls"
-        android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:scrollbarAlwaysDrawVerticalTrack="false"
-        android:scrollbarThumbHorizontal="@null"
-        android:scrollbarThumbVertical="@null"
-        android:scrollbars="none"
-        android:scaleX="0.975"
-        android:scaleY="0.975"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".4">
+        app:layout_constraintVertical_bias=".405">
+<!--        android:scaleX="0.975"-->
+<!--        android:scaleY="0.975"-->
         <!-- austin phone vertical_bias = 0.48 -->
+
         <FrameLayout
             android:id="@+id/tile0"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+            android:layout_width="@dimen/tile_size"
+            android:layout_height="@dimen/tile_size"
             android:alpha=".55"
             android:background="@color/warning_block"
             android:fitsSystemWindows="true"
@@ -98,6 +93,7 @@
             android:foregroundTintMode="src_in"
             android:scaleX="1.0312"
             android:scaleY="1.0312"
+            app:layout_constraintVertical_bias=".24"
             app:layout_column="1"
             app:layout_row="12">
 

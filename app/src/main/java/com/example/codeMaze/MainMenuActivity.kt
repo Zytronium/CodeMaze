@@ -36,7 +36,7 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     enum class Gamemode { // 1 = Classic, 2 = SpeedMaze, 3 = Apocalypse, 4 = Glitch, 5 = PainMode, 6 = Inf, 7 SuddenDeath, 8 = NoMaze, 9 = Corruption. | 10 = Scavenger, 11 = TimeTrials, 0 = Story
-        Classic, SpeedMaze, Apocalypse, Glitch, PainMode, Inf, SuddenDeath, NoMaze, Corruption, Scavenger, TimeTrials, Story
+        Classic, SpeedMaze, Apocalypse, Glitch, PainMode, Inf, SuddenDeath, NoMaze, Corruption, Scavenger, TimeTrials, Stages, Story
     }
     object GameGm {
         var gamemode: Gamemode = Gamemode.Classic
@@ -113,7 +113,14 @@ class MainMenuActivity : AppCompatActivity() {
     fun timeTrial(view: View) {
         GameGm.gamemode = Gamemode.TimeTrials
         val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
-        startActivity(intent)}
+        startActivity(intent)
+    }
+
+    fun stages(view: View) {
+        GameGm.gamemode = Gamemode.Stages
+        val intent = Intent(this@MainMenuActivity, DifficultyActivity::class.java)
+        startActivity(intent)
+    }
 
 }
 

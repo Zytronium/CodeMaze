@@ -10,7 +10,7 @@ import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.graphics.drawable.ColorDrawable
 import android.os.*
-import android.os.VibrationEffect.createWaveform
+import android.os.Looper.loop
 import android.view.*
 import android.widget.*
 import androidx.annotation.RequiresApi
@@ -109,20 +109,22 @@ import com.example.codeMaze.Path1Tiles.TILE88
 import com.example.codeMaze.Path1Tiles.TILE89
 import com.example.codeMaze.Path1Tiles.TILE9
 import com.example.codeMaze.Path1Tiles.TILE90
-import com.google.android.material.internal.ViewUtils.getBackgroundColor
 import java.math.BigDecimal
 import java.math.RoundingMode
+import kotlin.concurrent.thread
 
-class MainActivity : AppCompatActivity() {
+class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     // 1 = classic; 2 = speed maze; 3 = speedrun;
     // 4 = glitch; 5 = pain mode; 6 = infinite;
     // 7 = sudden death; 8 = no maze; 9 = corruption
+//    private var mazeGenerationBeta = true
     private var loopTime = 1000
     private var playing: Boolean = true
     private var timerStarted: Boolean = false
     private var playerColor: Int = Color.WHITE
     private var hasLost: Boolean = false
     private var hasWon: Boolean = false
+    private var stage: Int = 0
     /* */ private var mode: MainMenuActivity.Gamemode = MainMenuActivity.GameGm.gamemode // 1 = classic; 2 = speed maze; 3 = speedrun; 4 = glitch; 5 = pain mode; 6 = infinite; 7 = sudden death; 8 = no maze; 9 = corruption
     /* */ private var difficulty: Int = DifficultyActivity.Difficulty.difficulty //0 //(1..4).random() // 0 - baby | 1 - beginner | 2 - easy | 3 - medium | 4 - hard | 5 - harder | 6 - expert | 7 - impossible | 8 - impossible++
     private var alphaUp: Boolean = true
@@ -249,6 +251,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tile88: FrameLayout
     private lateinit var tile89: FrameLayout
     private lateinit var tile90: FrameLayout
+    private var rainbowAttempts: Int = 0
 
     private lateinit var allTiles: Array<FrameLayout>
 //    private lateinit var path1: Array<FrameLayout>
@@ -386,8 +389,136 @@ class MainActivity : AppCompatActivity() {
         errorFails = 0
         crashFails = 0
 
-        allTiles = arrayOf(tile1, tile2, tile3, tile0, tile4, tile5, tile16, tile7, tile71, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile17, tile6, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27, tile28, tile29, tile30, tile31, tile32, tile33, tile34, tile35, tile36, tile37, tile38, tile39, tile40, tile41, tile42, tile43, tile44, tile45, tile46, tile47, tile48, tile49, tile50, tile51, tile52, tile53, tile54, tile55, tile56, tile57, tile58, tile59, tile60, tile61, tile62, tile63, tile64, tile65, tile66, tile67, tile68, tile69, tile70, tile8, tile72, tile73, tile74, tile75, tile76, tile77, tile78, tile79, tile80, tile81, tile82, tile83, tile84, tile85, tile86, tile87, tile88, tile89, tile90)
+        allTiles = arrayOf(
+            tile1,
+            tile2,
+            tile3,
+            tile0,
+            tile4,
+            tile5,
+            tile16,
+            tile7,
+            tile71,
+            tile9,
+            tile10,
+            tile11,
+            tile12,
+            tile13,
+            tile14,
+            tile15,
+            tile17,
+            tile6,
+            tile18,
+            tile19,
+            tile20,
+            tile21,
+            tile22,
+            tile23,
+            tile24,
+            tile25,
+            tile26,
+            tile27,
+            tile28,
+            tile29,
+            tile30,
+            tile31,
+            tile32,
+            tile33,
+            tile34,
+            tile35,
+            tile36,
+            tile37,
+            tile38,
+            tile39,
+            tile40,
+            tile41,
+            tile42,
+            tile43,
+            tile44,
+            tile45,
+            tile46,
+            tile47,
+            tile48,
+            tile49,
+            tile50,
+            tile51,
+            tile52,
+            tile53,
+            tile54,
+            tile55,
+            tile56,
+            tile57,
+            tile58,
+            tile59,
+            tile60,
+            tile61,
+            tile62,
+            tile63,
+            tile64,
+            tile65,
+            tile66,
+            tile67,
+            tile68,
+            tile69,
+            tile70,
+            tile8,
+            tile72,
+            tile73,
+            tile74,
+            tile75,
+            tile76,
+            tile77,
+            tile78,
+            tile79,
+            tile80,
+            tile81,
+            tile82,
+            tile83,
+            tile84,
+            tile85,
+            tile86,
+            tile87,
+            tile88,
+            tile89,
+            tile90
+        )
         allTiles.shuffle()
+
+//                val (height, width) = resources.displayMetrics.run { heightPixels/density to widthPixels/density }
+//                val widthDp = resources.displayMetrics.run { widthPixels / density }
+//                val heightDp = resources.displayMetrics.run { heightPixels / density }
+        val widthPx = resources.displayMetrics.run { widthPixels }
+        val heightPx = resources.displayMetrics.run { heightPixels }
+//                val sizeDp = heightDp * widthDp
+
+        val gridMaxWidth = widthPx * 0.9975F
+        val gridMaxHeight = heightPx * 0.835F
+        //ToDo: find a way for it to choose the correct one of these values, only one will be used and the other size will be set to 0 dp.
+        //for now, we will use gridMaxWidth.
+        val tileSize = minOf(
+            (gridMaxHeight / 13f),
+            (gridMaxWidth / 7f)
+        ) //ToDo: (maybe?) set dimens.xml resource value to this number + "dp"  and set all tile sizes to this size. May require converting back to pixels tho.
+        val playerSize = tileSize / 1.66F
+//        resources.getDimension(R.dimen.tile_size) //= tileSizeDp.toString() //(R.string.issues, issues.toString(), maxIssues.toString())
+
+        allTiles.forEach { tile: FrameLayout ->
+            tile.updateLayoutParams {
+                width = tileSize.toInt()
+                height = tileSize.toInt()
+            }
+        }
+        player.updateLayoutParams {
+            width = playerSize.toInt()
+            height = playerSize.toInt()
+        }
+        thread {
+
+                if (mode == MainMenuActivity.Gamemode.Stages) {
+                    stage = 1
+                    mode = MainMenuActivity.Gamemode.Classic
+                }
+
 //        when(difficulty) {
 //            0 -> optiGoal = 3   //testing goal    // baby
 //            1 -> optiGoal = (5..10).random()      // beginner
@@ -401,113 +532,146 @@ class MainActivity : AppCompatActivity() {
 //            9 -> optiGoal = (800..1500).random()  // impossible
 //            10 -> optiGoal = (2000..5000).random()// impossible++
 //        }
-        when(difficulty) {
-            -1 -> {         //* add for maxTime for time trials        // custom
-                maxIssues = CustomizeDifficultyActivity.CustomDifficulty.issuesMax
-                optiGoal = (CustomizeDifficultyActivity.CustomDifficulty.optiMin..CustomizeDifficultyActivity.CustomDifficulty.optiMax).random()
+            when (difficulty) {
+                -1 -> {         //* add for maxTime for time trials        // custom
+                    maxIssues = CustomizeDifficultyActivity.CustomDifficulty.issuesMax
+                    optiGoal =
+                        (CustomizeDifficultyActivity.CustomDifficulty.optiMin..CustomizeDifficultyActivity.CustomDifficulty.optiMax).random()
+                }
+                0 -> {
+                    maxTime = 240.0
+                    maxIssues = 35
+                    optiGoal = 3   //testing goal    // baby
+                }
+                1 -> {
+                    maxTime = 50.0
+                    maxIssues = 20
+                    optiGoal = (5..10).random()      // beginner
+                }
+                2 -> {
+                    maxTime = 25.0
+                    maxIssues = 15
+                    optiGoal = (10..15).random()     // easy
+                }
+                3 -> {
+                    maxTime = 15.0
+                    maxIssues = 10
+                    optiGoal = (15..25).random()     // normal
+                }
+                4 -> {
+                    maxTime = 10.0
+                    maxIssues = 10
+                    optiGoal = (30..60).random()     // hard
+                }
+                5 -> {
+                    maxTime = 8.0
+                    maxIssues = 9 // make 10 maybe?
+                    optiGoal = (65..135).random()    // experienced
+                }
+                6 -> {
+                    maxTime = 6.5
+                    maxIssues = 8 // make 9 maybe?
+                    optiGoal = (145..275).random()   // expert
+                }
+                7 -> {
+                    maxTime = 3.5
+                    maxIssues = 7
+                    optiGoal = (300..425).random()   // master
+                }
+                8 -> {
+                    maxTime = 2.5
+                    maxIssues = 6
+                    optiGoal = (444..777).random()   // deity
+                }
+                9 -> {
+                    maxTime = 2.0
+                    maxIssues = 5
+                    optiGoal = (800..1500).random()  // impossible
+                }
+                10 -> {
+                    maxTime = 1.5
+                    maxIssues = 3
+                    optiGoal = (2000..5000).random()// impossible++
+                }
+                else -> {
+                    maxTime = 20.0; maxIssues = 10; optiGoal = 20
+                    Toast.makeText(
+                        this,
+                        "Unknown difficulty loaded; setting makeshift difficulty.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
-            0 -> {
-                maxTime = 270.0
-                maxIssues = 30
-                optiGoal = 3   //testing goal    // baby
-            }
-            1 -> {
-                maxTime = 50.0
-                maxIssues = 20
-                optiGoal = (5..10).random()      // beginner
-            }
-            2 -> {
-                maxTime = 25.0
-                maxIssues = 15
-                optiGoal = (10..15).random()     // easy
-            }
-            3 -> {
-                maxTime = 15.0
-                maxIssues = 10
-                optiGoal = (15..25).random()     // normal
-            }
-            4 -> {
-                maxTime = 10.0
-                maxIssues = 10
-                optiGoal = (30..60).random()     // hard
-            }
-            5 -> {
-                maxTime = 8.0
-                maxIssues = 9 // make 10 maybe?
-                optiGoal = (65..135).random()    // experienced
-            }
-            6 -> {
-                maxTime = 6.5
-                maxIssues = 8 // make 9 maybe?
-                optiGoal = (145..275).random()   // expert
-            }
-            7 -> {
-                maxTime = 3.5
-                maxIssues = 7
-                optiGoal = (300..425).random()   // master
-            }
-            8 -> {
-                maxTime = 2.5
-                maxIssues = 6
-                optiGoal = (444..777).random()   // deity
-            }
-            9 -> {
-                maxTime = 2.0
-                maxIssues = 5
-                optiGoal = (800..1500).random()  // impossible
-            }
-            10 -> {
-                maxTime = 1.5
-                maxIssues = 3
-                optiGoal = (2000..5000).random()// impossible++
-            }
-            else -> {
-                maxTime = 20.0; maxIssues = 10; optiGoal = 20
-                Toast.makeText(this, "Unknown difficulty loaded; setting makeshift difficulty.", Toast.LENGTH_LONG).show()
-            }
+            if (mode == MainMenuActivity.Gamemode.SpeedMaze) maxIssues = 5
+            mainLayout = findViewById<View>(R.id.main) as ConstraintLayout
+            player.setOnTouchListener(onTouchListener())
+
+            if (mode == MainMenuActivity.Gamemode.SuddenDeath) screen.setBackgroundResource(R.drawable.death_gradient)
+
+            if (mode == MainMenuActivity.Gamemode.TimeTrials) {
+                time = maxTime
+                timeTrialStart()
+            } else time = 0.0//0.0
+
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            )
+
+            println("checkpoint 1")
+
+            val windowInsetsController =
+                ViewCompat.getWindowInsetsController(window.decorView) ?: return@thread
+            windowInsetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+            windowInsetsController.hide(WindowInsetsCompat.Type.displayCutout())
+
+            println("checkpoint 1.5")
         }
-        if(mode == MainMenuActivity.Gamemode.SpeedMaze) maxIssues = 5
-        mainLayout = findViewById<View>(R.id.main) as ConstraintLayout
-        player.setOnTouchListener(onTouchListener())
 
-        if(mode == MainMenuActivity.Gamemode.SuddenDeath) screen.setBackgroundResource(R.drawable.death_gradient)
+        if (mode == MainMenuActivity.Gamemode.Stages || stage == 1) {
+            Toast.makeText(this, "Stage 1: Classic", Toast.LENGTH_SHORT).show()
+        }
 
-        if(mode == MainMenuActivity.Gamemode.TimeTrials) {
-            time = maxTime
-            timeTrialStart()
-        } else time = 0.0//0.0
-
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
-
-    val windowInsetsController =
-            ViewCompat.getWindowInsetsController(window.decorView) ?: return
-        windowInsetsController.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
-        windowInsetsController.hide(WindowInsetsCompat.Type.displayCutout())
-
-//        spin(player, 350000, "z", 0f, 39600f)
-
+        println("checkpoint 2")
         readData()
         updateStats()
+        println("checkpoint 3")
         checkIssues()
+        println("checkpoint 4")
+
         generateTiles()
 
+        println(level)
+
+        thread {
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (SettingsValues.rainbowCharacter) rainbow(
+                player,
+                0f,
+                24,
+                2.5f
+            )
+        }, (15).toLong())
+            println("checkpoint 7")
+    }
         if (mode == MainMenuActivity.Gamemode.Corruption ) {
-            allTiles.forEach { the: FrameLayout -> loopCorrupt(the) }
+            thread {
+                allTiles.forEach { the: FrameLayout -> loopCorrupt(the) }
+            }
         }
 
         if(mode == MainMenuActivity.Gamemode.PainMode) {
             screen.setRenderEffect(RenderEffect.createBlurEffect(22F, 13F, Shader.TileMode.DECAL))
-            loopShake()
+                loopShake()
+
             alphaFluctuate()
         }
 
-        if(mode == MainMenuActivity.Gamemode.Apocalypse) {
-            loopError()
+        thread {
+        if(mode == MainMenuActivity.Gamemode.Apocalypse  || mode == MainMenuActivity.Gamemode.Stages || stage != 0) {
+            if(mode == MainMenuActivity.Gamemode.Apocalypse) loopError()
 
             when(difficulty) {
                 -1 -> loopTime = CustomizeDifficultyActivity.CustomDifficulty.apocLoopTime
@@ -523,6 +687,7 @@ class MainActivity : AppCompatActivity() {
                 9 -> loopTime = 333
                 10 -> loopTime = 250
             }
+            }
         }
 
         if(mode == MainMenuActivity.Gamemode.SpeedMaze) optiText.text = getString(R.string.speed_score, time.toString())
@@ -537,6 +702,34 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun nextStage() {
+        stage ++
+        when(stage) {
+            1 -> {
+                mode = MainMenuActivity.Gamemode.Classic
+//                optimizers = (optiGoal * 0/3 )
+            }
+            2 -> {
+                mode = MainMenuActivity.Gamemode.Apocalypse
+                optimizers = (optiGoal * 1/3 )
+                issues = (issues * 1/2 )
+                Toast.makeText(this, "Stage 2: Apocalypse", Toast.LENGTH_LONG).show()
+                loopError()
+            }
+            3 -> {
+                mode = MainMenuActivity.Gamemode.Corruption
+                optimizers = (optiGoal * 2/3 )
+                issues = (issues * 1/2 )
+                Toast.makeText(this, "Stage 3: Corruption", Toast.LENGTH_LONG).show()
+                thread {
+                    allTiles.forEach { frm: FrameLayout -> loopCorrupt(frm) } // loopError() will still continue running. This is intentional.
+                }
+            }
+            else -> {}
+        }
+        updateStats()
+    }
+
     private fun timeTrialStart() {
         timeBar.visibility = View.VISIBLE
         timeBar.max = (maxTime * 10.0).toInt()
@@ -549,14 +742,29 @@ class MainActivity : AppCompatActivity() {
         val strength = (((time * 85.0)-255.0)* -1.0).toInt()
 
         if(time in 0.05..3.0) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    screen.setRenderEffect(
-                        RenderEffect.createBlurEffect(
-                            strength / 5F,
-                            strength / 5F,
-                            Shader.TileMode.DECAL
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {//ToDo: fix crash here
+                    try {
+                        screen.setRenderEffect(
+                            RenderEffect.createBlurEffect(
+                                strength / 5F,
+                                strength / 5F,
+                                Shader.TileMode.DECAL
+                            )
                         )
-                    )
+                    } catch (e: Exception) {
+                        println("Error: $e\nTrying Again.")
+                        try {
+                            screen.setRenderEffect(
+                                RenderEffect.createBlurEffect(
+                                    strength / 5F,
+                                    strength / 5F,
+                                    Shader.TileMode.DECAL
+                                )
+                            )
+                        } catch (e: Exception) {
+                            println("Error: $e")
+                        }
+                    }
                 }
                     try {
                 vibrate(50, strength)
@@ -594,7 +802,7 @@ class MainActivity : AppCompatActivity() {
         timeBar.progress = (time * 10.0).toInt()
         //setcolor etc
         val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed({
+        handler.postDelayed({ //ToDo: fix crash here
             if(!hasWon && !hasLost)
                 startTimerTrial()
         }, (50).toLong())
@@ -605,8 +813,8 @@ class MainActivity : AppCompatActivity() {
         val handler = Handler(Looper.getMainLooper())
         if(thisTile.foreground == null && thisTile.tag != "finish" && !hasWon && !hasLost && playing) {
             when ((1..106).random()) {
-                in 1..25 -> thisTile.setBackgroundColor(getColor(R.color.safe_block))
-                in 26..30 -> thisTile.setBackgroundColor(getColor(R.color.tile_bomb_block))
+                in 1..5 -> thisTile.setBackgroundColor(getColor(R.color.tile_bomb_block))
+                in 6..30 -> thisTile.setBackgroundColor(getColor(R.color.safe_block))
                 in 31..36 -> thisTile.setBackgroundColor(getColor(R.color.fix_block))
                 in 36..70 -> thisTile.setBackgroundColor(getColor(R.color.warning_block))
                 in 71..85 -> thisTile.setBackgroundColor(getColor(R.color.error_block))
@@ -615,7 +823,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         handler.postDelayed({
-            loopCorrupt(thisTile)
+            if(!hasWon && !hasLost && playing) loopCorrupt(thisTile)
         }, (1000..7500).random().toLong())
 
     }
@@ -629,8 +837,8 @@ class MainActivity : AppCompatActivity() {
         optiText.text = getString(R.string.speed_score, decimal.toString())
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            if(!hasWon && !hasLost)
-            startTimer()
+            if (!hasWon && !hasLost)
+                startTimer()
         }, (50).toLong())
 
     }
@@ -857,97 +1065,98 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun generateLayout1() {
-        println(TILE0.toString())
-        println(TILE1.toString())
-        println(TILE2.toString())
-        println(TILE3.toString())
-        println(TILE4.toString())
-        println(TILE5.toString())
-        println(TILE6.toString())
-        println(TILE7.toString())
-        println(TILE8.toString())
-        println(TILE9.toString())
-        println(TILE10.toString())
-        println(TILE11.toString())
-        println(TILE12.toString())
-        println(TILE13.toString())
-        println(TILE14.toString())
-        println(TILE15.toString())
-        println(TILE16.toString())
-        println(TILE17.toString())
-        println(TILE18.toString())
-        println(TILE19.toString())
-        println(TILE20.toString())
-        println(TILE21.toString())
-        println(TILE22.toString())
-        println(TILE23.toString())
-        println(TILE24.toString())
-        println(TILE25.toString())
-        println(TILE26.toString())
-        println(TILE27.toString())
-        println(TILE28.toString())
-        println(TILE29.toString())
-        println(TILE30.toString())
-        println(TILE31.toString())
-        println(TILE32.toString())
-        println(TILE33.toString())
-        println(TILE34.toString())
-        println(TILE35.toString())
-        println(TILE36.toString())
-        println(TILE37.toString())
-        println(TILE38.toString())
-        println(TILE39.toString())
-        println(TILE40.toString())
-        println(TILE41.toString())
-        println(TILE42.toString())
-        println(TILE43.toString())
-        println(TILE44.toString())
-        println(TILE45.toString())
-        println(TILE46.toString())
-        println(TILE47.toString())
-        println(TILE48.toString())
-        println(TILE49.toString())
-        println(TILE50.toString())
-        println(TILE51.toString())
-        println(TILE52.toString())
-        println(TILE53.toString())
-        println(TILE54.toString())
-        println(TILE55.toString())
-        println(TILE56.toString())
-        println(TILE57.toString())
-        println(TILE58.toString())
-        println(TILE59.toString())
-        println(TILE60.toString())
-        println(TILE61.toString())
-        println(TILE62.toString())
-        println(TILE63.toString())
-        println(TILE64.toString())
-        println(TILE65.toString())
-        println(TILE66.toString())
-        println(TILE67.toString())
-        println(TILE68.toString())
-        println(TILE69.toString())
-        println(TILE70.toString())
-        println(TILE71.toString())
-        println(TILE72.toString())
-        println(TILE73.toString())
-        println(TILE74.toString())
-        println(TILE75.toString())
-        println(TILE76.toString())
-        println(TILE77.toString())
-        println(TILE78.toString())
-        println(TILE79.toString())
-        println(TILE80.toString())
-        println(TILE81.toString())
-        println(TILE82.toString())
-        println(TILE83.toString())
-        println(TILE84.toString())
-        println(TILE85.toString())
-        println(TILE86.toString())
-        println(TILE87.toString())
-        println(TILE88.toString())
-        println(TILE89.toString())
-        println(TILE90.toString())
+        println("receiving tile data")
+//        println(TILE0.toString())
+//        println(TILE1.toString())
+//        println(TILE2.toString())
+//        println(TILE3.toString())
+//        println(TILE4.toString())
+//        println(TILE5.toString())
+//        println(TILE6.toString())
+//        println(TILE7.toString())
+//        println(TILE8.toString())
+//        println(TILE9.toString())
+//        println(TILE10.toString())
+//        println(TILE11.toString())
+//        println(TILE12.toString())
+//        println(TILE13.toString())
+//        println(TILE14.toString())
+//        println(TILE15.toString())
+//        println(TILE16.toString())
+//        println(TILE17.toString())
+//        println(TILE18.toString())
+//        println(TILE19.toString())
+//        println(TILE20.toString())
+//        println(TILE21.toString())
+//        println(TILE22.toString())
+//        println(TILE23.toString())
+//        println(TILE24.toString())
+//        println(TILE25.toString())
+//        println(TILE26.toString())
+//        println(TILE27.toString())
+//        println(TILE28.toString())
+//        println(TILE29.toString())
+//        println(TILE30.toString())
+//        println(TILE31.toString())
+//        println(TILE32.toString())
+//        println(TILE33.toString())
+//        println(TILE34.toString())
+//        println(TILE35.toString())
+//        println(TILE36.toString())
+//        println(TILE37.toString())
+//        println(TILE38.toString())
+//        println(TILE39.toString())
+//        println(TILE40.toString())
+//        println(TILE41.toString())
+//        println(TILE42.toString())
+//        println(TILE43.toString())
+//        println(TILE44.toString())
+//        println(TILE45.toString())
+//        println(TILE46.toString())
+//        println(TILE47.toString())
+//        println(TILE48.toString())
+//        println(TILE49.toString())
+//        println(TILE50.toString())
+//        println(TILE51.toString())
+//        println(TILE52.toString())
+//        println(TILE53.toString())
+//        println(TILE54.toString())
+//        println(TILE55.toString())
+//        println(TILE56.toString())
+//        println(TILE57.toString())
+//        println(TILE58.toString())
+//        println(TILE59.toString())
+//        println(TILE60.toString())
+//        println(TILE61.toString())
+//        println(TILE62.toString())
+//        println(TILE63.toString())
+//        println(TILE64.toString())
+//        println(TILE65.toString())
+//        println(TILE66.toString())
+//        println(TILE67.toString())
+//        println(TILE68.toString())
+//        println(TILE69.toString())
+//        println(TILE70.toString())
+//        println(TILE71.toString())
+//        println(TILE72.toString())
+//        println(TILE73.toString())
+//        println(TILE74.toString())
+//        println(TILE75.toString())
+//        println(TILE76.toString())
+//        println(TILE77.toString())
+//        println(TILE78.toString())
+//        println(TILE79.toString())
+//        println(TILE80.toString())
+//        println(TILE81.toString())
+//        println(TILE82.toString())
+//        println(TILE83.toString())
+//        println(TILE84.toString())
+//        println(TILE85.toString())
+//        println(TILE86.toString())
+//        println(TILE87.toString())
+//        println(TILE88.toString())
+//        println(TILE89.toString())
+//        println(TILE90.toString())
         allTiles.forEach { frameLayout: FrameLayout ->
             frameLayout.setBackgroundColor(getColor(R.color.warning_block))
         }
@@ -1136,7 +1345,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun generateTiles() {
-        if (mode != MainMenuActivity.Gamemode.NoMaze) {
+        println("checkpoint 5")
+        /*if(mazeGenerationBeta) {
+            autoGenerateMaze1()
+            if(mode != MainMenuActivity.Gamemode.SpeedMaze) {
+                generateFixes((6..10).random())
+                if (mode != MainMenuActivity.Gamemode.Glitch) {
+                    generateOptimizers(6)
+                } else if (mode == MainMenuActivity.Gamemode.Glitch) highlightRandomTile(getColor(R.color.glitch_block))
+            }
+            generateErrors((21..25).random())
+            generateCrashes((5..8).random())
+        } else*/ if (mode != MainMenuActivity.Gamemode.NoMaze) {
             generateLayout1()
             if(mode != MainMenuActivity.Gamemode.SpeedMaze) {
                 generateFixes((6..10).random())
@@ -1155,6 +1375,8 @@ class MainActivity : AppCompatActivity() {
             generateErrors((15..23).random())
             generateCrashes((2..7).random())
         }
+
+        println("checkpoint 6")
     }
 
     private fun generateLayout2() {
@@ -1172,10 +1394,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+//    var fixWait = 5L
     private fun generateFix() {
         println("generating fix tile")
         val tile = selectRandomTile()
         if (getBackgroundColor(tile) == getColor(R.color.safe_block)) {
+//            fixWait += 40L
             tile.setBackgroundColor(getColor(R.color.fix_block))
             println("generated fix tile successfully")
         } else {
@@ -1278,8 +1502,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkIssues() {
         if (issues >= maxIssues) {
-            issues = 0
-            gameOver()
+                issues = 0
+                gameOver()
         }
         updateIssues()
     }
@@ -1291,35 +1515,37 @@ class MainActivity : AppCompatActivity() {
             val stage3: Int = if(st3 >= (maxIssues - 5)) st3 else (maxIssues - 5)
         issuesText.text = getString(R.string.issues, issues.toString(), maxIssues.toString())
 
-        if (issues != (maxIssues - 1)) {
-            if (issues !in 0..stage1) {
-                if (issues !in stage3..(maxIssues - 2)) {
-                    when (issues) {
-                        in stage1..stage2 -> {
-                            playerColor = getColor(R.color.player_color_green)
-                            player.setColorFilter(playerColor) //green
-                            playerShaking = false
+        if(!SettingsValues.rainbowCharacter) {
+            if (issues != (maxIssues - 1)) {
+                if (issues !in 0..stage1) {
+                    if (issues !in stage3..(maxIssues - 2)) {
+                        when (issues) {
+                            in stage1..stage2 -> {
+                                playerColor = getColor(R.color.player_color_green)
+                                player.setColorFilter(playerColor) //green
+                                playerShaking = false
+                            }
+                            in stage2..stage3 -> {
+                                playerColor = getColor(R.color.player_color_orange)
+                                player.setColorFilter(playerColor) //orange
+                                playerShaking = false
+                            }
                         }
-                        in stage2..stage3 -> {
-                            playerColor = getColor(R.color.player_color_orange)
-                            player.setColorFilter(playerColor) //orange
-                            playerShaking = false
-                        }
+                    } else {
+                        playerColor = getColor(R.color.player_color_red)
+                        player.setColorFilter(playerColor) //red
+                        playerShaking = false
                     }
                 } else {
-                    playerColor = getColor(R.color.player_color_red)
-                    player.setColorFilter(playerColor) //red
+                    playerColor = getColor(R.color.glow_teal)
+                    player.colorFilter = null
                     playerShaking = false
                 }
             } else {
-                playerColor = getColor(R.color.glow_teal)
-                player.colorFilter = null
-                playerShaking = false
+                playerColor = getColor(R.color.player_color_dark_red)
+                player.setColorFilter(playerColor) // dark red & shake
+                if (!playerShaking) loopShakePlayer()
             }
-        } else {
-            playerColor = getColor(R.color.player_color_dark_red)
-            player.setColorFilter(playerColor) // dark red & shake
-            if (!playerShaking) loopShakePlayer()
         }
 //        when(issues) {
 //            in 0..(if (ic * 0.125 >= 1.0) (ic * 0.125) else 1).toInt() -> {
@@ -1372,16 +1598,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun generateOptimizers(repeatNum: Int) {
-        repeat(repeatNum) {
-            generateOptimizer()
+        thread {
+            repeat(repeatNum) {
+                generateOptimizer()
+            }
         }
     }
 
     private fun generateOptimizer() {
         val tile = selectRandomTile()
-        if(getBackgroundColor(tile) == getColor(R.color.safe_block) && tile.foreground == null) {
+        if((getBackgroundColor(tile) == getColor(R.color.safe_block) || getBackgroundColor(tile) == getColor(R.color.fix_block)) && tile.foreground == null) {
             tile.foreground = getDrawable(R.drawable.ic_baseline_extension_24)//.toDrawable()
-            tile.setBackgroundColor(getColor(R.color.safe_block))
+//            tile.setBackgroundColor(getColor(R.color.safe_block))
+
 //            tile.setBackgroundColor(getColor(R.color.optimizer_piece))
         } else {
             optiFails++
@@ -1411,9 +1640,11 @@ class MainActivity : AppCompatActivity() {
                 else -> 10.0
             }
         }
+
         optimizers++
         totalOptimizers++
         allTiles.shuffle()
+
         when((1..4).random()) {
             1 -> {
                 generateFixBlock()
@@ -1425,13 +1656,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         if(optimizers >= optiGoal && !finBlockGenerated && mode != MainMenuActivity.Gamemode.Inf) {
-            generateFinishBlock()
-            finBlockGenerated = true
+            if(stage != 0 && stage < 3) {
+                nextStage()
+            } else {
+                generateFinishBlock()
+                finBlockGenerated = true
+            }
         }
         updateStats()
 //        saveStats()
         //if(optimizers <= x) {below code}
-        generateOptimizer()
+        if(!finBlockGenerated || SettingsValues.keepGeneratingOptis) generateOptimizer()
     }
 
     private fun generateFinishBlock() {
@@ -1466,7 +1701,7 @@ class MainActivity : AppCompatActivity() {
     private fun fixBlockHit(tile: FrameLayout) {
         if (issues != 0) {
             issues -= 1
-        } else if(issues == 0 && mode == MainMenuActivity.Gamemode.TimeTrials) time += 0.25
+        } else if(/*issues == 0 &&*/ mode == MainMenuActivity.Gamemode.TimeTrials) time += 0.25
 
         updateStats()
         tile.setBackgroundColor(getColor(R.color.safe_block))
@@ -1552,7 +1787,7 @@ class MainActivity : AppCompatActivity() {
                 in (2..4) -> selectedTile3.setBackgroundColor(getColor(R.color.glitch_block))
             }
         }
-        else -> println("WIP code")
+        else -> println("WIP code") //don't remember what would've gone here, if anything
     }
 
     when {
@@ -1587,20 +1822,20 @@ class MainActivity : AppCompatActivity() {
             menuButton.visibility = View.VISIBLE
 
             player.setOnTouchListener(null)
-
             screen.setBackgroundResource(R.drawable.death_gradient)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 val r = if(mode != MainMenuActivity.Gamemode.PainMode) 4F else 14f
                 screen.setRenderEffect(RenderEffect.createBlurEffect(r, r, Shader.TileMode.DECAL))
             }
-            Toast.makeText(applicationContext, "You Lost.", Toast.LENGTH_LONG).show()
+//            Toast.makeText(applicationContext, "You Lost.", Toast.LENGTH_LONG).show()
             postGameText.visibility = View.VISIBLE
-            postGameText.text = "Game Over"
+            postGameText.text = "Game Over."
 
             if (hasLost && hasWon) {
                 postGameText.text = "You managed to win and loose simultaneously!"
                 rainbow(grid, 90f, 1, 10f, true)
+//                Toast.makeText(applicationContext, "Actually, You Won & Lost!", Toast.LENGTH_LONG).show()
             }
 
             vibrate(250)
@@ -1654,7 +1889,6 @@ class MainActivity : AppCompatActivity() {
 
             handler1.postDelayed({
                 player.colorFilter = null
-
                 saveStats()
 
                 handler1.postDelayed({
@@ -1682,7 +1916,6 @@ class MainActivity : AppCompatActivity() {
                                                         animator2.start()
                                                     }
                                                 } else if(hasLost && hasWon) {
-
                                                     val animator2 = ObjectAnimator.ofFloat(grid, View.ALPHA, 0.955f, 0.3555f)
                                                     animator2.duration = (2777).toLong()
                                                     animator2.start()
@@ -1716,7 +1949,6 @@ class MainActivity : AppCompatActivity() {
             var repeatNum = 90
             if(mode == MainMenuActivity.Gamemode.Glitch || mode == MainMenuActivity.Gamemode.SpeedMaze) repeatNum = 91
             hasWon = true
-
             println("win!")
             vibrate(75)
             player.setOnTouchListener(null)
@@ -1733,17 +1965,17 @@ class MainActivity : AppCompatActivity() {
             optimizers = 0
             saveStats()
 //        loadNextLevel()
-            Toast.makeText(applicationContext, "You Win!", Toast.LENGTH_LONG).show()
+//            Toast.makeText(applicationContext, "You Win!", Toast.LENGTH_LONG).show()
             postGameText.visibility = View.VISIBLE
 //            postGameText.text = "You won!\nTap your character to play again, or tap and hold to go to the main menu."
-            postGameText.text = "You win!" //as CharSequence
+            postGameText.text = "You win!"
 
                 restartButton.visibility = View.VISIBLE
                 menuButton.visibility = View.VISIBLE
             // wins++
             if (hasLost && hasWon) {
                 postGameText.text = "You managed to win and loose simultaneously!" //as String
-                issues++
+                issues++ //I think this was done because it's technically an issue of user has won and lost at the same time, so the game adds 1 issue.
                 updateIssues()
                 rainbow(grid, 350f, 1, 10f, true)
             }
@@ -1752,22 +1984,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun rainbowAll() {
             val tile = allTiles.random()
-            if(tile.tag != "rainbow" && tile.tag != "finish" ) {
+            if(tile.tag != "rainbow" && tile.tag != "finish") {
                 tile.tag = "rainbow"
                 tile.alpha = 0.75f
                 vibrate(10)
                 if(tile.foreground != null) tile.foreground = null
                 rainbow(tile, 0f, 9, 2f, false)
-            } else rainbowAll()
+            } else {
+                if(rainbowAttempts <= 900) {
+                    rainbowAttempts++
+                    rainbowAll()
+                }
+            }
     }
-
-    private fun loadNextLevel() {
-        //xx = level
-        //load this level
-
-        //or... randomize game board
-    }
-
+//    private fun loadNextLevel() { //leave this here because it's been here unused for so long, just as a memory
+//        //xx = level
+//        //load this level
+//        //or... randomize game board
+//    }
     private fun shakeScreen() {
         rot1end = (-1..1).random().toFloat()
         rot2end = (-1..1).random().toFloat()
@@ -1867,7 +2101,7 @@ class MainActivity : AppCompatActivity() {
         allTiles.onEach { frameLayout: FrameLayout ->
             val tileX = frameLayout.x
             val tileY = frameLayout.y
-//            println(frameLayout.height.toString())
+            /*
             if(playerX <= (tileX + 165f)) { // up = left | left | Johnathan phone: +115 | Austin phone before: same | me before: + 165f | me: 165 | Xavier: 165f
                 if(playerX >= (tileX - 90f)) { // up = left (remember number is negative rn) | right | Johnathan phone: -70 | Austin phone before: same | me before: - 80f | me: -90 | Xavier: -90f
 //                    println("X collision detected.")
@@ -1875,9 +2109,22 @@ class MainActivity : AppCompatActivity() {
                     if(playerY >= (tileY + 102f)) { // up = up | bottom | Johnathan phone: -25 | Austin phone before: 102f | me before: + 65f | me: 102 | Xavier: +85f
                         if(playerY <= (tileY + 310f)) { // up = up | top | Johnathan phone: +120 | Austin phone before: 303f | me before + 270f | me: 310 | Xavier: +285f
 //                            println("Y collision detected.")
-//                            println("player's Y is $playerY and tile's Y is $tileY")
-//                            checkIssues()
+            */
+            val playerTop = playerY
+            val playerBottom = playerY + player.height
+            val playerLeft = playerX
+            val playerRight = playerX + player.width
+            val tileTop = tileY + grid.y
+            val tileBottom = tileY + frameLayout.height + grid.y
+            val tileLeft =   tileX + grid.x
+            val tileRight =  tileX + frameLayout.width + grid.x
 
+            if(playerLeft <= (tileRight + (frameLayout.width / 19.75f ))) { // Player Left - Tile Right hitbox. Negative leeway added because of weird shape & size of player | Remember, X coords are bigger when farther right on screen
+                if(playerRight >= (tileLeft - (frameLayout.width / 19.75f))) { // Player Right - Tile Left hitbox. Negative leeway added because of weird shape & size of player | Remember, X coords are bigger when farther right on screen
+//                    println("X collision detected.")
+                    if(playerBottom >= (tileTop + (frameLayout.height / 5.9f ))) { //     Player Bottom - Tile Top hitbox. Leeway added. Remember, Y coords are bigger when LOWER on screen
+                        if(playerTop <= (tileBottom - (frameLayout.height / 8.5f ))) { // Player Top - Tile Bottom hitbox. Leeway added. Remember, Y coords are bigger when LOWER on screen
+//                            println("Y collision detected.")
                             if(frameLayout.alpha == 0.55f) {
                                 frameLayout.alpha = 0.6f
                                 if(mode == MainMenuActivity.Gamemode.PainMode) {
@@ -1888,7 +2135,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                 }
 
-                                if (frameLayout.foreground != null) optimizerCollect(frameLayout)
+                                if (frameLayout.foreground != null) optimizerCollect(frameLayout) // Note: change this if/when other tile items are added (like tile bomb as an item instead of tile type/color)
 
                                 when {
                                     getBackgroundColor(frameLayout) == warningColor -> {
@@ -1917,7 +2164,7 @@ class MainActivity : AppCompatActivity() {
                 } else if(frameLayout.alpha == 0.6f) frameLayout.alpha = 0.55f
             } else if(frameLayout.alpha == 0.6f) frameLayout.alpha = 0.55f
         }
-        if(playerY <= (tile9.y + 90f) && mode == MainMenuActivity.Gamemode.SpeedMaze) levelWin()
+        if(playerY <= (grid.y - (player.height * 1.1F)) && mode == MainMenuActivity.Gamemode.SpeedMaze) levelWin()
         if(mode == MainMenuActivity.Gamemode.SpeedMaze && !timerStarted) {
             timerStarted = true
             startTimer()
@@ -2031,6 +2278,11 @@ class MainActivity : AppCompatActivity() {
         level = shared.getInt("level", level)
 //        optimizers = shared.getInt("optimizers", optimizers)
         totalOptimizers = shared.getInt("totalOptimizers", totalOptimizers)
+
+        SettingsValues.vibrationsAllowed   = shared.getBoolean("vibrations",    SettingsValues.vibrationsAllowed )
+        SettingsValues.visualMazeGen       = shared.getBoolean("visualMazeGen", SettingsValues.visualMazeGen )
+        SettingsValues.keepGeneratingOptis = shared.getBoolean("keepGenOptis",  SettingsValues.keepGeneratingOptis)
+        SettingsValues.rainbowCharacter    = shared.getBoolean("rainbowCharacter",  SettingsValues.rainbowCharacter)
     }
 
     private fun saveStats() {
@@ -2039,30 +2291,46 @@ class MainActivity : AppCompatActivity() {
         edit.putInt("level" , level )
 //        edit.putInt("optimizers" , optimizers )
         edit.putInt("totalOptimizers" , totalOptimizers )
+
+        //                     --Settings--                     \\
+        edit.putBoolean("vibrations" , SettingsValues.vibrationsAllowed)
+        edit.putBoolean("visualMazeGen" , SettingsValues.visualMazeGen)
+        edit.putBoolean("keepGenOptis" , SettingsValues.keepGeneratingOptis)
+        edit.putBoolean("rainbowCharacter" , SettingsValues.rainbowCharacter)
         edit.apply()
     }
          private fun vibrate(time: Long, strength: Int = -1) {
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        if (vibrator.hasVibrator()) { // Vibrator availability checking
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+             val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+             if(SettingsValues.vibrationsAllowed) {
+                 if (vibrator.hasVibrator()) { // Vibrator availability checking
+                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 //                vibrator.vibrate(createWaveform(
 //                    timings = longArrayOf(0L, 100L, 20L, 100L),
 //                    amplitudes = intArrayOf(145, 40),
 //                    repeat = -1
 //                ))
-                vibrator.vibrate(VibrationEffect.createOneShot(time, strength/*VibrationEffect.DEFAULT_AMPLITUDE)*/)) // New vibrate method for API Level 26 or higher
-            } else {
-                vibrator.vibrate(time) // Vibrate method for below API Level 26
-            }
-        }
+                         vibrator.vibrate(
+                             VibrationEffect.createOneShot(
+                                 time,
+                                 strength/*VibrationEffect.DEFAULT_AMPLITUDE)*/
+                             )
+                         ) // New vibrate method for API Level 26 or higher
+                     } else {
+                         vibrator.vibrate(time) // Vibrate method for below API Level 26
+                     }
+                 }
+             }
     }
 
     private fun rainbow(target: View, hue: Float, speed: Long, strength: Float, ignoreHasLost: Boolean = false) {
         if((playing && !hasLost) || (playing && ignoreHasLost)) {
             var h = hue
             if (h >= 360f) h -= 360f
-            target.setBackgroundColor(Color.HSVToColor(floatArrayOf(h, 100f, 100f)))
+            if(target == player && target is ImageView) {
+                target.setColorFilter(Color.HSVToColor(floatArrayOf(h, 100f, 100f)))
+            }
+            else target.setBackgroundColor(Color.HSVToColor(floatArrayOf(h, 100f, 100f)))
             Handler(Looper.getMainLooper()).postDelayed({
                 rainbow(target, (h + strength), speed, strength, ignoreHasLost)
             }, (speed))
@@ -2173,6 +2441,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun restart(view: View) {
+//        if(stage != 0) {
+//            mode = MainMenuActivity.Gamemode.Stages
+//            stage = 0
+//        }
         issues = 0
         optimizers = 0
         resetTileData()
@@ -2182,6 +2454,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    class tile(val x: Int, val y: Int, )
 
 }
 // Green: Safe block
@@ -2194,9 +2468,11 @@ class MainActivity : AppCompatActivity() {
 
 /* ~FEATURE IDEAS~
 *  Hitting an Error Block makes the phone vibrate and screen shake via 3D rotation -- already implemented (final feature modified slightly from this)
-*  Idea: White Blocks: Ad Blocks; gives the user a frikin' ad -- idea scrapped
+*  Idea: White Blocks: Ad Blocks; gives the user a frikin' ad -- idea scrapped | Note: May be worth looking into again. Could make an entire gamemode about this!
 *  Story Mode -- idk
 *  Sound effects
 *  Color mode(?): tell user color, user navigates to tile of this color before time runs out
 *
-* 563 | 4849 -> 746 ~ 2179 */
+*  More Ideas in a note on my phone.
+*
+* 563 | 4849 -> 746 ~ 2179 ~ 6/21/23: 2476 ~ _/__/2_: ____ */ // Total number of lines over time (including this line?)

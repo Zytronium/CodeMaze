@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tile_size">58dp</dimen>
+</resources>
+<!--65 DP clearance from top edge of screen-->
+<!--75 DP clearance from bottom edge of screen-->
+<!--^(with example screen size)^-->
+<!--grid takes up ~84% of screen height at most-->
+<!--grid takes up roughly 99.5% of screen width at most-->

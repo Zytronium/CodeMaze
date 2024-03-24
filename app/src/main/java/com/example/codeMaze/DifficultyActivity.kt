@@ -71,7 +71,7 @@ class DifficultyActivity : AppCompatActivity() {
             startBtn.setBackgroundColor(getColor(R.color.blue))
             startBtn.setTextColor(getColor(R.color.glow_teal))
 
-            diffText.text = getString(R.string.diff_text, "In baby mode, the player looses at only 30 issues and wins at a goal of 3 optimizers. In Apocalypse mode, tiles progress to worse stages every 5 seconds. This might be the hardest difficulty yet. This hidden mode has bee used for testing purposes, but it is fine to use if you just can't do it on beginner mode.")
+            diffText.text = getString(R.string.diff_text, "In baby mode, the player looses at only 30 issues and wins at a goal of 3 optimizers. In Apocalypse mode, tiles progress to worse stages every 5 seconds. This might be the hardest difficulty yet. This hidden mode has been used for testing purposes, but it's fine to use if you just can't do it on beginner mode.")
             resizeText()
             resetButtonScales()
             true
@@ -88,9 +88,11 @@ class DifficultyActivity : AppCompatActivity() {
         ) {}
 //        setAutoSizeTextTypeUniformWithConfiguration(int autoSizeMinTextSize, int autoSizeMaxTextSize,
 //            int autoSizeStepGranularity, int unit)
-
-        diffText.setAutoSizeTextTypeUniformWithConfiguration(
-            12, 225, 4, TypedValue.COMPLEX_UNIT_DIP);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            diffText.setAutoSizeTextTypeUniformWithConfiguration(
+                12, 225, 4, TypedValue.COMPLEX_UNIT_DIP
+            );
+        }
     }
 
     object Difficulty {
@@ -103,7 +105,8 @@ class DifficultyActivity : AppCompatActivity() {
         startBtn.setBackgroundColor(getColor(R.color.blue))
         startBtn.setTextColor(getColor(R.color.glow_teal))
 
-        diffText.text = getString(R.string.diff_text, "In custom difficulty, you choose all, the parameters. Currently, customizable parameters include choosing the amount of issues the player looses at, the range of numbers that the optimizers goal can be, and, if your in Apocalypse mode, the speed Apocalypse mode progresses.")
+        diffText.text = getString(R.string.diff_text, "In custom difficulty, you choose all the parameters. Currently, customizable parameters include: choosing the amount of issues the player looses at; the range of numbers that the optimizers goal can be; and, when in Apocalypse mode, the speed Apocalypse mode progresses.")
+
         resizeText()
         resetButtonScales()
         view.scaleX = 1f
@@ -243,7 +246,7 @@ class DifficultyActivity : AppCompatActivity() {
         startBtn.setBackgroundColor(getColor(R.color.blue))
         startBtn.setTextColor(getColor(R.color.glow_teal))
 
-        diffText.text = getString(R.string.diff_text, "In impossible+ mode, the player looses at only 3 issues, and wins at 2000 to 5000 optimizers. In Apocalypse mode, tiles progress to worse stages every quarter second. If you can beat this you'll win one trillion useless points. Seriously, don't try this, it's not worth it.")
+        diffText.text = getString(R.string.diff_text, "In impossible+ mode, the player looses at only 3 issues, and wins at 2000 to 5000 optimizers. In Apocalypse mode, tiles progress to worse stages every quarter second. If you can beat this, you'll win one trillion useless points. Seriously, don't try this, it's not worth it.")
         resizeText()
         resetButtonScales()
         view.scaleX = 1f
@@ -254,6 +257,12 @@ class DifficultyActivity : AppCompatActivity() {
         var intent = Intent(this@DifficultyActivity, StartActivity::class.java)
         if (gamemode == MainMenuActivity.Gamemode.NoMaze) intent = Intent(this@DifficultyActivity, MainActivity::class.java)
         if (Difficulty.difficulty == -1) intent = Intent(this@DifficultyActivity, CustomizeDifficultyActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun back(view: View) {
+        var intent = Intent(this@DifficultyActivity, MainMenuActivity::class.java)
         startActivity(intent)
         finish()
     }

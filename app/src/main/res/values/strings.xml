@@ -18,9 +18,14 @@
     <!-- Game Preferences -->
     <string name="signature_title">Your signature</string> <!-- sample, not using -->
     <string name="reply_title">Default reply action</string> <!-- sample, not using -->
-    <string name="vibrations_title">Allow Vibrations</string>
-    <string name="vibrations_summary_on">Allow this game to vibrate the phone.\n*WIP Setting; toggling currently does nothing.*</string>
-    <string name="vibrations_summary_off">This game will never vibrate your phone.</string>
+
+    <string name="visual_maze_generation_title">Visual Maze Generation </string>
+    <string name="visual_maze_generation_summary_on">When on, visually generate the maze one tile at a time. This also enables experimental random maze generation. This is a WIP. </string>
+    <string name="visual_maze_generation_summary_off">When off, instantly generate the maze upon loading game. This disables experimental random maze generation, so the maze path is randomly selected from a large group of pre-made preset paths.</string>
+
+    <string name="keep_gen_opti_title">Keep generating optimizers after goal has been met</string>
+    <string name="kgo_summary_on">When on, after the optimizers goal has been met, optimizer tiles will still keep appearing forever.</string>
+    <string name="kgo_summary_off">When off, no more optimizers will appear after the goal has been met and the Finish tile has appeared.</string>
 
     <!-- Misc Preferences -->
     <string name="sync_title">Sync email periodically</string> <!-- sample, not using -->
@@ -28,11 +33,12 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails</string> <!-- sample, not using -->
     <string name="attachment_summary_off">Only download attachments when manually requested</string> <!-- sample, not using -->
 
-    <string name="rainbow_title">Rainbow Character</string>
-    <string name="rainbow_summary_on">Character constantly changes colors, cycling though the entire rainbow. *may interfere with character color blinking during things like collisions with tiles and game over animations.</string>
-    <string name="rainbow_summary_off">When off, Character stays normal white color. \nWhen on, Character constantly changes colors, cycling though the entire rainbow.\n*WIP setting, currently will not work*</string>
+    <string name="vibrations_title">Allow Vibrations</string>
+    <string name="vibrations_summary_on">Allow this game to vibrate the phone. </string>
+    <string name="vibrations_summary_off">This game will never vibrate your phone. </string>
 
-    <string name="keep_gen_opti_title">Keep generating optimizers after goal has been met</string>
-    <string name="kgo_summary_on">When on, after the optimizers goal has been met, optimizer tiles will still keep appearing forever.\n*WIP setting, toggling off currently will not affect anything* </string>
-    <string name="kgo_summary_off">When off, no more optimizers will appear after the goal has been met and the Finish tile has appeared.</string>
+    <string name="rainbow_title">Rainbow Character</string>
+    <string name="rainbow_summary_on">When on, Character constantly changes colors, cycling though the rainbow. *Interferes with other Character color changes, this is a WIP setting*</string>
+    <string name="rainbow_summary_off">When off, Character stays normal white color, except when the character normally changes colors to indicate things like player health and damage taken. </string>
+    <string name="android_logo_player_icon_description">Android Logo Player Icon</string>
 </resources>
