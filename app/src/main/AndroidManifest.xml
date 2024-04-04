@@ -64,12 +64,6 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity2"
-            android:configChanges="orientation"
-            android:showWhenLocked="true"
-            android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".StoryStartActivity"
             android:configChanges="orientation"
             android:exported="true"

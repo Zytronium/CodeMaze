@@ -9,11 +9,13 @@ import android.graphics.Color
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.*
 import android.view.*
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.*
 import androidx.gridlayout.widget.GridLayout
@@ -126,6 +128,14 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     private var stage: Int = 0
     /* */ private var mode: MainMenuActivity.Gamemode = MainMenuActivity.GameGm.gamemode // 1 = classic; 2 = speed maze; 3 = speedrun; 4 = glitch; 5 = pain mode; 6 = infinite; 7 = sudden death; 8 = no maze; 9 = corruption
     /* */ private var difficulty: Int = DifficultyActivity.Difficulty.difficulty //0 //(1..4).random() // 0 - baby | 1 - beginner | 2 - easy | 3 - medium | 4 - hard | 5 - harder | 6 - expert | 7 - impossible | 8 - impossible++
+    private var foolsColors = emptyArray<Int>()
+    private var foolsFixColor: Int = 0
+    private var foolsPathColor: Int = 0
+    private var foolsGlitchColor: Int = 0
+    private var foolsErrorColor: Int = 0
+    private var foolsWarningColor: Int = 0
+    private var foolsCrashColor: Int = 0
+    private var foolsBombColor: Int = 0
     private var alphaUp: Boolean = true
     private var alphaDown: Boolean = false
     private var playerShaking: Boolean = false
@@ -381,6 +391,16 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         tile90 = findViewById(R.id.tile90)
         tile89 = findViewById(R.id.tile89)
         playerColor = getColor(R.color.glow_teal)
+        foolsColors = arrayOf(
+            getColor(R.color.glitch_block),
+            getColor(R.color.fix_block),
+            getColor(R.color.error_block),
+            getColor(R.color.black),
+            getColor(R.color.warning_block),
+            getColor(R.color.tile_bomb_block),
+            getColor(R.color.safe_block)
+        )
+
         // to edo : add joke EULA rkrl
         optiFails = 0
         fixFails = 0
@@ -519,7 +539,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                 }
 
 //        when(difficulty) {
-//            0 -> optiGoal = 3   //testing goal    // baby
+//            0 -> optiGoal = 3    //testing goal     // baby
 //            1 -> optiGoal = (5..10).random()      // beginner
 //            2 -> optiGoal = (10..15).random()     // easy
 //            3 -> optiGoal = (15..25).random()     // normal
@@ -593,7 +613,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                     optiGoal = (2000..5000).random()// impossible++
                 }
                 else -> {
-                    maxTime = 20.0; maxIssues = 10; optiGoal = 20
+                    maxTime = 15.0; maxIssues = 10; optiGoal = 25
                     Toast.makeText(
                         this,
                         "Unknown difficulty loaded; setting makeshift difficulty.",
@@ -610,35 +630,67 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
             if (mode == MainMenuActivity.Gamemode.TimeTrials) {
                 time = maxTime
                 timeTrialStart()
-            } else time = 0.0//0.0
+            } else time = 0.0
 
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             )
-
-            println("checkpoint 1")
-
             val windowInsetsController =
                 ViewCompat.getWindowInsetsController(window.decorView) ?: return@thread
             windowInsetsController.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
             windowInsetsController.hide(WindowInsetsCompat.Type.displayCutout())
+        }
 
-            println("checkpoint 1.5")
+        if(mode == MainMenuActivity.Gamemode.Switcheroo) {
+            foolsColors.shuffle()
+            foolsFixColor = foolsColors[0]
+            foolsPathColor = foolsColors[1]
+            foolsGlitchColor = foolsColors[2]
+            foolsErrorColor = foolsColors[3]
+            foolsWarningColor = foolsColors[4]
+            foolsCrashColor = foolsColors[5]
+            foolsBombColor = foolsColors[6]
+            if(foolsCrashColor == getColor(R.color.safe_block)) {
+                when((0..6).random()) {
+                    0 -> {
+                        foolsCrashColor = foolsColors[0]
+                        foolsFixColor = foolsColors[5]
+                    }
+                    1 -> {
+                        foolsCrashColor = foolsColors[1]
+                        foolsPathColor = foolsColors[5]
+                    }
+                    2 -> {
+                        foolsCrashColor = foolsColors[2]
+                        foolsGlitchColor = foolsColors[5]
+                    }
+                    3 -> {
+                        foolsCrashColor = foolsColors[3]
+                        foolsErrorColor = foolsColors[5]
+                    }
+                    4 -> {
+                        foolsCrashColor = foolsColors[4]
+                        foolsWarningColor = foolsColors[5]
+                    }
+                    6 -> {
+                        foolsCrashColor = foolsColors[6]
+                        foolsBombColor = foolsColors[5]
+                    }
+                    else -> {}
+                }
+            }
         }
 
         if (mode == MainMenuActivity.Gamemode.Stages || stage == 1) {
             Toast.makeText(this, "Stage 1: Classic", Toast.LENGTH_SHORT).show()
         }
 
-        println("checkpoint 2")
         readData()
         updateStats()
-        println("checkpoint 3")
         checkIssues()
-        println("checkpoint 4")
 
         generateTiles()
 
@@ -653,7 +705,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                 2.5f
             )
         }, (15).toLong())
-            println("checkpoint 7")
     }
         if (mode == MainMenuActivity.Gamemode.Corruption ) {
             thread {
@@ -1344,7 +1395,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun generateTiles() {
-        println("checkpoint 5")
         /*if(mazeGenerationBeta) {
             autoGenerateMaze1()
             if(mode != MainMenuActivity.Gamemode.SpeedMaze) {
@@ -1374,8 +1424,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
             generateErrors((15..23).random())
             generateCrashes((2..7).random())
         }
-
-        println("checkpoint 6")
     }
 
     private fun generateLayout2() {
@@ -1607,7 +1655,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     private fun generateOptimizer() {
         val tile = selectRandomTile()
         if((getBackgroundColor(tile) == getColor(R.color.safe_block) || getBackgroundColor(tile) == getColor(R.color.fix_block)) && tile.foreground == null) {
-            tile.foreground = getDrawable(R.drawable.ic_baseline_extension_24)//.toDrawable()
+            tile.foreground = AppCompatResources.getDrawable(this, R.drawable.ic_baseline_extension_24)//.toDrawable()
 //            tile.setBackgroundColor(getColor(R.color.safe_block))
 
 //            tile.setBackgroundColor(getColor(R.color.optimizer_piece))
@@ -1703,7 +1751,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         } else if(/*issues == 0 &&*/ mode == MainMenuActivity.Gamemode.TimeTrials) time += 0.25
 
         updateStats()
-        tile.setBackgroundColor(getColor(R.color.safe_block))
+        tile.setBackgroundColor(if(mode == MainMenuActivity.Gamemode.Switcheroo) foolsPathColor else getColor(R.color.safe_block))
 
         when((1..4).random()) {
             1 -> generateFixBlock()
@@ -1860,6 +1908,11 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                                 ObjectAnimator.ofFloat(grid, View.ROTATION_Y, rot3end, 0f)
                             animator3.duration = ((74..76).random()).toLong()
                             animator3.start()
+
+                            if(mode == MainMenuActivity.Gamemode.Switcheroo) {
+                                if((1..9000).random() == 7) startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://youtu.be/pyoURHR-g4U")))
+                            }
+
                         }, 75)
                     }, 75)
                 }, 75)
@@ -2088,12 +2141,12 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun checkHitboxes() {
-            val glitchColor = getColor(R.color.glitch_block)
-            val errorColor = getColor(R.color.error_block)
-            val warningColor = getColor(R.color.warning_block)
-            val fixColor = getColor(R.color.fix_block)
-            val crashColor = getColor(R.color.black)
-            val bombColor = getColor(R.color.tile_bomb_block)
+            val glitchColor =     if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsGlitchColor} else getColor(R.color.glitch_block)
+            val errorColor =      if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsErrorColor} else getColor(R.color.error_block)
+            val warningColor =  if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsWarningColor} else getColor(R.color.warning_block)
+            val fixColor =         if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsFixColor} else getColor(R.color.fix_block)
+            val crashColor =     if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsCrashColor} else getColor(R.color.black)
+            val bombColor =     if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsBombColor} else getColor(R.color.tile_bomb_block)
 //            val optiColor = getColor(R.color.optimizer_piece)
             val playerX = player.x
             val playerY = player.y
@@ -2171,18 +2224,18 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun tileBombBlockHit(thisTile: FrameLayout) {
-        thisTile.setBackgroundColor(getColor(R.color.warning_block))
+        thisTile.setBackgroundColor(if(mode == MainMenuActivity.Gamemode.Switcheroo) foolsWarningColor else getColor(R.color.warning_block))
         vibrate(230)
         repeat((5..10).random()) {
             val handler = Handler(Looper.getMainLooper())
             handler.postDelayed({
                 when((1..11).random()) {
-                    in 1..3 -> highlightRandomTile(getColor(R.color.warning_block))
-                    in 4..6 -> highlightRandomTile(getColor(R.color.error_block))
-                    in 7..8 -> highlightRandomTile(getColor(R.color.black))
-                    9 -> highlightRandomTile(getColor(R.color.glitch_block))
-                    10 -> highlightRandomTile(getColor(R.color.tile_bomb_block))
-                    11 -> highlightRandomTile(getColor(R.color.safe_block))
+                    in 1..3 -> highlightRandomTile(if(mode == MainMenuActivity.Gamemode.Switcheroo) foolsWarningColor else getColor(R.color.warning_block))
+                    in 4..6 -> highlightRandomTile(if(mode == MainMenuActivity.Gamemode.Switcheroo) foolsErrorColor else getColor(R.color.error_block))
+                    in 7..8 -> highlightRandomTile(if(mode == MainMenuActivity.Gamemode.Switcheroo) foolsCrashColor else getColor(R.color.black))
+                    9 -> highlightRandomTile(if(mode == MainMenuActivity.Gamemode.Switcheroo) foolsGlitchColor else getColor(R.color.glitch_block))
+                    10 -> highlightRandomTile(if(mode == MainMenuActivity.Gamemode.Switcheroo) foolsBombColor else getColor(R.color.tile_bomb_block))
+                    11 -> highlightRandomTile(if(mode == MainMenuActivity.Gamemode.Switcheroo) foolsPathColor else getColor(R.color.safe_block))
                 }
                 vibrate(55)
             }, ((15..450).random().toLong()))
@@ -2203,18 +2256,18 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                 in (1..2) -> {
                     issues += (1..3).random()
                     repeat((0..2).random()) {
-                        highlightRandomTile(getColor(R.color.glitch_block))
+                        highlightRandomTile(if(mode == MainMenuActivity.Gamemode.Switcheroo) arrayOf(getColor(R.color.glitch_block), foolsGlitchColor, foolsGlitchColor).random() else getColor(R.color.glitch_block))
                     }
                 }
                 in (3..19) -> {
                     issues += (0..3).random()
                     repeat((2..6).random()) {
-                        highlightRandomTile(getColor(R.color.glitch_block))
+                        highlightRandomTile(if(mode == MainMenuActivity.Gamemode.Switcheroo) arrayOf(getColor(R.color.glitch_block), foolsGlitchColor, foolsGlitchColor).random() else getColor(R.color.glitch_block))
                     }
                 }
                 20 -> {
                     repeat((2..6).random()) {
-                        highlightRandomTile(getColor(R.color.glitch_block))
+                        highlightRandomTile(if(mode == MainMenuActivity.Gamemode.Switcheroo) arrayOf(getColor(R.color.glitch_block), foolsGlitchColor, foolsGlitchColor).random() else getColor(R.color.glitch_block))
                     }
                     issues += (maxIssues - 1)
                 }
@@ -2472,6 +2525,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
 *  Sound effects
 *  Color mode(?): tell user color, user navigates to tile of this color before time runs out
 *
+* April Fools mode: Game board generates like normal classic game, but the functions of each color are randomized each game. If there's time, there will also be a rickroll tile that appears. -- done
 *  More Ideas in a note on my phone.
 *
 * 563 | 4849 -> 746 ~ 2179 ~ 6/21/23: 2476 ~ _/__/2_: ____ */ // Total number of lines over time (including this line?)

@@ -202,17 +202,32 @@
                     app:cornerRadius="28dp" />
 
                 <Button
-                    android:id="@+id/btn_comingsoon2"
+                    android:id="@+id/btn_aprilfools"
                     android:layout_width="185dp"
                     android:layout_height="90dp"
-                    android:backgroundTint="#46474A"
-                    android:enabled="false"
+                    android:backgroundTint="@color/optimizer_piece"
+                    android:onClick="aprilFools"
                     android:padding="10dp"
-                    android:text="COMING SOON"
+                    android:text="Fools"
                     android:textSize="21sp"
-                    android:textColor="#D4D4D4"
+                    android:textColor="@color/fix_block"
                     android:textStyle="bold"
                     app:cornerRadius="28dp" />
+
+
+<!--                <Button-->
+<!--                    android:id="@+id/btn_comingsoon"-->
+<!--                    android:layout_width="185dp"-->
+<!--                    android:layout_height="90dp"-->
+<!--                    android:backgroundTint="#46474A"-->
+<!--                    android:onClick="comingSoon"-->
+<!--                    android:enabled="false"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:text="Coming Soon"-->
+<!--                    android:textSize="21sp"-->
+<!--                    android:textColor="#D4D4D4"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:cornerRadius="28dp" />-->
 
             </LinearLayout>
 

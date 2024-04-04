@@ -19,11 +19,11 @@
     <string name="signature_title">Your signature</string> <!-- sample, not using -->
     <string name="reply_title">Default reply action</string> <!-- sample, not using -->
 
-    <string name="visual_maze_generation_title">Visual Maze Generation </string>
+    <string name="visual_maze_generation_title">Visual Maze Generation</string>
     <string name="visual_maze_generation_summary_on">When on, visually generate the maze one tile at a time. This also enables experimental random maze generation. This is a WIP. </string>
     <string name="visual_maze_generation_summary_off">When off, instantly generate the maze upon loading game. This disables experimental random maze generation, so the maze path is randomly selected from a large group of pre-made preset paths.</string>
 
-    <string name="keep_gen_opti_title">Keep generating optimizers after goal has been met</string>
+    <string name="keep_gen_opti_title">Keep generating optimizers</string>
     <string name="kgo_summary_on">When on, after the optimizers goal has been met, optimizer tiles will still keep appearing forever.</string>
     <string name="kgo_summary_off">When off, no more optimizers will appear after the goal has been met and the Finish tile has appeared.</string>
 
