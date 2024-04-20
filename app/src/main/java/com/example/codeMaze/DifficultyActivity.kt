@@ -95,7 +95,7 @@ class DifficultyActivity : AppCompatActivity() {
         }
     }
 
-    object sDifficulty {
+    object Difficulty {
         var difficulty: Int = 0
     }
     @RequiresApi(Build.VERSION_CODES.O)
