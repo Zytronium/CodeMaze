@@ -19,6 +19,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.*
 import androidx.gridlayout.widget.GridLayout
+import com.example.codeMaze.Path1Tiles.ALL_TILES
 import com.example.codeMaze.Path1Tiles.TILE0
 import com.example.codeMaze.Path1Tiles.TILE1
 import com.example.codeMaze.Path1Tiles.TILE10
@@ -1106,191 +1107,289 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
 
     private fun generateLayout1() {
         println("receiving tile data")
-        allTiles.forEach { frameLayout: FrameLayout ->
-            frameLayout.setBackgroundColor(getColor(R.color.warning_block))
+        allTiles = arrayOf(
+            tile0,
+            tile1,
+            tile2,
+            tile3,
+            tile4,
+            tile5,
+            tile6,
+            tile7,
+            tile8,
+            tile9,
+            tile10,
+            tile11,
+            tile12,
+            tile13,
+            tile14,
+            tile15,
+            tile16,
+            tile17,
+            tile18,
+            tile19,
+            tile20,
+            tile21,
+            tile22,
+            tile23,
+            tile24,
+            tile25,
+            tile26,
+            tile27,
+            tile28,
+            tile29,
+            tile30,
+            tile31,
+            tile32,
+            tile33,
+            tile34,
+            tile35,
+            tile36,
+            tile37,
+            tile38,
+            tile39,
+            tile40,
+            tile41,
+            tile42,
+            tile43,
+            tile44,
+            tile45,
+            tile46,
+            tile47,
+            tile48,
+            tile49,
+            tile50,
+            tile51,
+            tile52,
+            tile53,
+            tile54,
+            tile55,
+            tile56,
+            tile57,
+            tile58,
+            tile59,
+            tile60,
+            tile61,
+            tile62,
+            tile63,
+            tile64,
+            tile65,
+            tile66,
+            tile67,
+            tile68,
+            tile69,
+            tile70,
+            tile71,
+            tile72,
+            tile73,
+            tile74,
+            tile75,
+            tile76,
+            tile77,
+            tile78,
+            tile79,
+            tile80,
+            tile81,
+            tile82,
+            tile83,
+            tile84,
+            tile85,
+            tile86,
+            tile87,
+            tile88,
+            tile89,
+            tile90
+        )
+//        allTiles.forEach { frameLayout: FrameLayout ->
+//            frameLayout.setBackgroundColor(getColor(R.color.warning_block))
+//        }
+        for (i in 0..90) {
+            if (ALL_TILES[i]) allTiles[i].setBackgroundColor(getColor(R.color.safe_block))
+            else allTiles[i].setBackgroundColor(getColor(R.color.warning_block))
         }
-        if (TILE0) tile0.setBackgroundColor(getColor(R.color.safe_block))
-        else tile0.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE1) tile1.setBackgroundColor(getColor(R.color.safe_block))
-        else tile1.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE2) tile2.setBackgroundColor(getColor(R.color.safe_block))
-        else tile2.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE3) tile3.setBackgroundColor(getColor(R.color.safe_block))
-        else tile3.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE4) tile4.setBackgroundColor(getColor(R.color.safe_block))
-        else tile4.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE5) tile5.setBackgroundColor(getColor(R.color.safe_block))
-        else tile5.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE6) tile6.setBackgroundColor(getColor(R.color.safe_block))
-        else tile6.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE7) tile7.setBackgroundColor(getColor(R.color.safe_block))
-        else tile7.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE8) tile8.setBackgroundColor(getColor(R.color.safe_block))
-        else tile8.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE9) tile9.setBackgroundColor(getColor(R.color.safe_block))
-        else tile9.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE10) tile10.setBackgroundColor(getColor(R.color.safe_block))
-        else tile10.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE11) tile11.setBackgroundColor(getColor(R.color.safe_block))
-        else tile11.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE12) tile12.setBackgroundColor(getColor(R.color.safe_block))
-        else tile12.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE13) tile13.setBackgroundColor(getColor(R.color.safe_block))
-        else tile13.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE14) tile14.setBackgroundColor(getColor(R.color.safe_block))
-        else tile14.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE15) tile15.setBackgroundColor(getColor(R.color.safe_block))
-        else tile15.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE16) tile16.setBackgroundColor(getColor(R.color.safe_block))
-        else tile16.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE17) tile17.setBackgroundColor(getColor(R.color.safe_block))
-        else tile17.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE18) tile18.setBackgroundColor(getColor(R.color.safe_block))
-        else tile18.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE19) tile19.setBackgroundColor(getColor(R.color.safe_block))
-        else tile19.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE20) tile20.setBackgroundColor(getColor(R.color.safe_block))
-        else tile20.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE21) tile21.setBackgroundColor(getColor(R.color.safe_block))
-        else tile21.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE22) tile22.setBackgroundColor(getColor(R.color.safe_block))
-        else tile22.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE23) tile23.setBackgroundColor(getColor(R.color.safe_block))
-        else tile23.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE24) tile24.setBackgroundColor(getColor(R.color.safe_block))
-        else tile24.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE25) tile25.setBackgroundColor(getColor(R.color.safe_block))
-        else tile25.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE26) tile26.setBackgroundColor(getColor(R.color.safe_block))
-        else tile26.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE27) tile27.setBackgroundColor(getColor(R.color.safe_block))
-        else tile27.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE28) tile28.setBackgroundColor(getColor(R.color.safe_block))
-        else tile28.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE29) tile29.setBackgroundColor(getColor(R.color.safe_block))
-        else tile29.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE30) tile30.setBackgroundColor(getColor(R.color.safe_block))
-        else tile30.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE31) tile31.setBackgroundColor(getColor(R.color.safe_block))
-        else tile31.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE32) tile32.setBackgroundColor(getColor(R.color.safe_block))
-        else tile32.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE33) tile33.setBackgroundColor(getColor(R.color.safe_block))
-        else tile33.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE34) tile34.setBackgroundColor(getColor(R.color.safe_block))
-        else tile34.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE35) tile35.setBackgroundColor(getColor(R.color.safe_block))
-        else tile35.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE36) tile36.setBackgroundColor(getColor(R.color.safe_block))
-        else tile36.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE37) tile37.setBackgroundColor(getColor(R.color.safe_block))
-        else tile37.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE38) tile38.setBackgroundColor(getColor(R.color.safe_block))
-        else tile38.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE39) tile39.setBackgroundColor(getColor(R.color.safe_block))
-        else tile39.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE40) tile40.setBackgroundColor(getColor(R.color.safe_block))
-        else tile40.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE41) tile41.setBackgroundColor(getColor(R.color.safe_block))
-        else tile41.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE42) tile42.setBackgroundColor(getColor(R.color.safe_block))
-        else tile42.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE43) tile43.setBackgroundColor(getColor(R.color.safe_block))
-        else tile43.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE44) tile44.setBackgroundColor(getColor(R.color.safe_block))
-        else tile44.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE45) tile45.setBackgroundColor(getColor(R.color.safe_block))
-        else tile45.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE46) tile46.setBackgroundColor(getColor(R.color.safe_block))
-        else tile46.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE47) tile47.setBackgroundColor(getColor(R.color.safe_block))
-        else tile47.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE48) tile48.setBackgroundColor(getColor(R.color.safe_block))
-        else tile48.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE49) tile49.setBackgroundColor(getColor(R.color.safe_block))
-        else tile49.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE50) tile50.setBackgroundColor(getColor(R.color.safe_block))
-        else tile50.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE51) tile51.setBackgroundColor(getColor(R.color.safe_block))
-        else tile51.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE52) tile52.setBackgroundColor(getColor(R.color.safe_block))
-        else tile52.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE53) tile53.setBackgroundColor(getColor(R.color.safe_block))
-        else tile53.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE54) tile54.setBackgroundColor(getColor(R.color.safe_block))
-        else tile54.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE55) tile55.setBackgroundColor(getColor(R.color.safe_block))
-        else tile55.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE56) tile56.setBackgroundColor(getColor(R.color.safe_block))
-        else tile56.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE57) tile57.setBackgroundColor(getColor(R.color.safe_block))
-        else tile57.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE58) tile58.setBackgroundColor(getColor(R.color.safe_block))
-        else tile58.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE59) tile59.setBackgroundColor(getColor(R.color.safe_block))
-        else tile59.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE60) tile60.setBackgroundColor(getColor(R.color.safe_block))
-        else tile60.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE61) tile61.setBackgroundColor(getColor(R.color.safe_block))
-        else tile61.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE62) tile62.setBackgroundColor(getColor(R.color.safe_block))
-        else tile62.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE63) tile63.setBackgroundColor(getColor(R.color.safe_block))
-        else tile63.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE64) tile64.setBackgroundColor(getColor(R.color.safe_block))
-        else tile64.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE65) tile65.setBackgroundColor(getColor(R.color.safe_block))
-        else tile65.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE66) tile66.setBackgroundColor(getColor(R.color.safe_block))
-        else tile66.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE67) tile67.setBackgroundColor(getColor(R.color.safe_block))
-        else tile67.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE68) tile68.setBackgroundColor(getColor(R.color.safe_block))
-        else tile68.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE69) tile69.setBackgroundColor(getColor(R.color.safe_block))
-        else tile69.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE70) tile70.setBackgroundColor(getColor(R.color.safe_block))
-        else tile70.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE71) tile71.setBackgroundColor(getColor(R.color.safe_block))
-        else tile71.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE72) tile72.setBackgroundColor(getColor(R.color.safe_block))
-        else tile72.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE73) tile73.setBackgroundColor(getColor(R.color.safe_block))
-        else tile73.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE74) tile74.setBackgroundColor(getColor(R.color.safe_block))
-        else tile74.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE75) tile75.setBackgroundColor(getColor(R.color.safe_block))
-        else tile75.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE76) tile76.setBackgroundColor(getColor(R.color.safe_block))
-        else tile76.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE77) tile77.setBackgroundColor(getColor(R.color.safe_block))
-        else tile77.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE78) tile78.setBackgroundColor(getColor(R.color.safe_block))
-        else tile78.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE79) tile79.setBackgroundColor(getColor(R.color.safe_block))
-        else tile79.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE80) tile80.setBackgroundColor(getColor(R.color.safe_block))
-        else tile80.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE81) tile81.setBackgroundColor(getColor(R.color.safe_block))
-        else tile81.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE82) tile82.setBackgroundColor(getColor(R.color.safe_block))
-        else tile82.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE83) tile83.setBackgroundColor(getColor(R.color.safe_block))
-        else tile83.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE84) tile84.setBackgroundColor(getColor(R.color.safe_block))
-        else tile84.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE85) tile85.setBackgroundColor(getColor(R.color.safe_block))
-        else tile85.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE86) tile86.setBackgroundColor(getColor(R.color.safe_block))
-        else tile86.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE87) tile87.setBackgroundColor(getColor(R.color.safe_block))
-        else tile87.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE88) tile88.setBackgroundColor(getColor(R.color.safe_block))
-        else tile88.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE89) tile89.setBackgroundColor(getColor(R.color.safe_block))
-        else tile89.setBackgroundColor(getColor(R.color.warning_block))
-        if (TILE90) tile90.setBackgroundColor(getColor(R.color.safe_block))
-        else tile90.setBackgroundColor(getColor(R.color.warning_block))
+        allTiles.shuffle()
+//        if (TILE0) tile0.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile0.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE1) tile1.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile1.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE2) tile2.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile2.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE3) tile3.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile3.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE4) tile4.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile4.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE5) tile5.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile5.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE6) tile6.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile6.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE7) tile7.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile7.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE8) tile8.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile8.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE9) tile9.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile9.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE10) tile10.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile10.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE11) tile11.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile11.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE12) tile12.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile12.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE13) tile13.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile13.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE14) tile14.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile14.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE15) tile15.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile15.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE16) tile16.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile16.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE17) tile17.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile17.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE18) tile18.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile18.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE19) tile19.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile19.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE20) tile20.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile20.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE21) tile21.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile21.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE22) tile22.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile22.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE23) tile23.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile23.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE24) tile24.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile24.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE25) tile25.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile25.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE26) tile26.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile26.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE27) tile27.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile27.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE28) tile28.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile28.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE29) tile29.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile29.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE30) tile30.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile30.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE31) tile31.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile31.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE32) tile32.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile32.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE33) tile33.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile33.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE34) tile34.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile34.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE35) tile35.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile35.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE36) tile36.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile36.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE37) tile37.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile37.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE38) tile38.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile38.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE39) tile39.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile39.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE40) tile40.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile40.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE41) tile41.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile41.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE42) tile42.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile42.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE43) tile43.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile43.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE44) tile44.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile44.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE45) tile45.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile45.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE46) tile46.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile46.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE47) tile47.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile47.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE48) tile48.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile48.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE49) tile49.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile49.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE50) tile50.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile50.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE51) tile51.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile51.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE52) tile52.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile52.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE53) tile53.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile53.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE54) tile54.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile54.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE55) tile55.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile55.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE56) tile56.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile56.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE57) tile57.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile57.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE58) tile58.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile58.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE59) tile59.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile59.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE60) tile60.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile60.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE61) tile61.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile61.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE62) tile62.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile62.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE63) tile63.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile63.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE64) tile64.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile64.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE65) tile65.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile65.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE66) tile66.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile66.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE67) tile67.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile67.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE68) tile68.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile68.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE69) tile69.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile69.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE70) tile70.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile70.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE71) tile71.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile71.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE72) tile72.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile72.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE73) tile73.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile73.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE74) tile74.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile74.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE75) tile75.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile75.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE76) tile76.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile76.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE77) tile77.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile77.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE78) tile78.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile78.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE79) tile79.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile79.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE80) tile80.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile80.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE81) tile81.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile81.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE82) tile82.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile82.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE83) tile83.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile83.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE84) tile84.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile84.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE85) tile85.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile85.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE86) tile86.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile86.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE87) tile87.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile87.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE88) tile88.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile88.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE89) tile89.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile89.setBackgroundColor(getColor(R.color.warning_block))
+//        if (TILE90) tile90.setBackgroundColor(getColor(R.color.safe_block))
+//        else tile90.setBackgroundColor(getColor(R.color.warning_block))
     }
 
     private fun generateTiles() {
@@ -2292,97 +2391,9 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun resetTileData() {
-        TILE0 = false
-        TILE1 = false
-        TILE2 = false
-        TILE3 = false
-        TILE4 = false
-        TILE5 = false
-        TILE6 = false
-        TILE7 = false
-        TILE8 = false
-        TILE9 = false
-        TILE10 = false
-        TILE11 = false
-        TILE12 = false
-        TILE13 = false
-        TILE14 = false
-        TILE15 = false
-        TILE16 = false
-        TILE17 = false
-        TILE18 = false
-        TILE19 = false
-        TILE20 = false
-        TILE21 = false
-        TILE22 = false
-        TILE23 = false
-        TILE24 = false
-        TILE25 = false
-        TILE26 = false
-        TILE27 = false
-        TILE28 = false
-        TILE29 = false
-        TILE30 = false
-        TILE31 = false
-        TILE32 = false
-        TILE33 = false
-        TILE34 = false
-        TILE35 = false
-        TILE36 = false
-        TILE37 = false
-        TILE38 = false
-        TILE39 = false
-        TILE40 = false
-        TILE41 = false
-        TILE42 = false
-        TILE43 = false
-        TILE44 = false
-        TILE45 = false
-        TILE46 = false
-        TILE47 = false
-        TILE48 = false
-        TILE49 = false
-        TILE50 = false
-        TILE51 = false
-        TILE52 = false
-        TILE53 = false
-        TILE54 = false
-        TILE55 = false
-        TILE56 = false
-        TILE57 = false
-        TILE58 = false
-        TILE59 = false
-        TILE60 = false
-        TILE61 = false
-        TILE62 = false
-        TILE63 = false
-        TILE64 = false
-        TILE65 = false
-        TILE66 = false
-        TILE67 = false
-        TILE68 = false
-        TILE69 = false
-        TILE70 = false
-        TILE71 = false
-        TILE72 = false
-        TILE73 = false
-        TILE74 = false
-        TILE75 = false
-        TILE76 = false
-        TILE77 = false
-        TILE78 = false
-        TILE79 = false
-        TILE80 = false
-        TILE81 = false
-        TILE82 = false
-        TILE83 = false
-        TILE84 = false
-        TILE85 = false
-        TILE86 = false
-        TILE87 = false
-        TILE88 = false
-        TILE89 = false
-        TILE90 = false
+        for (i in 0..90) {
+            ALL_TILES[i] = false
+        }
     }
 
     fun restart(view: View) {
@@ -2421,4 +2432,4 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
 * April Fools mode: Game board generates like normal classic game, but the functions of each color are randomized each game. If there's time, there will also be a rickroll tile that appears. -- done
 *  More Ideas in a note on my phone.
 *
-* 563 | 4849 -> 746 ~ 2179 ~ 6/21/23: 2476 ~ _/__/2_: ____ */ // Total number of lines over time (including this line?)
+* 563 | 4849 -> 746 ~ 2179 ~ 6/21/23: 2476 ~ _/__/2_: ____ */ // Total number of lines over time (including this line?)TEST%d
