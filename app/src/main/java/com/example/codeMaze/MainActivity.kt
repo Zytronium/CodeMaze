@@ -263,7 +263,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     private var rainbowAttempts: Int = 0
 
     private lateinit var allTiles: Array<FrameLayout>
-//    private lateinit var path1: Array<FrameLayout>
 
     private var mainLayout: ViewGroup? = null
     private var xDelta = 0
@@ -401,7 +400,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
             getColor(R.color.safe_block)
         )
 
-        // to edo : add joke EULA rkrl
         optiFails = 0
         fixFails = 0
         fixFails2 = 0
@@ -2306,7 +2304,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun glitchSpread() {
-        var glitchScore: Int = 0
+        var glitchScore = 0
         if(optimizers < 91) {
             val tile = selectRandomTile()
             if (getBackgroundColor(tile) != getColor(R.color.glitch_block)) {
@@ -2330,6 +2328,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         level = shared.getInt("level", level)
 //        optimizers = shared.getInt("optimizers", optimizers)
         totalOptimizers = shared.getInt("totalOptimizers", totalOptimizers)
+        difficulty = DifficultyActivity.Difficulty.difficulty
 
         SettingsValues.vibrationsAllowed   = shared.getBoolean("vibrations",    SettingsValues.vibrationsAllowed )
         SettingsValues.visualMazeGen       = shared.getBoolean("visualMazeGen", SettingsValues.visualMazeGen )
@@ -2507,7 +2506,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         finish()
     }
 
-    class tile(val x: Int, val y: Int, )
+    class Tile(val x: Int, val y: Int, )
 
 }
 // Green: Safe block
