@@ -1203,10 +1203,8 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
 //        allTiles.forEach { frameLayout: FrameLayout ->
 //            frameLayout.setBackgroundColor(getColor(R.color.warning_block))
 //        }
-        for (i in 0..90) {
-            if (ALL_TILES[i]) allTiles[i].setBackgroundColor(getColor(R.color.safe_block))
-            else allTiles[i].setBackgroundColor(getColor(R.color.warning_block))
-        }
+        for (i in 0..90)
+            allTiles[i].setBackgroundColor(getColor(if (ALL_TILES[i]) R.color.safe_block else R.color.warning_block))
         allTiles.shuffle()
 //        if (TILE0) tile0.setBackgroundColor(getColor(R.color.safe_block))
 //        else tile0.setBackgroundColor(getColor(R.color.warning_block))
@@ -2391,9 +2389,8 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun resetTileData() {
-        for (i in 0..90) {
-            ALL_TILES[i] = false
-        }
+        val newArray = BooleanArray(91) { false }
+        ALL_TILES = newArray
     }
 
     fun restart(view: View) {
