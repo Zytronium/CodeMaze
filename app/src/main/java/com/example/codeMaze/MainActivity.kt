@@ -118,7 +118,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     // 1 = classic; 2 = speed maze; 3 = speedrun;
     // 4 = glitch; 5 = pain mode; 6 = infinite;
     // 7 = sudden death; 8 = no maze; 9 = corruption
-//    private var mazeGenerationBeta = true
+
     private var loopTime = 1000
     private var playing: Boolean = true
     private var timerStarted: Boolean = false
@@ -148,7 +148,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     private var finBlockGenerated: Boolean = false
     private lateinit var shared : SharedPreferences
 
-    // ~ Stats: ~
+    // ~ Stats: ~ \\
     private var issues: Int = 0
     /* */ private var level: Int = 1
     private var optimizers: Int = 0
@@ -157,7 +157,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     /* */ private var totalOptimizers: Int = 0
     private var optiGoal: Int = 25
     private var maxIssues = 10
-    // ~ Stats ~
+    // ~ Stats ~ \\
 
     private lateinit var postGameText: TextView
     private lateinit var restartButton: Button
@@ -260,9 +260,8 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     private lateinit var tile88: FrameLayout
     private lateinit var tile89: FrameLayout
     private lateinit var tile90: FrameLayout
-    private var rainbowAttempts: Int = 0
-
     private lateinit var allTiles: Array<FrameLayout>
+    private var rainbowAttempts: Int = 0
 
     private var mainLayout: ViewGroup? = null
     private var xDelta = 0
@@ -282,6 +281,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     private var pRot3start =  0f
     private var pRot3end =  (-4..4).random().toFloat()
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -510,12 +510,14 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
 
         val gridMaxWidth = widthPx * 0.9975F
         val gridMaxHeight = heightPx * 0.835F
-        //ToDo: find a way for it to choose the correct one of these values, only one will be used and the other size will be set to 0 dp.
-        //for now, we will use gridMaxWidth.
+        //ToDo: find a way for it to choose the correct one of these values, only one will be used
+        // and the other size will be set to 0 dp.
+        // for now, we will use gridMaxWidth.
         val tileSize = minOf(
             (gridMaxHeight / 13f),
             (gridMaxWidth / 7f)
-        ) //ToDo: (maybe?) set dimens.xml resource value to this number + "dp"  and set all tile sizes to this size. May require converting back to pixels tho.
+        ) //ToDo: (maybe?) set dimens.xml resource value to this number + "dp"  and set all
+          // tile sizes to this size. May require converting back to pixels tho.
         val playerSize = tileSize / 1.66F
 //        resources.getDimension(R.dimen.tile_size) //= tileSizeDp.toString() //(R.string.issues, issues.toString(), maxIssues.toString())
 
@@ -530,7 +532,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
             height = playerSize.toInt()
         }
         thread {
-
                 if (mode == MainMenuActivity.Gamemode.Stages) {
                     stage = 1
                     mode = MainMenuActivity.Gamemode.Classic
@@ -552,13 +553,12 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
             when (difficulty) {
                 -1 -> {         //* add for maxTime for time trials        // custom
                     maxIssues = CustomizeDifficultyActivity.CustomDifficulty.issuesMax
-                    optiGoal =
-                        (CustomizeDifficultyActivity.CustomDifficulty.optiMin..CustomizeDifficultyActivity.CustomDifficulty.optiMax).random()
+                    optiGoal = (CustomizeDifficultyActivity.CustomDifficulty.optiMin..CustomizeDifficultyActivity.CustomDifficulty.optiMax).random()
                 }
                 0 -> {
                     maxTime = 240.0
                     maxIssues = 35
-                    optiGoal = 3   //testing goal    // baby
+                    optiGoal = 3   //  testing goal       // baby
                 }
                 1 -> {
                     maxTime = 50.0
@@ -689,24 +689,23 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         readData()
         updateStats()
         checkIssues()
-
         generateTiles()
 
         println(level)
 
         thread {
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (SettingsValues.rainbowCharacter) rainbow(
-                player,
-                0f,
-                24,
-                2.5f
-            )
-        }, (15).toLong())
-    }
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (SettingsValues.rainbowCharacter) rainbow(
+                    player,
+                    0f,
+                    24,
+                    2.5f
+                )
+            }, (15).toLong())
+        }
         if (mode == MainMenuActivity.Gamemode.Corruption ) {
             thread {
-                allTiles.forEach { the: FrameLayout -> loopCorrupt(the) }
+                allTiles.forEach { t: FrameLayout -> loopCorrupt(t) }
             }
         }
 
@@ -755,7 +754,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         when(stage) {
             1 -> {
                 mode = MainMenuActivity.Gamemode.Classic
-//                optimizers = (optiGoal * 0/3 )
             }
             2 -> {
                 mode = MainMenuActivity.Gamemode.Apocalypse
@@ -785,12 +783,21 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun startTimerTrial() {
-
-        time -= 0.05
         val strength = (((time * 85.0)-255.0)* -1.0).toInt()
+        time -= 0.05
 
-        if(time in 0.05..3.0) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {//ToDo: fix crash here
+        if (time in 0.05..3.0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { //ToDo: fix crash here
+                try {
+                    screen.setRenderEffect(
+                        RenderEffect.createBlurEffect(
+                            strength / 5F,
+                            strength / 5F,
+                            Shader.TileMode.DECAL
+                        )
+                    )
+                } catch (e: Exception) {
+                    println("Error: $e\nTrying Again.")
                     try {
                         screen.setRenderEffect(
                             RenderEffect.createBlurEffect(
@@ -800,56 +807,44 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                             )
                         )
                     } catch (e: Exception) {
-                        println("Error: $e\nTrying Again.")
-                        try {
-                            screen.setRenderEffect(
-                                RenderEffect.createBlurEffect(
-                                    strength / 5F,
-                                    strength / 5F,
-                                    Shader.TileMode.DECAL
-                                )
-                            )
-                        } catch (e: Exception) {
-                            println("Error: $e")
-                        }
+                        println("Error: $e")
                     }
                 }
-                    try {
+            }
+            try {
                 vibrate(50, strength)
-            } catch(e: Exception) {
+            } catch (e: Exception) {
 //                Toast.makeText(this, "error:"+e.message, Toast.LENGTH_LONG).show()
                 try {
-                    vibrate(50, strength+1)
-                } catch(e: Exception) {
+                    vibrate(50, strength + 1)
+                } catch (e: Exception) {
 //                    Toast.makeText(this, "error2:"+e.message, Toast.LENGTH_SHORT).show()
                     try {
-                        vibrate(50, strength-1)
-                    } catch(e: Exception) {
+                        vibrate(50, strength - 1)
+                    } catch (e: Exception) {
 //                        Toast.makeText(this, "error3:"+e.message, Toast.LENGTH_SHORT).show()
                         try {
                             vibrate(50)
-                        } catch(e: Exception) {
-                            Toast.makeText(this, "error: "+e.message, Toast.LENGTH_SHORT).show()
+                        } catch (e: Exception) {
+                            Toast.makeText(this, "error: " + e.message, Toast.LENGTH_SHORT).show()
                             vibrate(50)
                         }
                     }
                 }
             }
-        } else if(time <= 0.0) {
+        } else if (time <= 0.0) {
             gameOver()
             time = 0.0
         } //vibrate(1500, strength)
-        else
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                screen.setRenderEffect(null)
-            }
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            screen.setRenderEffect(null)
+        }
 
         val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
-//        println(decimal.toString())
+        val handler = Handler(Looper.getMainLooper())
         optiText.text = getString(R.string.speed_score, decimal.toString()) //*
         timeBar.progress = (time * 10.0).toInt()
         //setcolor etc
-        val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({ //ToDo: fix crash here
             if(!hasWon && !hasLost)
                 startTimerTrial()
@@ -857,7 +852,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun loopCorrupt(thisTile: FrameLayout) {
-
         val handler = Handler(Looper.getMainLooper())
         if(thisTile.foreground == null && thisTile.tag != "finish" && !hasWon && !hasLost && playing) {
             when ((1..106).random()) {
@@ -877,7 +871,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun startTimer() {
-
         time += 0.05 //+
 
         val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
@@ -888,7 +881,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
             if (!hasWon && !hasLost)
                 startTimer()
         }, (50).toLong())
-
     }
 
     private fun spin(target: View, time: Long, axis: String, startAngle: Float, goalAngle: Float = 45f) {
@@ -1114,97 +1106,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
 
     private fun generateLayout1() {
         println("receiving tile data")
-//        println(TILE0.toString())
-//        println(TILE1.toString())
-//        println(TILE2.toString())
-//        println(TILE3.toString())
-//        println(TILE4.toString())
-//        println(TILE5.toString())
-//        println(TILE6.toString())
-//        println(TILE7.toString())
-//        println(TILE8.toString())
-//        println(TILE9.toString())
-//        println(TILE10.toString())
-//        println(TILE11.toString())
-//        println(TILE12.toString())
-//        println(TILE13.toString())
-//        println(TILE14.toString())
-//        println(TILE15.toString())
-//        println(TILE16.toString())
-//        println(TILE17.toString())
-//        println(TILE18.toString())
-//        println(TILE19.toString())
-//        println(TILE20.toString())
-//        println(TILE21.toString())
-//        println(TILE22.toString())
-//        println(TILE23.toString())
-//        println(TILE24.toString())
-//        println(TILE25.toString())
-//        println(TILE26.toString())
-//        println(TILE27.toString())
-//        println(TILE28.toString())
-//        println(TILE29.toString())
-//        println(TILE30.toString())
-//        println(TILE31.toString())
-//        println(TILE32.toString())
-//        println(TILE33.toString())
-//        println(TILE34.toString())
-//        println(TILE35.toString())
-//        println(TILE36.toString())
-//        println(TILE37.toString())
-//        println(TILE38.toString())
-//        println(TILE39.toString())
-//        println(TILE40.toString())
-//        println(TILE41.toString())
-//        println(TILE42.toString())
-//        println(TILE43.toString())
-//        println(TILE44.toString())
-//        println(TILE45.toString())
-//        println(TILE46.toString())
-//        println(TILE47.toString())
-//        println(TILE48.toString())
-//        println(TILE49.toString())
-//        println(TILE50.toString())
-//        println(TILE51.toString())
-//        println(TILE52.toString())
-//        println(TILE53.toString())
-//        println(TILE54.toString())
-//        println(TILE55.toString())
-//        println(TILE56.toString())
-//        println(TILE57.toString())
-//        println(TILE58.toString())
-//        println(TILE59.toString())
-//        println(TILE60.toString())
-//        println(TILE61.toString())
-//        println(TILE62.toString())
-//        println(TILE63.toString())
-//        println(TILE64.toString())
-//        println(TILE65.toString())
-//        println(TILE66.toString())
-//        println(TILE67.toString())
-//        println(TILE68.toString())
-//        println(TILE69.toString())
-//        println(TILE70.toString())
-//        println(TILE71.toString())
-//        println(TILE72.toString())
-//        println(TILE73.toString())
-//        println(TILE74.toString())
-//        println(TILE75.toString())
-//        println(TILE76.toString())
-//        println(TILE77.toString())
-//        println(TILE78.toString())
-//        println(TILE79.toString())
-//        println(TILE80.toString())
-//        println(TILE81.toString())
-//        println(TILE82.toString())
-//        println(TILE83.toString())
-//        println(TILE84.toString())
-//        println(TILE85.toString())
-//        println(TILE86.toString())
-//        println(TILE87.toString())
-//        println(TILE88.toString())
-//        println(TILE89.toString())
-//        println(TILE90.toString())
         allTiles.forEach { frameLayout: FrameLayout ->
             frameLayout.setBackgroundColor(getColor(R.color.warning_block))
         }
@@ -1654,9 +1555,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         val tile = selectRandomTile()
         if((getBackgroundColor(tile) == getColor(R.color.safe_block) || getBackgroundColor(tile) == getColor(R.color.fix_block)) && tile.foreground == null) {
             tile.foreground = AppCompatResources.getDrawable(this, R.drawable.ic_baseline_extension_24)//.toDrawable()
-//            tile.setBackgroundColor(getColor(R.color.safe_block))
-
-//            tile.setBackgroundColor(getColor(R.color.optimizer_piece))
         } else {
             optiFails++
             if(optiFails < 500) {
@@ -1667,7 +1565,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
 
     private fun optimizerCollect(tile: FrameLayout) {
         vibrate(10)
-//        tile.setBackgroundColor(getColor(R.color.safe_block))
         tile.foreground = null
         if(mode == MainMenuActivity.Gamemode.TimeTrials) {
             time += when (difficulty) {
@@ -1873,14 +1770,12 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                 val r = if(mode != MainMenuActivity.Gamemode.PainMode) 4F else 14f
                 screen.setRenderEffect(RenderEffect.createBlurEffect(r, r, Shader.TileMode.DECAL))
             }
-//            Toast.makeText(applicationContext, "You Lost.", Toast.LENGTH_LONG).show()
             postGameText.visibility = View.VISIBLE
             postGameText.text = "Game Over."
 
             if (hasLost && hasWon) {
                 postGameText.text = "You managed to win and loose simultaneously!"
                 rainbow(grid, 90f, 1, 10f, true)
-//                Toast.makeText(applicationContext, "Actually, You Won & Lost!", Toast.LENGTH_LONG).show()
             }
 
             vibrate(250)
@@ -1965,7 +1860,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                                                         animator2.duration = (2777).toLong()
                                                         animator2.start()
                                                     }
-                                                } else if(hasLost && hasWon) {
+                                                } else if(hasLost && hasWon) { // keeping hasWon to avoid confusion
                                                     val animator2 = ObjectAnimator.ofFloat(grid, View.ALPHA, 0.955f, 0.3555f)
                                                     animator2.duration = (2777).toLong()
                                                     animator2.start()
@@ -2025,7 +1920,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
             // wins++
             if (hasLost && hasWon) {
                 postGameText.text = "You managed to win and loose simultaneously!" //as String
-                issues++ //I think this was done because it's technically an issue of user has won and lost at the same time, so the game adds 1 issue.
+                issues++ //I think this was done because it's technically an issue if user has won and lost at the same time, so the game adds 1 issue, just as a hidden joke.
                 updateIssues()
                 rainbow(grid, 350f, 1, 10f, true)
             }
@@ -2139,15 +2034,14 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
 
     private fun checkHitboxes() {
-            val glitchColor =     if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsGlitchColor} else getColor(R.color.glitch_block)
-            val errorColor =      if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsErrorColor} else getColor(R.color.error_block)
-            val warningColor =  if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsWarningColor} else getColor(R.color.warning_block)
-            val fixColor =         if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsFixColor} else getColor(R.color.fix_block)
-            val crashColor =     if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsCrashColor} else getColor(R.color.black)
-            val bombColor =     if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsBombColor} else getColor(R.color.tile_bomb_block)
-//            val optiColor = getColor(R.color.optimizer_piece)
-            val playerX = player.x
-            val playerY = player.y
+        val glitchColor =  if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsGlitchColor}  else getColor(R.color.glitch_block)
+        val errorColor =   if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsErrorColor}   else getColor(R.color.error_block)
+        val warningColor = if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsWarningColor} else getColor(R.color.warning_block)
+        val fixColor =     if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsFixColor}     else getColor(R.color.fix_block)
+        val crashColor =   if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsCrashColor}   else getColor(R.color.black)
+        val bombColor =    if(mode == MainMenuActivity.Gamemode.Switcheroo) {foolsBombColor}    else getColor(R.color.tile_bomb_block)
+        val playerX = player.x
+        val playerY = player.y
         allTiles.onEach { frameLayout: FrameLayout ->
             val tileX = frameLayout.x
             val tileY = frameLayout.y
@@ -2350,28 +2244,28 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         edit.putBoolean("rainbowCharacter" , SettingsValues.rainbowCharacter)
         edit.apply()
     }
-         private fun vibrate(time: Long, strength: Int = -1) {
-             val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-             if(SettingsValues.vibrationsAllowed) {
-                 if (vibrator.hasVibrator()) { // Vibrator availability checking
-                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    private fun vibrate(time: Long, strength: Int = -1) {
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (SettingsValues.vibrationsAllowed) {
+            if (vibrator.hasVibrator()) { // Vibrator availability checking
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 //                vibrator.vibrate(createWaveform(
 //                    timings = longArrayOf(0L, 100L, 20L, 100L),
 //                    amplitudes = intArrayOf(145, 40),
 //                    repeat = -1
 //                ))
-                         vibrator.vibrate(
-                             VibrationEffect.createOneShot(
-                                 time,
-                                 strength/*VibrationEffect.DEFAULT_AMPLITUDE)*/
-                             )
-                         ) // New vibrate method for API Level 26 or higher
-                     } else {
-                         vibrator.vibrate(time) // Vibrate method for below API Level 26
-                     }
-                 }
-             }
+                    vibrator.vibrate(
+                        VibrationEffect.createOneShot(
+                            time,
+                            strength/*VibrationEffect.DEFAULT_AMPLITUDE)*/
+                        )
+                    ) // New vibrate method for API Level 26 or higher
+                } else {
+                    vibrator.vibrate(time) // Vibrate method for below API Level 26
+                }
+            }
+        }
     }
 
     private fun rainbow(target: View, hue: Float, speed: Long, strength: Float, ignoreHasLost: Boolean = false) {
@@ -2506,7 +2400,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         finish()
     }
 
-    class Tile(val x: Int, val y: Int, )
+    class Tile(val x: Int, val y: Int)
 
 }
 // Green: Safe block
