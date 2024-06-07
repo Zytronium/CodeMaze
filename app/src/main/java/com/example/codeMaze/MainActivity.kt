@@ -1634,10 +1634,12 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
 
     private fun updateOptimizers() {
         val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
-        if(mode != MainMenuActivity.Gamemode.Glitch && mode != MainMenuActivity.Gamemode.Inf && mode != MainMenuActivity.Gamemode.SpeedMaze) optiText.text = getString(R.string.optimizers_and_goal, optimizers.toString(), optiGoal.toString())
-        else if (mode == MainMenuActivity.Gamemode.Glitch) optiText.text = getString(R.string.glitch_score, optimizers.toString())
-        else if (mode == MainMenuActivity.Gamemode.Inf) optiText.text = getString(R.string.optimizers, optimizers.toString())
-        else if(mode == MainMenuActivity.Gamemode.SpeedMaze) optiText.text = getString(R.string.speed_score, decimal.toString())
+        optiText.text = when (mode) {
+            MainMenuActivity.Gamemode.Glitch -> getString(R.string.glitch_score, optimizers.toString())
+            MainMenuActivity.Gamemode.Inf -> getString(R.string.optimizers, optimizers.toString())
+            MainMenuActivity.Gamemode.SpeedMaze -> getString(R.string.speed_score, decimal.toString())
+            else -> getString(R.string.optimizers_and_goal, optimizers.toString(), optiGoal.toString())
+        }
     }
 
     private fun generateOptimizers(repeatNum: Int) {
