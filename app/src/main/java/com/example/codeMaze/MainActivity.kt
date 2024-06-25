@@ -115,7 +115,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.concurrent.thread
 
-class MainActivity(/*visualGen: Boolean = false*/) : AppCompatActivity() {
+class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     // 1 = classic; 2 = speed maze; 3 = speedrun;
     // 4 = glitch; 5 = pain mode; 6 = infinite;
     // 7 = sudden death; 8 = no maze; 9 = corruption
