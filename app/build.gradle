@@ -5,14 +5,14 @@ plugins {
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.zytronium.CodeMaze"
         minSdk 23
-        targetSdk 33 // needs to be updated
-        versionCode 13
-        versionName "1.0.2.1"
+        targetSdk 35
+        versionCode 14
+        versionName "1.0.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,8 +42,8 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference-ktx:1.2.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }

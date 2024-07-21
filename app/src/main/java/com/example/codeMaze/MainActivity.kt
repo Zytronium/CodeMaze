@@ -636,7 +636,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             )
             val windowInsetsController =
-                ViewCompat.getWindowInsetsController(window.decorView) ?: return@thread
+                WindowCompat.getInsetsController(window, window.decorView)
             windowInsetsController.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
@@ -692,7 +692,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         checkIssues()
         generateTiles()
 
-        println(level)
+//        println(level)
 
         thread {
             Handler(Looper.getMainLooper()).postDelayed({
@@ -1706,25 +1706,25 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         }
         updateStats()
 //        saveStats()
-        //if(optimizers <= x) {below code}
-        if(!finBlockGenerated || SettingsValues.keepGeneratingOptis) generateOptimizer()
+        if(SettingsValues.keepGeneratingOptis || !finBlockGenerated) generateOptimizer()
     }
 
     private fun generateFinishBlock() {
-            val newTile = selectRandomTile()
+        val newTile = selectRandomTile()
+        if (!finBlockGenerated) { // attempt to fix occasional bug
             if (getBackgroundColor(newTile) == getColor(R.color.safe_block)) {
                 newTile.setBackgroundColor(getColor(R.color.white))
                 newTile.tag = "finish"
                 rainbow(newTile, 0f, 9, 2f, false)
                 newTile.alpha = 0.75f
-                if(newTile.foreground != null) {
+                if (newTile.foreground != null) {
 //                    newTile.foreground = null
                     optimizerCollect(newTile)
                 }
             } else {
                 generateFinishBlock()
             }
-
+        }
     }
 
     private fun generateFixBlock() {
@@ -1991,7 +1991,8 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     private fun levelWin() {
         if(!hasWon) {
             var repeatNum = 90
-            if(mode == MainMenuActivity.Gamemode.Glitch || mode == MainMenuActivity.Gamemode.SpeedMaze) repeatNum = 91
+            if(mode == MainMenuActivity.Gamemode.Glitch || mode == MainMenuActivity.Gamemode.SpeedMaze)
+                repeatNum = 91
             hasWon = true
             println("win!")
             vibrate(75)
@@ -2003,7 +2004,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                     rainbowAll()
                 }, ((95..3505).random()).toLong())
             }
-            level++
+//            level++
             issues = 0
 //        totalOptimizers += optimizers
             optimizers = 0
@@ -2035,7 +2036,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
                 if(tile.foreground != null) tile.foreground = null
                 rainbow(tile, 0f, 9, 2f, false)
             } else {
-                if(rainbowAttempts <= 900) {
+                if(rainbowAttempts <= 950) {
                     rainbowAttempts++
                     rainbowAll()
                 }
@@ -2310,7 +2311,6 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         allTiles.forEach { frameLayout: FrameLayout ->
             if(getBackgroundColor(frameLayout) == getColor(R.color.glitch_block)) glitchScore++
         }
-        println("Never gonna give you up")
         optimizers = glitchScore
         updateOptimizers()
         if (glitchScore >= 91) levelWin()
@@ -2318,7 +2318,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
 
     private fun readData() {
 //        issues = shared.getInt("issues", issues)
-        level = shared.getInt("level", level)
+//        level = shared.getInt("level", level)
 //        optimizers = shared.getInt("optimizers", optimizers)
         totalOptimizers = shared.getInt("totalOptimizers", totalOptimizers)
         difficulty = DifficultyActivity.Difficulty.difficulty
@@ -2332,7 +2332,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     private fun saveStats() {
         val edit = shared.edit()
 //        edit.putInt("issues" , issues )
-        edit.putInt("level" , level )
+//        edit.putInt("level" , level )
 //        edit.putInt("optimizers" , optimizers )
         edit.putInt("totalOptimizers" , totalOptimizers )
 
@@ -2345,36 +2345,27 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
     }
     private fun vibrate(time: Long, strength: Int = -1) {
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        if (SettingsValues.vibrationsAllowed) {
-            if (vibrator.hasVibrator()) { // Vibrator availability checking
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-//                vibrator.vibrate(createWaveform(
-//                    timings = longArrayOf(0L, 100L, 20L, 100L),
-//                    amplitudes = intArrayOf(145, 40),
-//                    repeat = -1
-//                ))
-                    vibrator.vibrate(
-                        VibrationEffect.createOneShot(
-                            time,
-                            strength/*VibrationEffect.DEFAULT_AMPLITUDE)*/
-                        )
-                    ) // New vibrate method for API Level 26 or higher
-                } else {
-                    vibrator.vibrate(time) // Vibrate method for below API Level 26
-                }
+        if (SettingsValues.vibrationsAllowed && vibrator.hasVibrator()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot( time, strength)) // New vibrate method for API Level 26 or higher
+            } else {
+                vibrator.vibrate(time) // Vibrate method for below API Level 26
             }
         }
     }
 
     private fun rainbow(target: View, hue: Float, speed: Long, strength: Float, ignoreHasLost: Boolean = false) {
-        if((playing && !hasLost) || (playing && ignoreHasLost)) {
+        if ((playing && !hasLost) || (playing && ignoreHasLost)) {
             var h = hue
-            if (h >= 360f) h -= 360f
-            if(target == player && target is ImageView) {
+
+            if (h >= 360f)
+                h -= 360f
+
+            if (target == player && target is ImageView)
                 target.setColorFilter(Color.HSVToColor(floatArrayOf(h, 100f, 100f)))
-            }
-            else target.setBackgroundColor(Color.HSVToColor(floatArrayOf(h, 100f, 100f)))
+            else
+                target.setBackgroundColor(Color.HSVToColor(floatArrayOf(h, 100f, 100f)))
+
             Handler(Looper.getMainLooper()).postDelayed({
                 rainbow(target, (h + strength), speed, strength, ignoreHasLost)
             }, (speed))
@@ -2410,7 +2401,7 @@ class MainActivity(visualGen: Boolean = false) : AppCompatActivity() {
         finish()
     }
 
-    class Tile(val x: Int, val y: Int)
+//    class Tile(val x: Int, val y: Int)
 
 }
 // Green: Safe block

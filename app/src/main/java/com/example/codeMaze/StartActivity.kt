@@ -12,18 +12,13 @@ class StartActivity : AppCompatActivity() {
         print("starting activity")
 
         val generation = SettingsValues.visualMazeGen
-//        val intentt = Intent(this@StartActivity, Path1Tiles::class.java)
-//        startActivity(intentt)
-//        println(" starting PathTiles object")
-//        finish()
 
         if(generation) {
             val intent = Intent(this@StartActivity, PathGenActivity::class.java)
             startActivity(intent)
-//        print(" Generating")
             finish()
         } else {
-            when (Random(System.currentTimeMillis() + System.nanoTime() + (-70000..30000002L).random() / 2L).nextInt(
+            when (Random(System.currentTimeMillis() + System.nanoTime() + (-3000000..30000002L).random() / 2L).nextInt(
                 1,
                 14
             )) {
